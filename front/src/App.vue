@@ -1,47 +1,46 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <nav>
+      <LayoitBlock class="LayoitBlock"/>
+    </nav>
+    <template v-if="$route.path=='/'">
+      <FooterBlock class="FooterBlock"/>
+    </template>
+    
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+<script>
+import LayoitBlock from './views/Layot/Layot.vue'
+import FooterBlock from './components/Footer/FooterBlock.vue';
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+export default{
+  
+  components:{
+    FooterBlock,
+    LayoitBlock,
   }
 }
+</script>
+
+<style lang="scss">
+@import url("./assets/global.scss");
+@import url("./assets/Main.scss");
+
+#app {
+   
+}  
+.LayoitBlock{
+  max-width: 100%;
+  padding: 0 40px;
+  margin: 0 auto;
+  
+}
+.FooterBlock{
+ 
+  border-top: 1px solid #0079C2;
+  width: 100%;
+}
+
 </style>

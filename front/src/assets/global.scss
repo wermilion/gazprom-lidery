@@ -1,0 +1,40 @@
+@import url('./scss/Mixcins.scss');
+@import url('./scss/Сonstants.scss');
+
+body{
+    font-family: HeliosCond;
+}
+*{
+    
+    margin: 0;
+    padding: 0;
+}
+button{
+    cursor: pointer;
+    background-color: #0079C2;
+    color: #ffff;
+    border: none;
+}
+h1{
+    font-weight: 700;
+    font-size: 208px;
+    line-height: 242px;
+}
+h2{
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 57px;
+    
+}
+h3{
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+}
+a{
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 38px;
+    text-decoration: none;
+    color: #0079C2;
+}

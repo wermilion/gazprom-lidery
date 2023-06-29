@@ -17,8 +17,11 @@ location / {
     proxy_pass http://${CI_PROJECT_NAME}-${CI_ENVIRONMENT_NAME}-front:8080;
     }
 
-location /api/ {
-    rewrite ^/api(/.*)$ $1 break;
+location /api {
+    proxy_pass http://${CI_PROJECT_NAME}-${CI_ENVIRONMENT_NAME}-back:80;
+    }
+
+location /cp {
     proxy_pass http://${CI_PROJECT_NAME}-${CI_ENVIRONMENT_NAME}-back:80;
     }
 }

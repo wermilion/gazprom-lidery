@@ -7,8 +7,8 @@
         </div>
         <div class="RIGHTdiv">
             <p>Контактная информация</p>
-            <a class="between2" href="mailto:tomsk-tr.gazprom.ru">tomsk-tr.gazprom.ru</a>
-            <a  href="tel:+ 7 (3822) 60-32-09">+ 7 (3822) 60-32-09</a>
+            <a class="between2" href="">tomsk-tr.gazprom.ru</a>
+            <a  href="">+ 7 (3822) 60-32-09</a>
         </div>
     </section>
 </template>

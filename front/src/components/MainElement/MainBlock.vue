@@ -81,15 +81,10 @@ section{
     }
     @media screen and (max-width :1024px) {
         .IMg1{
-            top:470px;
-            width: 160px;
-            height: inherit;
+            display: none;
         }
         .IMg2{
-            width: 200px;
-            height: inherit;
-            left: 520px;
-            top:800px;
+            display: none;
         }
         .top_inf{
             h1{

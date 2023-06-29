@@ -1,6 +1,6 @@
 <template>
     <section>
-        <img src="/image/GazpromLog.svg" alt="logo">
+        <router-link to="/"><img src="/image/GazpromLog.svg" alt="logo"></router-link>
         <template v-if="$route.path == '/'">
             <p>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</p>
             <router-link class="router" to="/Entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>

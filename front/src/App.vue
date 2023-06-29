@@ -17,22 +17,7 @@ import FooterBlock from './components/Footer/FooterBlock.vue';
 
 export default{
    
-  computed: {
-    windowWidth() {
-      return window.innerWidth;
-    },
-    windowHeight() {
-      return window.innerHeight;
-    }
-  },
-  mounted() {
-    this.mounted();
-  },
-  methods: {
-    mounted() {
-      alert(this.windowWidth + 'x' + this.windowHeight);
-    }
-  },
+
   components:{
     FooterBlock,
     LayoitBlock,

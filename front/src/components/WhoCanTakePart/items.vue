@@ -1,9 +1,9 @@
 
 <template>
     <section>
-        <div>
+       
             <p>{{ item.title }}</p>
-        </div>
+        
     </section>
 </template>
 
@@ -18,14 +18,12 @@ export default{
 
 <style lang="scss" scoped>
 section{
-    div{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border:1px solid black;
-        width: 500px;
-        height: 500px;
-        margin: 0 16px;
-    }
+    width: 20%;
+    height: 500px;
+    border:1px solid black;
+    margin: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

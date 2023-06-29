@@ -34,8 +34,8 @@ section{
         position: absolute;
         top: 248px;
         right: 40px;
-        height: 300px;
-        width: 300px;
+        height: 400px;
+        width: 400px;
     }
     .IMg2{
         position: absolute;
@@ -45,9 +45,11 @@ section{
         width: 400px;
     }
     .top_inf{
+        margin-bottom: 10px;
         h1{
             margin-top: 93px;
             padding-left: 32px;
+            
             margin-bottom: 0;
         }
     }
@@ -60,7 +62,7 @@ section{
         max-width: 100%;
         margin: 0 auto;
         h1{
-            width: 100%;
+            
             background-color: #F5F5F5;
             color: #1D4573;
             padding:0 19px;
@@ -78,7 +80,55 @@ section{
             margin-top: 24px;
             
         }
+       
+    } 
+    @media screen and (max-width :1680px) {
+        .IMg1{
+            height: 300px;
+            width: 305px;
+        }
+        .IMg2{
+            height: 340px;
+            width: 340px;
+            top:650px;
+        }
     }
+    @media screen and (max-width :1280px) {
+        .IMg1{
+            height: 250px;
+            width: 245px;
+        }
+        .IMg2{
+            height: 300px;
+            width: 300px;
+            top:530px;
+        }
+        .top_inf{
+            
+            h1{
+                font-size: 150px;
+                line-height: 160px;
+            }
+        }
+    .botton_inf{
+       
+        width: 100%;
+        max-width:700px ;
+       
+        h1{
+            
+            font-size: 150px;
+            line-height: 160px;
+            
+        }  
+        p{
+            font-size: 25px;
+            padding-left: 10px;
+            
+        }
+       
+    } 
+        }
     @media screen and (max-width :1024px) {
         .IMg1{
             display: none;

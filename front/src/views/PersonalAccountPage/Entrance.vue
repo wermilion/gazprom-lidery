@@ -6,7 +6,7 @@
         <div class="right">
             <h2>ВХОД В КАБИНЕТ</h2>
             <form>
-                <input type="text" placeholder="Табельный номер ">
+                <input type="text" class="one" placeholder="Табельный номер ">
                 <input type="text" placeholder="Пароль"> 
             </form>
             <button>Войти</button>
@@ -26,7 +26,10 @@ export  default{
 
 <style lang="scss" scoped>
 section{
+    max-width: 1456px;
+    width: 100%;
     margin-top: 109px;
+    margin-bottom: 243px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -38,7 +41,7 @@ section{
     }
     div{
         height: 594px;
-        width: 594px;
+        width: 40%;
     }
      .left{
         background-color: #3394CE;
@@ -47,8 +50,8 @@ section{
         align-items: center;
         justify-content: center;
         img{
-            width: 542px;
-            height: 542px;
+            width: 100%;
+            height: hidden;
         }
 
 
@@ -59,7 +62,9 @@ section{
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        
+        .one{
+            margin-bottom: 80px;
+        }
         h2{
             font-size: 48px;
             font-family: "HeliosCondBlack";
@@ -70,14 +75,14 @@ section{
         form{
             display: flex;
             flex-direction: column;
-
+            width: 100%;
             input{
                 margin: 0 auto ;
                 border: none;
-                width: 508px;
+                width: 90%;
                 height: 34px;
                 border-bottom:5px  solid #3394CE;
-                margin-bottom: 82px;
+                
                 font-size: 32px;
                 font-weight: 400;
                 
@@ -96,11 +101,13 @@ section{
         border:4px solid #3394CE;
         color: #064677;
         background-color: white;
-        padding: 22px 32px;
+        padding: 22px auto;
         color: #064677;
         font-size: 48px;
         font-weight: 700;
-        margin-bottom:80px ;
+        height: 100px;
+        width: 35%;
+        margin: 80px auto;
     }
 }
 

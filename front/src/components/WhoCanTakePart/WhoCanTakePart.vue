@@ -41,16 +41,17 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100%;
-    width: 1564px;
+    max-width:1564px ;
+    width:100% ;
     margin: 0 auto;
     div{
         display: flex;
-        max-width: 100%;
-        width: 1564px;
+        width: 100%;
         justify-content: space-between;
         margin-top: 56px;
-        
+         .ItemsWho{
+                margin: 0 16px;
+            }
     }
     @media screen and (max-width :1024px) { 
         div{

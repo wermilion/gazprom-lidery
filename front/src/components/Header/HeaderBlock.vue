@@ -64,7 +64,34 @@ section{
         
         
     }
-   
+    @media screen and (max-width :1680px) {
+        img{
+            width: 183px;
+            height: 91px;
+        }
+        p{ 
+            font-size: 28px; 
+      
+        }
+        .router{  
+            font-size: 26px;
+            padding: 11px 20px 12px 20px;
+        }
+    }
+    @media screen and (max-width :1280px) {
+        img{
+            width: 153px;
+            height: 91px;
+        }
+        p{ 
+            font-size: 24px; 
+      
+        }
+        .router{  
+            font-size: 24px;
+            padding: 11px 20px 12px 20px;
+        }
+    }
         
 }
  @media screen and (max-width :1024px) {
@@ -81,7 +108,7 @@ section{
                 
 
             }
+          
         }
-         
     }
 </style>

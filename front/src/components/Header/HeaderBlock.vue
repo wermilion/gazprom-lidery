@@ -62,7 +62,26 @@ section{
         border: none;
         padding: 10px 25px 10px 25px;
         
+        
     }
+   
+        
 }
+ @media screen and (max-width :1024px) {
+        section{
+            display: flex;
+            flex-direction: column;
+            
+            align-items: center;
+            p{
+                width: 100%;
+                margin: 20px 0 20px;
+                text-align: center;
+                line-height: 60px;
+                
 
+            }
+        }
+         
+    }
 </style>

@@ -13,14 +13,14 @@
                 сообщества лучших управленцев компании.
             </p>
         </div>
-        <img src="/image/Baner1.png" alt="" class="Baner1">
-        <img src="/image/Baner2.png" alt="" class="Baner2">
+        <img src="/image/ImgMain1.png" alt="" class="IMg1">
+        <img src="/image/ImgMain2.png" alt="" class="IMg2">
     </section>
 </template>
 
 <script>
 export default{
-    name:'BanerBlock'
+    name:'MainBlock'
 }
 </script>
 
@@ -30,14 +30,14 @@ section{
     margin-top: 0px;
     background-color: #0079C2;
     color: #F5F5F5;
-    .Baner1{
+    .IMg1{
         position: absolute;
         top: 248px;
         right: 40px;
         height: 300px;
         width: 300px;
     }
-    .Baner2{
+    .IMg2{
         position: absolute;
         top: 550px;
         left: 0;
@@ -60,6 +60,7 @@ section{
         max-width: 100%;
         margin: 0 auto;
         h1{
+            width: 100%;
             background-color: #F5F5F5;
             color: #1D4573;
             padding:0 19px;
@@ -68,12 +69,47 @@ section{
             
         }  
         p{
-            width: 951px;
+            width: 100%;
             font-weight: 400;
             font-size: 30px;
             line-height: 35px;
             margin-bottom: 93px;
+            margin-left: -19px;
+            margin-top: 24px;
             
+        }
+    }
+    @media screen and (max-width :1024px) {
+        .IMg1{
+            top:470px;
+            width: 160px;
+            height: inherit;
+        }
+        .IMg2{
+            width: 200px;
+            height: inherit;
+            left: 520px;
+            top:800px;
+        }
+        .top_inf{
+            h1{
+                font-size: 100px;
+                line-height: 120px;
+
+            }
+        }
+        .botton_inf{
+            width: 456px;
+            h1{
+                margin: 0px;
+                padding: 0 10px;
+                font-size: 100px;
+                line-height: 120px;
+            }
+            p{
+                overflow: hidden;
+                font-size: 25px;
+            }
         }
     }
 }

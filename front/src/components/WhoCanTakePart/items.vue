@@ -19,12 +19,13 @@ export default{
 <style lang="scss" scoped>
 section{
     div{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-       border-color: black;
-       width: 500px;
-       height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border:1px solid black;
+        width: 500px;
+        height: 500px;
+        margin: 0 16px;
     }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <section>
-        <BanerBlock class="BanerBlock"></BanerBlock>
+        <MainBlock class="BanerBlock"></MainBlock>
         <OpprtunitiesBlock class="OpprtunitiesBlock"></OpprtunitiesBlock>
         <WhoCanTakePart class="WhoCanTakePart"></WhoCanTakePart>
         <StagesBlock class="StagesBlock"></StagesBlock>
@@ -11,7 +11,7 @@
 
 
 <script>
-import BanerBlock from '@/components/Banner/BanerBlock.vue';
+import MainBlock from '@/components/MainElement/MainBlock.vue';
 import OpprtunitiesBlock from '@/components/Opportunities/OpprtunitiesBlock.vue';
 import WhoCanTakePart from '@/components/WhoCanTakePart/WhoCanTakePart.vue';
 import StagesBlock from '@/components/Stages/StagesBlock.vue';
@@ -20,7 +20,7 @@ import QuestionAndAnswer from '@/components/QuestionAndAnswer/QuestionAndAnswer.
 export default{
     name:'MainPage',
     components:{
-        BanerBlock,
+        MainBlock,
         OpprtunitiesBlock,
         WhoCanTakePart,
         StagesBlock,

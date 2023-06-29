@@ -54,6 +54,7 @@ section{
                 align-items: center;
                 justify-content: center;
                 margin: 1px;
+                padding: 20px;
                 p{
                     font-weight: 400;
                     font-size: 48px;

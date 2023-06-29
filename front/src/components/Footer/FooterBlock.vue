@@ -51,4 +51,14 @@ section{
     }
     
 }
+@media screen and (max-width :1024px) {
+    section{
+        display: flex;
+        flex-direction: column;
+        .RIGHTdiv{
+            align-items: flex-end;
+            margin: 0px 20px 64px 40px;
+        }
+    }
+}
 </style>

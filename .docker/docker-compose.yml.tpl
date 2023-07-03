@@ -9,7 +9,7 @@ services:
     image: ${CI_REGISTRY_IMAGE}/back:${CI_COMMIT_TAG}
     container_name: ${CI_PROJECT_NAME}-${CI_ENVIRONMENT_NAME}-back
     env_file:
-    - .env
+      - .env
     networks:
       - server
   db:

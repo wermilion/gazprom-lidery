@@ -34,18 +34,18 @@ export default{
 <style lang="scss" scoped>
 
 .OpprtunitiesBlock{
-    margin: 160px 42px 160px 40px;
+    margin: 56px 40px 112px 40px;
 }
 .WhoCanTakePart{
-    margin-bottom: 160px;
+    margin-bottom: 112px;
 }
 .StagesBlock{
-    margin-bottom: 160px;
+    margin-bottom: 112px;
 }
 .NumbersBlock{
-    margin-bottom: 160px;
+    margin-bottom: 114px;
 }
 .QuestionAndAnswer{
-    margin-bottom: 64px;
+    margin-bottom: 56px;
 }
 </style>

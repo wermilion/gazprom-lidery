@@ -28,10 +28,10 @@ section{
     margin: 0px;
     padding: 0;
     .LEFTdiv{
-        margin: 64px 420px 64px 40px;
+        margin: 40px 374px 40px 40px;
     }
     .RIGHTdiv{
-        margin-top:64px ;
+        margin-top:40px ;
     }
     div{
         display: flex;

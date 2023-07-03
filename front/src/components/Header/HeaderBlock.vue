@@ -23,7 +23,7 @@ export default{
 
 section{
     
-    margin-top: 48px;
+    margin-top: 32px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -31,8 +31,8 @@ section{
     
     img{
         
-        width: 193px;
-        height: 101px;
+        width: 190px;
+        height: 103px;
     }
    
     p{
@@ -40,7 +40,7 @@ section{
         padding-bottom: 15px;
         margin: 0 20px;
         font-weight: 700;
-        font-size: 37px;
+        font-size: 32px;
         line-height: 37px;
         color: #1D4573;
         
@@ -64,7 +64,7 @@ section{
         
         
     }
-    @media screen and (max-width :1680px) {
+    @media screen and (max-width :1600px) {
         img{
             width: 183px;
             height: 91px;

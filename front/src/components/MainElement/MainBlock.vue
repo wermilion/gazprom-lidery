@@ -10,7 +10,7 @@
                 “Лидеры Газпрома” - это закрытый конкурс для руководителей ООО 
                 “Газпром трансгаз Томск” нового поколения, который дает возможность 
                 проявить свои лидерские качества и войти в состав привилегированного
-                сообщества лучших управленцев компании.
+                сообщества <br>лучших управленцев компании.
             </p>
         </div>
         <img src="/image/ImgMain1.png" alt="" class="IMg1">
@@ -45,12 +45,11 @@ section{
         width: 400px;
     }
     .top_inf{
-        margin-bottom: 10px;
+        
         h1{
             margin-top: 93px;
             padding-left: 32px;
-            
-            margin-bottom: 0;
+            margin-bottom: 5px;
         }
     }
     .botton_inf{
@@ -58,50 +57,49 @@ section{
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 913px;
+        width: 951px;
         max-width: 100%;
         margin: 0 auto;
+        
         h1{
-            
+            width: 100%;
             background-color: #F5F5F5;
             color: #1D4573;
-            padding:0 19px;
-            margin-bottom: 0;
-            margin-top: 0;
+            padding: 0 0 0 19px;
+            
             
         }  
         p{
             width: 100%;
-            font-weight: 400;
             font-size: 30px;
-            line-height: 35px;
-            margin-bottom: 93px;
-            margin-left: -19px;
-            margin-top: 24px;
+            margin-bottom: 68px;
+            
+            margin-top: 32px;
             
         }
        
     } 
     @media screen and (max-width :1680px) {
         .IMg1{
-            height: 300px;
-            width: 305px;
+            height: 250px;
+            width: 250px;
+            top: 230px;
         }
         .IMg2{
-            height: 340px;
-            width: 340px;
-            top:650px;
+            height: 320px;
+            width: 320px;
+            top:600px;
         }
     }
     @media screen and (max-width :1280px) {
         .IMg1{
-            height: 250px;
-            width: 245px;
+            height: 240px;
+            width: 230px;
         }
         .IMg2{
             height: 300px;
             width: 300px;
-            top:530px;
+            top:490px;
         }
         .top_inf{
             

@@ -31,11 +31,13 @@ export default{
 
 <style lang="scss" scoped>
 section{
+    
     text-align: center;
     h2{
             margin-bottom: 56px;
         }
     .shell{
+        font-family: HeliosCondBlack;
         display: flex;
         flex-direction: column;
         

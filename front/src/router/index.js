@@ -18,6 +18,11 @@ const routes = [
     component: Entrance
   },
   {
+    path:'/ChangingThePassword',
+    name:'ChangingThePassword',
+    component: Entrance
+  },
+  {
     path:'*',
     name:'Page404',
     component: Page404

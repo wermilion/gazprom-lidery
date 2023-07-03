@@ -8,6 +8,13 @@
             <form>
                 <input type="text" class="one" placeholder="Табельный номер ">
                 <input type="text" placeholder="Пароль"> 
+                <template v-if="$route.path == '/ChangingThePassword'">
+                    <div class="checkpasword">
+                        <input id="checkbox" type="checkbox"> 
+                        <label for="checkbox">Запомнить меня</label>
+                    </div>
+                    
+                </template>
             </form>
             <button>Войти</button>
             
@@ -94,6 +101,9 @@ section{
             }
             input::placeholder{
                 color: #064677;
+            }
+            .checkpasword{
+                display: flex;
             }
         }
     }

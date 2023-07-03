@@ -68,6 +68,10 @@ section{
             }
             
         }
+        p{
+            
+            padding: 40px ;
+        }
 
     }
 }

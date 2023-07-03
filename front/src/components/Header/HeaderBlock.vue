@@ -5,7 +5,12 @@
             <p>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</p>
             <router-link class="router" to="/Entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
         </template>
-        
+        <template v-if="$route.path == '/StagesCompetition'">
+            <div>
+                <p>id</p>
+                <button>Выход</button>
+            </div>       
+        </template>
     </section>
 </template>
 
@@ -47,7 +52,7 @@ section{
         span{
             background-color: #0079C2;
             color: white;
-            padding: 12px 0;
+            padding: 12px 4px;
             
         }
     }

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Page404 from '@/views/404/404Page.vue'
 import MainPage from '@/views/MainPage/MainPage.vue'
 import Entrance from "@/views/PersonalAccountPage/Entrance.vue"
+import StagesCompetition from "@/components/Account/StagesCompetition.vue"
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path:'/ChangingThePassword',
     name:'ChangingThePassword',
     component: Entrance
+  },
+  {
+    path:'/StagesCompetition',
+    name:'StagesCompetitionBlock',
+    component: StagesCompetition
   },
   {
     path:'*',

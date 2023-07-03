@@ -16,8 +16,7 @@ import LayoitBlock from './views/Layot/Layot.vue'
 import FooterBlock from './components/Footer/FooterBlock.vue';
 
 export default{
-   
-
+  
   components:{
     FooterBlock,
     LayoitBlock,

@@ -6,17 +6,16 @@
         <div class="right">
             <h2>ВХОД В КАБИНЕТ</h2>
             <form>
-                <input type="text" class="one" placeholder="Табельный номер ">
+                <input type="text" class="one" placeholder="Табельный номер " title = "Это тигр">
                 <input type="text" placeholder="Пароль"> 
                 <template v-if="$route.path == '/ChangingThePassword'">
                     <div class="checkpasword">
                         <input id="checkbox" type="checkbox"> 
                         <label for="checkbox">Запомнить меня</label>
-                    </div>
-                    
+                    </div>    
                 </template>
             </form>
-            <button>Войти</button>
+            <button><router-link class="button" to="/StagesCompetition">Войти</router-link></button>
             
         </div>
     </section>
@@ -33,14 +32,15 @@ export  default{
 
 <style lang="scss" scoped>
 section{
-    max-width: 1456px;
-    width: 100%;
+    width: 1456px;
+    max-width: 100%;
     margin-top: 109px;
     margin-bottom: 243px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     color: #064677;
+    margin: 104px auto;
     h2{
         font-size: 48px;
         font-weight: 400;
@@ -107,6 +107,10 @@ section{
             }
         }
     }
+    .button{
+        color: #064677;
+        font-size: 48px; 
+    }
     button{
         border:4px solid #3394CE;
         color: #064677;
@@ -118,6 +122,7 @@ section{
         height: 100px;
         width: 35%;
         margin: 80px auto;
+        text-align: center;
     }
 }
 

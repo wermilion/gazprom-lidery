@@ -45,7 +45,5 @@ export default{
 .NumbersBlock{
     margin-bottom: 114px;
 }
-.QuestionAndAnswer{
-    margin-bottom: 56px;
-}
+
 </style>

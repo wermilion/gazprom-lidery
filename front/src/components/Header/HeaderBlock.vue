@@ -6,9 +6,9 @@
             <router-link class="router" to="/Entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
         </template>
         <template v-if="$route.path == '/StagesCompetition'">
-            <div>
-                <p>id</p>
-                <button>Выход</button>
+            <div class="account">
+                <p>id: 863421</p>
+                <button >Выход</button>
             </div>       
         </template>
     </section>
@@ -29,6 +29,7 @@ export default{
 section{
     
     margin-top: 32px;
+    margin-bottom:32px ;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -56,6 +57,14 @@ section{
             
         }
     }
+    .account{
+        display: flex;
+        align-items: center;
+        p{
+           padding: 16px 24px; 
+           margin-right: 88px;
+        }
+    }
     
     .router{
         background-color: #0079C2;
@@ -69,6 +78,13 @@ section{
         
         
     }
+    button{
+        padding: 16px 24px;
+        font-size: 32px;
+    }
+  
+    }
+   
     @media screen and (max-width :1600px) {
         img{
             width: 183px;
@@ -98,7 +114,7 @@ section{
         }
     }
         
-}
+
  @media screen and (max-width :1024px) {
         section{
             display: flex;

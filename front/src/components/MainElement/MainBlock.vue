@@ -39,15 +39,16 @@ section{
     }
     .IMg2{
         position: absolute;
-        top: 550px;
+        top: 497px;
         left: 0;
         height: 400px;
         width: 400px;
     }
     .top_inf{
-        
+        width: 951px;
+        max-width: 100%;
         h1{
-            margin-top: 93px;
+            margin-top: 7px;
             padding-left: 32px;
             margin-bottom: 5px;
         }
@@ -67,6 +68,7 @@ section{
             color: #1D4573;
             padding: 0 19px 0 19px;
             
+
         }  
         p{
             width: 100%;
@@ -98,7 +100,7 @@ section{
         .IMg2{
             height: 300px;
             width: 300px;
-            top:490px;
+            top:420px;
         }
         .top_inf{
             

@@ -15,7 +15,7 @@
                     </div>    
                 </template>
             </form>
-            <button><router-link class="button" to="/StagesCompetition">Войти</router-link></button>
+            <button ><router-link class="button" to="/StagesCompetition">Войти</router-link></button>
             
         </div>
     </section>
@@ -25,6 +25,12 @@
 <script>
 export  default{
     name: "EntranceBlock",
+    data(){
+        return{
+            pasword:'1234'
+
+        }
+    }
 
 }
 </script>

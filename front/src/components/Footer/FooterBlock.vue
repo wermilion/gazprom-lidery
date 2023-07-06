@@ -25,7 +25,7 @@ section{
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin: 0px;
+    
     padding: 0;
     .LEFTdiv{
         margin: 40px 374px 40px 40px;

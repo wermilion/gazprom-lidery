@@ -3,7 +3,7 @@
     <nav>
       <LayoitBlock class="LayoitBlock"/>
     </nav>
-    <template v-if="$route.path=='/'">
+    <template v-if="$route.path!='/Entrance'">
       <FooterBlock class="FooterBlock"/>
     </template>
     
@@ -38,7 +38,7 @@ export default{
   
 }
 .FooterBlock{
- 
+  margin-top: 56px;
   border-top: 1px solid #0079C2;
   width: 100%;
 }

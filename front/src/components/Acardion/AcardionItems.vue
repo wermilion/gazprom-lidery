@@ -59,9 +59,13 @@ section{
                 margin:28px 42px 28px;
                 
                 .img1{
+                    transition-duration: .2s;
                     position: absolute;
                     transform: rotate(90deg);
 
+                }
+                .img2{
+                     transition-duration: .2s;
                 }
                 
                 

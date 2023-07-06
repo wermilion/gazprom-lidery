@@ -8,9 +8,27 @@
         <template v-if="$route.path == '/StagesCompetition'">
             <div class="account">
                 <p>id: 863421</p>
-                <button >Выход</button>
+                <button v-on:click="openModel" >Выход</button>
+               
             </div>       
         </template>
+        <div v-show="modalOpen" class="modal-wrapper">
+            <div class="model-content">
+                <div class="top">
+                  <button  v-on:click="closeModel" class="exst"></button>  
+                </div>
+                <div class="betwen">
+                    <p>Вы действительно хотите выйти?</p>
+                </div>
+                
+                <div class="botton">
+                    <router-link  to="/"><button v-on:click="closeModel">Да</button></router-link>
+                    <button v-on:click="closeModel">Нет</button>
+                </div>
+            </div>
+            
+        </div>
+
     </section>
 </template>
 
@@ -18,7 +36,19 @@
 
 export default{
     name: "HeaderBlock",
-    
+    data(){
+        return{
+            modalOpen:false
+        }
+    },
+    methods: {
+        openModel(){
+            this.modalOpen=true
+        },
+        closeModel(){
+            this.modalOpen=false
+        }
+    }
 }
 
 </script>
@@ -81,6 +111,59 @@ section{
     button{
         padding: 16px 24px;
         font-size: 32px;
+    }
+    .modal-wrapper{
+        border: 3px solid #064677;
+        background: #FFF;
+        position: absolute;
+        top:25%;
+        left: 30%;
+        z-index: 1000;
+        width: 743px;
+        height: 400px;
+        .model-content{
+            width: 100%;
+            max-width: 641px;
+            margin: 31px auto;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            .betwen{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 88px;
+            }
+            .top{
+                display: flex;
+                justify-content: end;
+                margin-bottom: 16px;
+                .exst{
+                    background-image: url('/public/image/Group 36.png');
+                    background-color: white;
+                    background-size:cover ;
+                    width: 62px;
+                    height: 62px;
+                }
+                .exst:hover{
+                    background-image: url('/public/image/Group 36 (1).png');
+                }
+            }
+            .botton{
+                display: flex;
+                justify-content: space-around;
+                button{
+                    border: 4px solid #064677;
+                    background-color: white;
+                    color: #064677;
+                    
+                    padding: 8px 29px;
+                }
+                button:hover{
+                    background-color: #064677;
+                    color: white;
+                }
+            }
+        }
     }
   
     }

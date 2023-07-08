@@ -14,17 +14,17 @@ const routes = [
     component: MainPage
   },
   {
-    path:'/Entrance',
+    path:'/entrance',
     name:'EntranceBlock',
     component: Entrance
   },
   {
-    path:'/ChangingThePassword',
+    path:'/changing_the_password',
     name:'ChangingThePassword',
     component: Entrance
   },
   {
-    path:'/StagesCompetition',
+    path:'/stages_competition',
     name:'StagesCompetitionBlock',
     component: StagesCompetition
   },

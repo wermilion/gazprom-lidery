@@ -30,9 +30,10 @@ section{
     margin-top: 0px;
     background-color: #0079C2;
     color: #F5F5F5;
+    
     .IMg1{
         position: absolute;
-        top: 248px;
+        top: 175px;
         right: 40px;
         height: 400px;
         width: 400px;

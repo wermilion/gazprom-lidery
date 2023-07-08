@@ -42,7 +42,7 @@ export default{
                     title: "Регистрация",
                     img: '/image/ImgMain1.png',
                     text:"",
-                    button:"Приступить",
+                    button:"",
                     term: "ДОСТУПНО",
                     info: "",
                     statys: "active",
@@ -102,7 +102,7 @@ export default{
                     title: "Финал",
                     img: '/image/ImgMain1.png',
                     text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "инструкция",
+                    button: "",
                     term: "ДОСТУПНО",
                     info: "До 31 октября",
                     statys:"inactive", 
@@ -166,7 +166,7 @@ section{
                 h2{
                     border: 2px solid #064677;
                     color: #064677;  
-                    font-family: HeliosCondBlack;
+                    font-weight: bold;
                     padding: 32px 32px;
                     
                     font-size: 96px;

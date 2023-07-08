@@ -59,7 +59,7 @@ section {
             h2{
                 border: 2px solid #064677;
                 color: #064677;  
-                font-family: HeliosCondBlack;
+                font-weight: bold;
                 padding: 0 16px;
             }
         

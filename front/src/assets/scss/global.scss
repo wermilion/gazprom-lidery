@@ -1,5 +1,5 @@
-@import url('./scss/Mixcins.scss');
-@import url('./scss/Сonstants.scss');
+@import url('./Mixcins.scss');
+@import url('./Сonstants.scss');
 
 body{
     font-family: HeliosCond;
@@ -9,6 +9,12 @@ body{
     margin: 0;
     padding: 0;
 }
+.mainContener{
+    width: 1840px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 auto;
+}
 button{
     cursor: pointer;
     background-color: #0079C2;
@@ -16,6 +22,7 @@ button{
     border: none;
 }
 h1{
+   
     font-weight: 700;
     font-size: 208px;
     line-height: 242px;

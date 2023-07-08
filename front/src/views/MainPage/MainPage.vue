@@ -1,12 +1,14 @@
 <template>
-    <section>
+    <section class="mainContener">
         <MainBlock class="BanerBlock"></MainBlock>
         <OpprtunitiesBlock class="OpprtunitiesBlock"></OpprtunitiesBlock>
         <WhoCanTakePart class="WhoCanTakePart"></WhoCanTakePart>
         <StagesBlock class="StagesBlock"></StagesBlock>
         <NumbersBlock class="NumbersBlock"></NumbersBlock>
         <QuestionAndAnswer class="QuestionAndAnswer"></QuestionAndAnswer>
+        
     </section>
+    
 </template>
 
 
@@ -32,7 +34,10 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-
+section{
+    display: flex;
+    flex-direction: column;
+}
 .OpprtunitiesBlock{
     margin: 56px 40px 112px 40px;
 }

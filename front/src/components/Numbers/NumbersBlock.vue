@@ -37,7 +37,7 @@ section{
             margin-bottom: 56px;
         }
     .shell{
-        font-family: HeliosCondBlack;
+        
         display: flex;
         flex-direction: column;
         
@@ -58,7 +58,7 @@ section{
                 margin: 1px;
                 padding: 20px;
                 p{
-                    font-weight: 400;
+                    font-weight: bold;
                     font-size: 48px;
                     line-height: 57px;
                     color: white;

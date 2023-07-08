@@ -1,17 +1,19 @@
 <template>
     <section>
-        <router-link to="/"><img src="/image/GazpromLog.svg" alt="logo"></router-link>
-        <template v-if="$route.path == '/'">
-            <p>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</p>
-            <router-link class="router" to="/Entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
-        </template>
-        <template v-if="$route.path == '/StagesCompetition'">
-            <div class="account">
-                <p>id: 863421</p>
-                <button v-on:click="openModel" >Выход</button>
-               
-            </div>       
-        </template>
+            <router-link to="/"><img src="/image/GazpromLog.svg" alt="logo"></router-link>
+            <template v-if="$route.name == 'MainPage'">
+                <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
+                <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
+            </template>
+            <template v-if="$route.name == 'StagesCompetitionBlock'">
+                <div class="account">
+                    <b>id: 00001</b>
+                    <button v-on:click="openModel" >Выход</button>
+                
+                </div>       
+            </template>
+       
+       
         <div v-show="modalOpen" class="modal-wrapper">
             <div class="model-content">
                 <div class="top">
@@ -26,9 +28,8 @@
                     <button v-on:click="closeModel">Нет</button>
                 </div>
             </div>
-            
         </div>
-
+        
     </section>
 </template>
 
@@ -71,8 +72,8 @@ section{
         height: 103px;
     }
    
-    p{
-        font-family: "HeliosCondBlack";
+    b{
+        font-family: "HeliosCond";
         padding-bottom: 15px;
         margin: 0 20px;
         font-weight: 700;
@@ -90,7 +91,7 @@ section{
     .account{
         display: flex;
         align-items: center;
-        p{
+        b{
            padding: 16px 24px; 
            margin-right: 88px;
         }

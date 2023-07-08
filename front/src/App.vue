@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <nav>
-      <LayoitBlock class="LayoitBlock"/>
+  <div id="app" >
+    <nav class="mainContener">
+      <HeaderBlock></HeaderBlock>
     </nav>
-    <template v-if="$route.path!='/Entrance'">
-      <FooterBlock class="FooterBlock"/>
-    </template>
+    <router-view/>
+    <footer>
+       <template v-if="$route.name!='EntranceBlock'">
+        <FooterBlock class="FooterBlock"/>
+      </template>
     
+    </footer>
+   
   </div>
 </template>
 
 
 <script>
-import LayoitBlock from './views/Layot/Layot.vue'
-import FooterBlock from './components/Footer/FooterBlock.vue';
 
+import FooterBlock from './components/Footer/FooterBlock.vue';
+import HeaderBlock from './components/Header/HeaderBlock.vue';
 export default{
   
   components:{
     FooterBlock,
-    LayoitBlock,
+    HeaderBlock,
   }
 }
 </script>
 
 <style lang="scss">
-@import url("./assets/global.scss");
-@import url("./assets/Main.scss");
+@import url("./assets/scss/global.scss");
+@import url("./assets/fonts/Main.scss");
 
 #app {
    

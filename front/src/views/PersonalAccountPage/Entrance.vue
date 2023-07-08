@@ -4,7 +4,7 @@
             <img src="/image/ImgMain1.png" alt="">
         </div>
         <div class="right">
-            <h2>ВХОД В КАБИНЕТ</h2>
+            <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
                 <input type="text" class="one" placeholder="Табельный номер " title = "Это тигр">
                 <input type="text" placeholder="Пароль"> 
@@ -15,7 +15,7 @@
                     </div>    
                 </template>
             </form>
-            <button ><router-link class="button" to="/StagesCompetition">Войти</router-link></button>
+            <button ><router-link class="button" to="/stages_competition">Войти</router-link></button>
             
         </div>
     </section>
@@ -80,8 +80,7 @@ section{
         }
         h2{
             font-size: 48px;
-            font-family: "HeliosCondBlack";
-            font-weight: 400;
+            font-family: "HeliosCond";
             line-height: normal;
             margin: 42px 0 82px;
         }

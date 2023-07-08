@@ -12,8 +12,6 @@ class Challenge extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'random_task_id',
         'solution',
-        'file'
     ];
 }

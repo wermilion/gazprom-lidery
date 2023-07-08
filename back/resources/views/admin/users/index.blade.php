@@ -22,14 +22,6 @@
                                     @selected(old('branch_id', request()->get('branch_id')) == $branch->id)  value="{{$branch->id}}">{{$branch->name}}</option>
                             @endforeach
                         </select>
-                        <select name="branch_id"
-                                class="w-max h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500">
-                            <option selected value="0" class="text-gray-600">Выберите филиал</option>
-                            @foreach($branches as $branch)
-                                <option
-                                    @selected(old('branch_id', request()->get('branch_id')) == $branch->id)  value="{{$branch->id}}">{{$branch->name}}</option>
-                            @endforeach
-                        </select>
                         <button
                             class="w-max h-max ml-2 text-white bg-gazprom-500 uppercase hover:bg-gazprom-400 py-2 px-4">
                             Поиск

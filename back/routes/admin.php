@@ -23,7 +23,7 @@ Route::name('cp.')->prefix('cp/')->group(function () {
 
     Route::middleware(['auth', 'admin'])->group(function () {
 
-        Route::get('', [AdminController::class, 'index'])->name('index');
+        Route::get('main', [AdminController::class, 'index'])->name('index');
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
@@ -84,6 +84,7 @@ Route::name('cp.')->prefix('cp/')->group(function () {
             Route::post('storeDistance/{result}', [ResultController::class, 'storeDistance'])->name('storeDistance');
 
             Route::get('/{stage:slug}/{result}', [ResultController::class, 'printPdf'])->name('printPdf');
+
         });
     });
 });

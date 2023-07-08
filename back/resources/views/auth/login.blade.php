@@ -1,12 +1,12 @@
 <x-guest-layout>
-    <x-auth-session-status class="mb-4" :status="session('status')"/>
+    <x-auth-session-status class="mb-4" :status="session('status')"/>z
 
     <form method="POST" action="{{ route('cp.login') }}">
         @csrf
         <div>
             <x-input-label for="tabel_number" :value="__('Табельный номер')"/>
             <x-text-input id="tabel_number" class="block mt-1 w-full" type="text" name="tabel_number"
-                          :value="old('email')" required
+                          :value="old('tabel_number')" required
                           autofocus autocomplete="username"/>
             <x-input-error :messages="$errors->get('tabel_number')" class="mt-2"/>
         </div>

@@ -38,15 +38,6 @@ class BranchController extends Controller
 
         return redirect()->route('cp.branches.index')->with(['success' => true, 'message' => 'Филиал успешно добавлен!']);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Branch $branch)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */

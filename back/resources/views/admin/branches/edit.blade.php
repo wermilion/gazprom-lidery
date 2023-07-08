@@ -17,7 +17,7 @@
             </label>
             <input
                 placeholder="Название филиала"
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
+                class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
                 id="name" type="text" name="name" autofocus="autofocus" required
                 value="{{ old('name', $branch->name) }}">
         </div>

@@ -15,7 +15,6 @@ return new class extends Migration {
         Schema::create('challenges', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'user_id')->constrained();
-            $table->string('task');
             $table->string('solution');
             $table->timestamps();
         });

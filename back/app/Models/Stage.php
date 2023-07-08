@@ -14,6 +14,7 @@ class Stage extends Model
     protected $fillable = [
         'id',
         'name',
+        'slug',
         'instruction',
         'date_start',
         'date_end',

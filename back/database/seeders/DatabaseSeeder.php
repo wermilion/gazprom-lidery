@@ -4,13 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Branch;
+use App\Models\Instrument;
 use App\Models\ResultStatus;
 use App\Models\Role;
 use App\Models\Stage;
 use App\Models\StageStatus;
 use App\Models\User;
-use Database\Factories\BranchFactory;
 use Illuminate\Database\Seeder;
+use Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -39,6 +40,10 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(40)->create();
 
+        Instrument::factory()->create([
+            'min_points' => 100,
+            'task' => 'Задача для этапа Задача.',
+        ]);
 
         StageStatus::factory()->create([
             'status_name' => 'Доступно'
@@ -50,6 +55,8 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Регистрация',
+            'slug' => Str::slug('Регистрация', '_'),
+            'desc' => fake()->text('200'),
             'instruction' => 'Зарегистрироваться на сайте Лидеры Газпрома.',
             'date_start' => '2022-09-28 23:59',
             'date_end' => '2023-09-28 11:59',
@@ -58,6 +65,8 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Анкета и видеоинтервью',
+            'slug' => Str::slug('Анкета и видеоинтервью', '_'),
+            'desc' => fake()->text('200'),
             'instruction' => 'Пройти анкетирование и загрузить видеоинтервью.',
             'date_start' => '2023-09-28 23:59',
             'date_end' => '2024-09-28 11:59',
@@ -66,9 +75,51 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Дистанционный этап',
+            'slug' => Str::slug('Дистанционный этап', '_'),
+            'desc' => fake()->text('200'),
             'instruction' => 'Пройти дистанционные тесты на сайте РСВ.',
             'date_start' => '2024-09-28 23:59',
             'date_end' => '2025-09-28 11:59',
+            'stage_status_id' => 2,
+        ]);
+
+        Stage::factory()->create([
+            'name' => 'Управленчиские решения',
+            'slug' => Str::slug('Управленчиские решения', '_'),
+            'desc' => fake()->text('200'),
+            'instruction' => 'Описать управленческое решение.',
+            'date_start' => '2025-09-28 23:59',
+            'date_end' => '2026-09-28 11:59',
+            'stage_status_id' => 2,
+        ]);
+
+        Stage::factory()->create([
+            'name' => 'Задача',
+            'slug' => Str::slug('Задача', '_'),
+            'desc' => fake()->text('200'),
+            'instruction' => 'Решить задачу.',
+            'date_start' => '2026-09-28 23:59',
+            'date_end' => '2027-09-28 11:59',
+            'stage_status_id' => 2,
+        ]);
+
+        Stage::factory()->create([
+            'name' => 'Очный этап',
+            'slug' => Str::slug('Очный этап', '_'),
+            'desc' => fake()->text('200'),
+            'instruction' => 'Очный этап будет проходить по адресу....',
+            'date_start' => '2027-09-28 23:59',
+            'date_end' => '2028-09-28 11:59',
+            'stage_status_id' => 2,
+        ]);
+
+        Stage::factory()->create([
+            'name' => 'Финал',
+            'slug' => Str::slug('Финал', '_'),
+            'desc' => fake()->text('200'),
+            'instruction' => 'Финал будет проходить по адресу....',
+            'date_start' => '2028-09-28 23:59',
+            'date_end' => '2029-09-28 11:59',
             'stage_status_id' => 2,
         ]);
 

@@ -10,8 +10,8 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tabel_number' => ['required', 'numeric', 'digits_between :5,5', ' unique:' . User::class],
-            'password' => ['string']
+            'tabel_number' => ['required', 'numeric', 'digits_between :1,9', ' unique:' . User::class],
+            'password' => ['required', 'string']
         ];
     }
 

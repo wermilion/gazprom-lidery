@@ -145,6 +145,6 @@ class ResultController extends Controller
         }
         $result->update();
 
-        return redirect()->back();
+        return redirect()->route('cp.results.show', $result->stage->slug);
     }
 }

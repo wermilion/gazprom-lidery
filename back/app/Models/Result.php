@@ -18,6 +18,12 @@ class Result extends Model
         'result_status_id'
     ];
 
+
+    public function stage()
+    {
+        return $this->belongsTo(Stage::class, 'stage_id');
+    }
+
     public function status()
     {
         return $this->belongsTo(ResultStatus::class, 'result_status_id');

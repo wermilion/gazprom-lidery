@@ -13,11 +13,16 @@ Route::prefix('/profile')->name('api.profile.')->group(callback: function () {
 
     /** Login */
     Route::post('/login', [ProfileAuthController::class, 'login'])
-        ->middleware('guest')
+        ->middleware(['guest', 'custom_password'])
         ->name('login');
 
     /** Logout */
     Route::post('/logout', [ProfileAuthController::class, 'logout'])
         ->middleware('auth:sanctum')
         ->name('logout');
+
+    Route::post('/change-password', [ProfileAuthController::class, 'change_password'])
+        ->middleware('auth:sanctum')
+        ->name('change-password');
+
 });

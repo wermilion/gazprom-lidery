@@ -4,6 +4,7 @@ import Page404 from '@/views/404/404Page.vue'
 import MainPage from '@/views/MainPage/MainPage.vue'
 import Entrance from "@/views/PersonalAccountPage/Entrance.vue"
 import StagesCompetition from "@/components/Account/StagesCompetition.vue"
+import QuestionnairePage from "@/views/QuestionnairePage/QuestionnairePage.vue"
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,11 @@ const routes = [
     path:'/',
     name:'MainPage',
     component: MainPage
+  },
+  {
+    path:'/questionnaire_page',
+    name:'QuestionnairePage',
+    component:QuestionnairePage
   },
   {
     path:'/entrance',

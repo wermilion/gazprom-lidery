@@ -42,11 +42,11 @@ export default{
                     title: "Регистрация",
                     img: '/image/ImgMain1.png',
                     text:"",
-                    button:"",
+                    button:"приступить",
                     term: "ДОСТУПНО",
                     info: "",
                     statys: "active",
-                    router:""
+                    router:"/questionnaire_page"
                 },
                 {
                     title: "Регистрация",

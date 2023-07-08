@@ -20,7 +20,7 @@
                   <button  v-on:click="closeModel" class="exst"></button>  
                 </div>
                 <div class="betwen">
-                    <p>Вы действительно хотите выйти?</p>
+                    <b>Вы действительно хотите выйти?</b>
                 </div>
                 
                 <div class="botton">
@@ -73,7 +73,7 @@ section{
     }
    
     b{
-        font-family: "HeliosCond";
+        
         padding-bottom: 15px;
         margin: 0 20px;
         font-weight: 700;

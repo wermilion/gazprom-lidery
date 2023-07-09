@@ -17,9 +17,27 @@
             </label>
             <input
                 placeholder="Название этапа"
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
+                class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
                 id="name" type="text" name="name" autofocus="autofocus"
                 value="{{ old('name', $stage->name) }}">
+        </div>
+
+        <div class="mt-4">
+            @if($errors->get('desc'))
+                <p class="text-red-600">Поле "Описание этапа" должно быть:</p>
+                <ul class="list-disc ml-4">
+                    @foreach($errors->get('desc') as $error)
+                        <li class="text-red-600">{{$error}}</li>
+                    @endforeach
+                </ul>
+            @endif
+            <label class="block font-medium text-lg text-gray-700" for="desc">
+                Описание этапа
+            </label>
+            <textarea
+                class="w-full border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
+                placeholder="Инструкция"
+                id="desc" name="desc">{{ old('desc', $stage->desc) }}</textarea>
         </div>
 
         <div class="mt-4">
@@ -35,11 +53,9 @@
                 Инструкция этапа
             </label>
             <textarea
-                class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
+                class="w-full border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
                 placeholder="Инструкция"
-                id="instruction" name="instruction">
-                {{ old('instruction', $stage->instruction) }}
-            </textarea>
+                id="instruction" name="instruction">{{ old('instruction', $stage->instruction) }}</textarea>
         </div>
         <div class="flex mt-4">
             <div class="mr-4">
@@ -55,7 +71,7 @@
                     Дата начала
                 </label>
                 <input name="date_start" id="date_start"
-                       class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
+                       class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
                        type="datetime-local" value="{{old('date_start', $stage->date_start)}}">
             </div>
             <div>
@@ -71,7 +87,7 @@
                     Дата конца
                 </label>
                 <input name="date_end" id="date_end"
-                       class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
+                       class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
                        type="datetime-local" value="{{old('date_end', $stage->date_end)}}">
             </div>
         </div>
@@ -83,7 +99,8 @@
             <input
                 @checked(old('activity', $stage->activity))
                 value="1"
-                id="activity" type="checkbox" name="activity">
+                id="activity" type="checkbox" name="activity"
+                class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm">
         </div>
         <button
             type="submit"

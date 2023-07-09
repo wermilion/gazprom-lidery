@@ -28,6 +28,9 @@
                                     @endif
                                 </span>
                             </div>
+                            <div>
+                                <span>Описание этапа: {{$stage->desc}}</span>
+                            </div>
                             <div class="container mt-4">
                                 <button type="button" class="trigger">Инструкция</button>
                                 <div class="content">
@@ -35,6 +38,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end">
+                                {{setlocale(LC_ALL, 'ru_RU', 'ru_RU.UTF-8', 'ru', 'russian')}}
                                 <span>{{date("F j, H:i", strtotime($stage->date_start))}} - {{date("F j, H:i", strtotime($stage->date_end))}} (по МСК)</span>
                             </div>
                         </div>

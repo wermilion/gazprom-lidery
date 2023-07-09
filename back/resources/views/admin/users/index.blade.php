@@ -11,11 +11,19 @@
                           method="get">
                         <input
                             placeholder="Поиск по табельному номеру"
-                            class="w-60 h-max ml-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 placeholder-gray-500"
+                            class="w-60 h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 placeholder-gray-500"
                             type="text" name="tabel_number"
                             value="{{ old('tabel_number', request()->get('tabel_number'))  }}">
                         <select name="branch_id"
-                                class="w-max h-max ml-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+                                class="w-max h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500">
+                            <option selected value="0" class="text-gray-600">Выберите филиал</option>
+                            @foreach($branches as $branch)
+                                <option
+                                    @selected(old('branch_id', request()->get('branch_id')) == $branch->id)  value="{{$branch->id}}">{{$branch->name}}</option>
+                            @endforeach
+                        </select>
+                        <select name="branch_id"
+                                class="w-max h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500">
                             <option selected value="0" class="text-gray-600">Выберите филиал</option>
                             @foreach($branches as $branch)
                                 <option
@@ -67,7 +75,7 @@
                         data-te-target="#ModalCenter"
                         data-te-ripple-init
                         data-te-ripple-color="#0079fa">
-                        <img src="{{URL('/images/delete-icon.svg')}}" alt="delete-icon">
+                        <img src="{{URL('/images/delete-icon.svg')}}" alt="delete-icon" draggable="false">
                     </button>
                     <div
                         data-te-modal-init

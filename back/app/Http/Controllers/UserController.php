@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Psy\Util\Str;
 
 class UserController extends Controller
 {
@@ -19,7 +20,7 @@ class UserController extends Controller
      */
     public function index(UserFilter $filter)
     {
-        $users = User::orderBy('id', 'DESC')->where('role_id', 1)->filter($filter)->paginate(10);
+        $users = User::orderBy('id', 'DESC')->where('role_id', 1)->where('custom_password', false)->filter($filter)->paginate(10);
 
         $branches = Branch::all();
 
@@ -37,14 +38,13 @@ class UserController extends Controller
     {
         $tabelNumber = request()->get('tabel_number');
         $branchId = request()->get('branch_id');
-        $userBuilder = User::query();
+        $userBuilder = User::query()->where('role_id', 1)->where('custom_password', true);
         if ($tabelNumber) $userBuilder->where('tabel_number', $tabelNumber);
         if ($branchId) $userBuilder->where('branch_id', $branchId);
 
         $users = $userBuilder->get();
-        $page = 1;
 
-        $pdf = PDF::loadView('admin.pdf.users', ['users' => $users, 'page' => $page])->setPaper('a4');
+        $pdf = PDF::loadView('admin.pdf.users', ['users' => $users])->setPaper('a4');
 
         return $pdf->download('Список конкурсантов.pdf');
     }

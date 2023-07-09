@@ -16,7 +16,7 @@
                     Табельный номер
                 </label>
                 <input
-                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
+                    class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
                     id="tabel_number" type="text" name="tabel_number" autofocus="autofocus" required
                     value="{{ old('tabel_number') }}">
             </div>
@@ -35,8 +35,8 @@
                 <input
                     disabled
                     oninput="switchDisabled()"
-                    class="border-gray-300 bg-gray-100 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm block mt-1"
-                    id="password" type="text" name="password" autofocus="autofocus" required>
+                    class="border-gray-300 bg-gray-100 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
+                    id="password" type="text" name="password" autofocus="autofocus" placeholder="Сгенерированный пароль" required>
             </div>
             <div class=" mt-4 flex flex-col">
                 <button

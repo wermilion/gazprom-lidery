@@ -46,6 +46,7 @@ section{
         justify-content: space-between;
         margin: 0px auto;
         width: 1530px;
+        max-width: 100%;
         .checkbox1{
             margin: 40px 0;
             display: flex;
@@ -62,10 +63,16 @@ section{
             }
         }
         button{
-            width: 139px;
+            
             height: 74px;
             font-size: 36px;
-            margin: 28px 0;
+            
+           
+             .router{
+               background-color: none;
+               color: white;
+                
+            }
         }
     }
 }

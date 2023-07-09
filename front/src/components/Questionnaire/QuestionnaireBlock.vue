@@ -181,14 +181,17 @@ button.disableBtn {
     justify-content: flex-end;
     margin-top: 172px;
     button{
-        .router{
+            
+            height: 74px;
             font-size: 36px;
-            font-weight: 700;
-            padding: 16px 24px;  
-            background: #0079C2;
-            color: white;
+            
+           
+             .router{
+               background-color: none;
+               color: white;
+                
+            }
         }
-    }
 }
 section{
     width: 1210px;

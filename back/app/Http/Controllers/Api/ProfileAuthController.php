@@ -10,12 +10,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use function Symfony\Component\Translation\t;
 
 class ProfileAuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
         $request->authenticate();
+        return response([
+           'status' => true,
+           'custom_password' => (bool) Auth::user()->custom_password,
+        ]);
     }
 
     public function logout(Request $request)
@@ -29,21 +34,24 @@ class ProfileAuthController extends Controller
         ]);
     }
 
-    public function change_password(ChangePasswordRequest $request)
+    public function changePassword(ChangePasswordRequest $request)
     {
         $data = $request->all();
         $user_id = Auth::guard('web')->user()->id;
 
         try {
-            User::where('id', $user_id)->update(['password' => Hash::make($data['new_password'])]);
-            User::where('id', $user_id)->update(['custom_password' => true]);
+
+            User::where('id', $user_id)->update(array(
+                'password' => Hash::make($data['new_password']),
+                'custom_password' => true,
+            ));
             $arr = response([
                 'status' => true,
                 'message' => 'Пароль был успешно изменён'
             ]);
 
         } catch (\Exception $ex) {
-            $msg = $ex->errorInfo[2] ?? $ex->getMessage();
+            $msg = $ex->getMessage();
             $arr = response([
                 'status' => false,
                 'message' => $msg

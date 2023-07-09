@@ -13,7 +13,7 @@ Route::prefix('/profile')->name('api.profile.')->group(callback: function () {
 
     /** Login */
     Route::post('/login', [ProfileAuthController::class, 'login'])
-        ->middleware(['guest', 'custom_password'])
+        ->middleware('guest')
         ->name('login');
 
     /** Logout */

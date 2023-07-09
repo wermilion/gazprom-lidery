@@ -21,7 +21,7 @@ Route::prefix('/profile')->name('api.profile.')->group(callback: function () {
         ->middleware('auth:sanctum')
         ->name('logout');
 
-    Route::post('/change-password', [ProfileAuthController::class, 'change_password'])
+    Route::post('/change-password', [ProfileAuthController::class, 'changePassword'])
         ->middleware('auth:sanctum')
         ->name('change-password');
 

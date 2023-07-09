@@ -16,9 +16,6 @@ class ProfileAuthController extends Controller
     public function login(LoginRequest $request)
     {
         $request->authenticate();
-        return response([
-            'status' => true,
-        ]);
     }
 
     public function logout(Request $request)
@@ -27,7 +24,8 @@ class ProfileAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return response([
-            'status' => true
+            'status' => true,
+            'message' => 'Выход из системы выполнен успешно'
         ]);
     }
 

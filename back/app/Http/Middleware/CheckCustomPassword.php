@@ -17,15 +17,25 @@ class CheckCustomPassword
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
-
-        if (Auth::guard('web')->user()->custom_password) {
+        if (!Auth::user()) {
             $response = response([
-                'custom_password' => true,
+                'status' => false,
+                'message' => 'Ошибка авторизации'
             ]);
         } else {
-            $response = response([
-                'custom_password' => false,
-            ]);
+            if (Auth::guard('web')->user()?->custom_password) {
+                $response = response([
+                    'status' => true,
+                    'message' => 'Авторизация прошла успешно',
+                    'custom_password' => true,
+                ]);
+            } else {
+                $response = response([
+                    'status' => true,
+                    'message' => 'Авторизация прошла успешно',
+                    'custom_password' => false,
+                ]);
+            }
         }
         return $response;
     }

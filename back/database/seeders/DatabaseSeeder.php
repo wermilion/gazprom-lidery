@@ -87,8 +87,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Stage::factory()->create([
-            'name' => 'Управленчиские решения',
-            'slug' => Str::slug('Управленчиские решения', '_'),
+            'name' => 'Управленческие решения',
+            'slug' => Str::slug('Управленческие решения', '_'),
             'desc' => fake()->text('200'),
             'instruction' => 'Описать управленческое решение.',
             'image' => '/image/stages/Management.svg',

@@ -14,9 +14,7 @@ return new class extends Migration {
         Schema::create('stages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('desc');
             $table->string('instruction');
-            $table->string('image');
             $table->timestamp('date_start');
             $table->timestamp('date_end');
             $table->boolean('activity')->default(false);

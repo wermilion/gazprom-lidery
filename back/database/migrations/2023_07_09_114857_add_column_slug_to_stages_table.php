@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::table('stages', function (Blueprint $table) {
             $table->string('slug');
-
         });
     }
 

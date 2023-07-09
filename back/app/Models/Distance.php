@@ -12,7 +12,6 @@ class Distance extends Model
     protected $fillable = [
         'id',
         'user_id',
-        'min_points',
         'sum_result'
     ];
 }

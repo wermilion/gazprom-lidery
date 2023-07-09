@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $tabelNumber = request()->get('tabel_number');
         $branchId = request()->get('branch_id');
-        $userBuilder = User::query()->where('role_id', 1)->where('custom_password', true);
+        $userBuilder = User::query()->where('role_id', 1)->where('custom_password', false);
         if ($tabelNumber) $userBuilder->where('tabel_number', $tabelNumber);
         if ($branchId) $userBuilder->where('branch_id', $branchId);
 
@@ -99,6 +99,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->back()->with(['success' => true, 'message' => 'Конкурсант был удалён.']);
+        return redirect()->route('cp.users.index')->with(['success' => true, 'message' => 'Конкурсант был удалён.']);
     }
 }

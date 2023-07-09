@@ -1,19 +1,19 @@
 <template>
     <section>
-            <router-link to="/"><img src="/image/GazpromLog.svg" alt="logo"></router-link>
-            <template v-if="$route.name == 'MainPage'">
-                <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
-                <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
-            </template>
-            <template v-if="$route.name == 'StagesCompetitionBlock'">
-                <div class="account">
-                    <b>id: 00001</b>
-                    <button v-on:click="openModel" >Выход</button>
-                
-                </div>       
-            </template>
-       
-       
+        <router-link to=""><img src="/image/GazpromLog.svg" alt="logo"></router-link>
+        <template v-if="$route.name == 'MainPage' ">
+            <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
+            <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
+        </template>
+        <template v-if="$route.name == 'StagesCompetitionBlock'|| $route.name == 'QuestionnairePage'">
+            <div class="account">
+                <b>id: 00001</b>
+                <button v-on:click="openModel" >Выход</button>
+            
+            </div>       
+        </template>
+
+
         <div v-show="modalOpen" class="modal-wrapper">
             <div class="model-content">
                 <div class="top">
@@ -22,14 +22,14 @@
                 <div class="betwen">
                     <b>Вы действительно хотите выйти?</b>
                 </div>
-                
                 <div class="botton">
                     <router-link  to="/"><button v-on:click="closeModel">Да</button></router-link>
                     <button v-on:click="closeModel">Нет</button>
                 </div>
             </div>
+
+
         </div>
-        
     </section>
 </template>
 

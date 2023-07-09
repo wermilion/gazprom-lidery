@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('slug');
             $table->string('desc');
             $table->string('instruction');
+            $table->string('image');
             $table->timestamp('date_start');
             $table->timestamp('date_end');
             $table->boolean('activity')->default(false);

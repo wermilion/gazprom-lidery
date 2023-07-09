@@ -1,52 +1,43 @@
 <template>
     <section>
-        <div>
-            <h2>Личная информация</h2> 
-            <div class="betwen">
-                <div class="left">
-                    <label for="">Имя</label>
-                    <input v-on:change="NameInput" required aria-required="true" type="text" v-model="name" :class="{ 'errorName': errorName }" placeholder="Ваше имя">
-                    <label  for="">Табельный номер</label>
-                    <input  type="text" autocomplete="on" v-model="service_number" placeholder="863421" value="863421">
-                    <label for="">Наименование филиала</label>
-                    <div class="selector_wraper" v-on:change="BranchInput" :class="{ 'errorbranch': errorbranch }">
-                        <select list="selector" foe="selector"  v-model="branch" class="select">
-                            <option disabled value="">Ваш филиал</option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                            <option>A</option>
-                            <option>B</option>
-                            <option>C</option>
-                        </select>
-                    </div>
-                    
-                </div>
-                <div class="right">
-                    <label for="">Фамилия</label>
-                    <input required type="text" v-model="surname"  placeholder="Ваша фамилия">
-                    <label for="">Должность</label>
-                    <input type="text" v-model="post" placeholder="Ваша должность">
-                    <label for="">Стаж</label>
-                    <input required type="text" v-model="experience"  placeholder="Ваш стаж">
+        <h2>Личная информация</h2> 
+        <form>
+            <div class="input-wrapper">
+                <label for="">Имя</label>
+                <input required aria-required="true" type="text" v-model.lazy="name" :class="{ 'errorName': errorName }" placeholder="Ваше имя">
+            </div>
+            <div class="input-wrapper">
+                <label for="">Фамилия</label>
+                <input required type="text" v-model.lazy="surname" :class="{ 'errorSurname': errorSurname }"  placeholder="Ваша фамилия">
+            </div>
+            <div class="input-wrapper">
+                <label  for="">Табельный номер</label>
+                <input  type="text" autocomplete="on" v-model="service_number" placeholder="863421" value="863421">
+            </div>
+            <div class="input-wrapper">
+                <label for="">Должность</label>
+                <input type="text" v-model.lazy="post" :class="{ 'errorPost': errorPost }"  placeholder="Ваша должность">
+            </div>
+            <div class="input-wrapper">
+                <label for="">Наименование филиала</label>
+                <div class="selector_wraper"   >
+                    <select list="selector" foe="selector"  v-model="branch" class="select">
+                        <option disabled  value="">Ваш филиал</option>
+                        <option v-for="(item, index) in items" :key="index" >{{ item.title }}</option>
+                    </select>
                 </div>
             </div>
-            <div class="under">
-                <button  v-on:click="FullPrase"   >
-                     <router-link :disabled="!name && !service_number && !branch && !surname && !post && !experience" class="router"  :to="isDisabled?'' : '/stages_competition'">Завершить</router-link>
+            <div class="input-wrapper">
+                <label for="">Стаж</label>
+                <input required type="text" v-model.lazy="experience" :class="{ 'errorExperience': errorExperience }"  placeholder="Ваш стаж">
+            </div>
+            <div class="form-action">
+                <button :class="{ 'disabled ': disableBtn }"   >
+                        <router-link class="router"  to="/stages_competition">Завершить</router-link>
                 </button>
-               
+        
             </div>
-        </div>
+        </form>
     </section>
 </template>
 
@@ -62,133 +53,162 @@ export default{
             surname:'',
             post:'',
             experience:'',
-            isDisabled:true,
             errorName:false,
+            errorSurname: false,
+            errorExperience: false,
             error_service_number:false,
-            errorbranch:false
+            errorbranch:false,
+            errorPost:false,
+            items:[
+                {
+                    title:'A'
+                },
+                {
+                    title: 'B'
+                },
+                {
+                    title: 'C'
+                },
+                {
+                    title: 'A'
+                },
+                {
+                    title: 'B'
+                },
+                {
+                    title: 'C'
+                },
+                  {
+                    title: 'A'
+                },
+                {
+                    title: 'B'
+                },
+                {
+                    title: 'C'
+                }
+            ]
         }
     },
-    methods:{
-        FullPrase(){
-            if(this.name.length>0 && this.service_number.length > 0 &&  this.branch.length > 0 &&   this.surname.length > 0   &&  this.post.length > 0  &&   this.experience.length > 0){
-                this.isDisabled=false
-
-            }
-        },
-         NameInput() {
+    computed: {
+        disableBtn() {
+            return this.errorName || this.errorSurname || this.errorExperience || this.error_service_number || this.errorPost || this.errorbranch;
+        }
+    },
+    watch: {
+        name(v) {
             const re = /[^a-zA-Zа-яА-Я ]/ui
-            this.errorName = re.test(this.name)
+            this.errorName = re.test(v)
         },
-        BranchInput(){
-            if(this.branch=='Ваш филиал'){
-                this.errorbranch=true
-            }
+        surname(e){
+            const re = /[^a-zA-Zа-яА-Я ]/ui
+            this.errorSurname = re.test(e)
+        },
+        post(s){
+            const re = /[^a-zA-Zа-яА-Я ]/ui
+            this.errorPost = re.test(s)
+        },
+        experience(b){
+            const re = /^[1-9]/ui
+            this.errorExperience = re.test(b)
         }
     },
-   
+ 
   
 }
 </script>
 
 
 <style lang="scss" scoped>
+
+ 
+.input-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    label{
+        margin-bottom: 24px;
+        color: #064677;
+        font-weight: 700;
+        font-size: 32px;
+    }
+    .select{
+        width: 100%;
+        border: none;
+        font-size: 28px;
+        font-weight: 400;
+        border-bottom:5px  solid #3394CE;
+    } 
+    input{
+        border: none;
+        height: 34px;
+        border-bottom:5px  solid #3394CE;
+        font-size: 36px;
+        font-weight: 400;
+        margin-bottom: 48px;
+        
+    }
+    input:active, :hover, :focus {
+        outline: 0;
+        outline-offset: 0;
+    }
+    &:nth-child(2n) {
+        padding-left: 65px;
+    }
+    &:nth-child(2n+1) {
+        padding-right: 65px;
+    }
+    .errorName{
+        border-bottom:5px  solid #F69F32;
+    }  
+    .errorSurname{
+        border-bottom:5px  solid #F69F32;
+    }
+    .errorPost{
+        border-bottom:5px  solid #F69F32;
+    }
+    .errorExperience{
+        border-bottom:5px  solid #F69F32;
+    }
+    
+}
+button.disableBtn {
+    pointer-events: none;
+}
+.form-action {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 172px;
+    button{
+        .router{
+            font-size: 36px;
+            font-weight: 700;
+            padding: 16px 24px;  
+            background: #0079C2;
+            color: white;
+        }
+    }
+}
 section{
     width: 1210px;
     height: 854px;
     box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
     margin: 0px auto;
-    div{
+    h2{
+        padding: 40px 0;
+        text-align: center;
+        color: #064677;
+        font-size: 48px;
+        font-weight: 700;
+    }
+    form{
         margin: 40px 0;
         width: 1060px;
         max-width: 100%;
         margin: 0 auto;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        h2{
-            margin: 40px 0;
-            color: #064677;
-            font-size: 48px;
-            font-weight: 700;
-        }
-        .under{
-            margin-top: 172px;
-            display: flex;
-            justify-content: end;
-            align-items: flex-end;
-            .router{
-              font-size: 36px;
-                font-weight: 700;
-                padding: 16px 24px;  
-                background: #0079C2;
-                color: white;
-            }
-            
-        }
-         .betwen{
-                display: flex;
-                flex-direction: row;
-                
-            .left,.right{
-                
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                
-                label{
-                    margin-bottom: 24px;
-                    color: #064677;
-                    font-weight: 700;
-                    font-size: 32px;
-                }
-                input{
-                    border: none;
-                    height: 34px;
-                    border-bottom:5px  solid #3394CE;
-                    font-size: 36px;
-                    font-weight: 400;
-                    margin-bottom: 48px;
-                    
-                }
-                input:active, :hover, :focus {
-                    outline: 0;
-                    outline-offset: 0;
-                }
-   
-                
-            } 
-            .left{
-                width: 422px;
-                max-width:100% ;
-                .errorbranch{
-                    border-bottom:5px  solid #F69F32;
-                }
-                .errorName{
-                    border-bottom:5px  solid #F69F32;
-                    
-                }
-                div{
-                    border-bottom:5px  solid #3394CE;
-                    margin-bottom: 48px;
-                    
-                   .select{
-                        width: 100%;
-                        border: none;
-                        font-size: 29px;
-                        font-weight: 400;
-                        
-                    
-                    } 
-                }
-                
-            }
-            .right{
-                width: 508px;
-                max-width: 100%;
-            }
-        }
+        flex-wrap: wrap;
     }
-   
-    
 }
 </style>

@@ -3,11 +3,11 @@
         <div class="shell ">
             <div class="top">
                 <p>Шаг 1 - Инструкция</p>
-                <button v-on:click="Manual"><img v-bind:style="{ transform: this.manual ? 'rotate(0deg)' : 'rotate(180deg)' }" src="/image/Vector 1.png" alt="" ></button>
+                <button v-on:click="Manual"><img v-bind:class="{  'text-ratate-img1': this.manual }"  src="/image/Vector 1.png" alt="" ></button>
             </div>
             <div class="under">
                 <p>Шаг 2 - Анкета</p>
-                <button v-on:click="Questionnair"><img v-bind:style="{ transform: this.questionnair ? 'rotate(0deg)' : 'rotate(180deg)' }" src="/image/Vector 1.png" alt=""></button>
+                <button v-on:click="Questionnair"><img v-bind:class="{ 'text-ratate': questionnair }"  src="/image/Vector 1.png" alt=""></button>
             </div>
         </div>
         <div class="tab">
@@ -31,7 +31,8 @@ export default{
         return{
             manual:true,
             questionnair:false,
-            checkbox:false
+            checkbox:false,
+           
         }
     }, 
   
@@ -40,16 +41,23 @@ export default{
             this.manual=!this.manual
             if (this.checkbox) {
                 this.questionnair = !this.questionnair
+                
             }
+        },
+        Ratate(){
+            this.rotate = !this.rotate
         },
         Questionnair(){
             if(this.checkbox){
                 this.questionnair=!this.questionnair
                 this.manual = !this.manual
+               
+                
             }
         },
         Checkbox1(){
             this.checkbox=!this.checkbox
+            
         }
            
     }
@@ -84,6 +92,13 @@ section{
             border: 3px solid #064677;
             justify-content: space-between;
             align-items: center;
+           
+            .text-ratate-img1{
+                transform: rotate(180deg);
+            }
+            .text-ratate{
+                transform: rotate(180deg);
+            }
 
         }
         .top{
@@ -93,6 +108,7 @@ section{
             justify-content: center;
             button{
                 background-color:white;
+               
             }
         }
         .under{

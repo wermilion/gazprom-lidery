@@ -17,6 +17,10 @@ class ProfileAuthController extends Controller
     public function login(LoginRequest $request)
     {
         $request->authenticate();
+        return response([
+           'status' => true,
+           'custom_password' => (bool) Auth::user()->custom_password,
+        ]);
     }
 
     public function logout(Request $request)

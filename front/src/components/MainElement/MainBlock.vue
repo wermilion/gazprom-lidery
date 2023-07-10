@@ -30,17 +30,18 @@ section{
     margin-top: 0px;
     background-color: #0079C2;
     color: #F5F5F5;
+    position: relative;
     
     .IMg1{
         position: absolute;
-        top: 175px;
-        right: 40px;
+        top: 0px;
+        right: 0px;
         height: 400px;
         width: 400px;
     }
     .IMg2{
         position: absolute;
-        top: 497px;
+        top: 322px;
         left: 0;
         height: 400px;
         width: 400px;

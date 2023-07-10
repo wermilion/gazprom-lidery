@@ -5,7 +5,7 @@
             <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
             <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
         </template>
-        <template v-if="$route.name == 'StagesCompetitionBlock'|| $route.name == 'QuestionnairePage'">
+        <template v-if="$route.name == 'StagesCompetitionBlock'|| $route.name == 'QuestionnairePage' || $route.name =='ManagmentPage' ">
             <div class="account">
                 <b>id: 00001</b>
                 <button v-on:click="openModel" >Выход</button>

@@ -33,7 +33,7 @@ export default{
 @import url("./assets/fonts/Main.scss");
 
 #app {
-   
+   height: 100vh;
 }  
 .LayoitBlock{
   max-width: 100%;
@@ -45,6 +45,10 @@ export default{
   margin-top: 56px;
   border-top: 1px solid #0079C2;
   width: 100%;
+  
+	height: 242px;
+	
+
 }
 
 </style>

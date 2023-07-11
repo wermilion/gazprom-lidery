@@ -1,0 +1,217 @@
+<template>
+    <section>
+        <h2>Личная информация</h2> 
+        <form>
+            <div class="input-wrapper">
+                <label for="">Имя</label>
+                <input required aria-required="true" type="text" v-model.lazy="name" :class="{ 'errorName': errorName }" placeholder="Ваше имя">
+            </div>
+            <div class="input-wrapper">
+                <label for="">Фамилия</label>
+                <input required type="text" v-model.lazy="surname" :class="{ 'errorSurname': errorSurname }"  placeholder="Ваша фамилия">
+            </div>
+            <div class="input-wrapper">
+                <label  for="">Табельный номер</label>
+                <input  type="text" autocomplete="on" v-model="service_number" placeholder="863421" value="863421">
+            </div>
+            <div class="input-wrapper">
+                <label for="">Должность</label>
+                <input type="text" v-model.lazy="post" :class="{ 'errorPost': errorPost }"  placeholder="Ваша должность">
+            </div>
+            <div class="input-wrapper">
+                <label for="">Наименование филиала</label>
+                <div class="selector_wraper"   >
+                    <select list="selector" foe="selector"  v-model="branch" class="select">
+                        <option disabled  value="">Ваш филиал</option>
+                        <option v-for="(item, index) in items" :key="index" >{{ item.title }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-wrapper">
+                <label for="">Стаж</label>
+                <input required type="text" v-model.lazy="experience" :class="{ 'errorExperience': errorExperience }"  placeholder="Ваш стаж">
+            </div>
+            <div class="form-action">
+                <button :class="{ 'disabled ': disableBtn }"   >
+                        <router-link class="router"  to="/stages_competition">Завершить</router-link>
+                </button>
+        
+            </div>
+        </form>
+    </section>
+</template>
+
+
+<script>
+export default{
+    name: "QuestionnaireBlock",
+    data(){
+        return{
+            name:'',
+            service_number:'',
+            branch:'',
+            surname:'',
+            post:'',
+            experience:'',
+            errorName:false,
+            errorSurname: false,
+            errorExperience: false,
+            error_service_number:false,
+            errorbranch:false,
+            errorPost:false,
+            items:[
+                {
+                    title:'A'
+                },
+                {
+                    title: 'B'
+                },
+                {
+                    title: 'C'
+                },
+                {
+                    title: 'A'
+                },
+                {
+                    title: 'B'
+                },
+                {
+                    title: 'C'
+                },
+                  {
+                    title: 'A'
+                },
+                {
+                    title: 'B'
+                },
+                {
+                    title: 'C'
+                }
+            ]
+        }
+    },
+    computed: {
+        disableBtn() {
+            return this.errorName || this.errorSurname || this.errorExperience || this.error_service_number || this.errorPost || this.errorbranch;
+        }
+    },
+    watch: {
+        name(v) {
+            const re = /[^a-zA-Zа-яА-Я ]/ui
+            this.errorName = re.test(v)
+        },
+        surname(e){
+            const re = /[^a-zA-Zа-яА-Я ]/ui
+            this.errorSurname = re.test(e)
+        },
+        post(s){
+            const re = /[^a-zA-Zа-яА-Я ]/ui
+            this.errorPost = re.test(s)
+        },
+        experience(b){
+            const re = /^[1-9]/ui
+            this.errorExperience = re.test(b)
+        }
+    },
+ 
+  
+}
+</script>
+
+
+<style lang="scss" scoped>
+
+ 
+.input-wrapper {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    label{
+        margin-bottom: 24px;
+        color: #064677;
+        font-weight: 700;
+        font-size: 32px;
+    }
+    .select{
+        width: 100%;
+        border: none;
+        font-size: 28px;
+        font-weight: 400;
+        border-bottom:5px  solid #3394CE;
+    } 
+    input{
+        border: none;
+        height: 34px;
+        border-bottom:5px  solid #3394CE;
+        font-size: 36px;
+        font-weight: 400;
+        margin-bottom: 48px;
+        
+    }
+    input:active, :hover, :focus {
+        outline: 0;
+        outline-offset: 0;
+    }
+    &:nth-child(2n) {
+        padding-left: 65px;
+    }
+    &:nth-child(2n+1) {
+        padding-right: 65px;
+    }
+    .errorName{
+        border-bottom:5px  solid #F69F32;
+    }  
+    .errorSurname{
+        border-bottom:5px  solid #F69F32;
+    }
+    .errorPost{
+        border-bottom:5px  solid #F69F32;
+    }
+    .errorExperience{
+        border-bottom:5px  solid #F69F32;
+    }
+    
+}
+button.disableBtn {
+    pointer-events: none;
+}
+.form-action {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 172px;
+    button{
+            
+            height: 74px;
+            font-size: 36px;
+            
+           
+             .router{
+               background-color: none;
+               color: white;
+                
+            }
+        }
+}
+section{
+    width: 1210px;
+    height: 854px;
+    box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
+    margin: 0px auto;
+    h2{
+        padding: 40px 0;
+        text-align: center;
+        color: #064677;
+        font-size: 48px;
+        font-weight: 700;
+    }
+    form{
+        margin: 40px 0;
+        width: 1060px;
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+</style>

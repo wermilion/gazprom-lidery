@@ -101,6 +101,7 @@ section {
                 padding: 10px 25px 10px 25px;
             }
             .botton_under{
+                
                 .term{
                     font-size: 24px;
                     font-weight: 700;

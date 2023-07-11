@@ -3,23 +3,26 @@
 
 body{
     font-family: HeliosCond;
+    height: 100vh;
 }
 *{
     
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 .mainContener{
-    width: 1840px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 1838px;
     margin: 0 auto;
-    padding: 0 auto;
+    padding: 0 20px;
 }
 button{
     cursor: pointer;
     background-color: #0079C2;
     color: #ffff;
     border: none;
+    padding: 16px 24px;
 }
 h1{
    
@@ -37,6 +40,8 @@ h3{
     font-weight: 400;
     font-size: 32px;
     line-height: 38px;
+    color: #064677;
+    font-weight: bold;
 }
 a{
     font-weight: 400;

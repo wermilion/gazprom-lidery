@@ -58,7 +58,7 @@ class ResultController extends Controller
         ]);
     }
 
-    private function show_upravlenciskie_reseniia(Stage $stage, StatusFilter $filter)
+    private function show_upravlenceskie_reseniia(Stage $stage, StatusFilter $filter)
     {
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
@@ -94,7 +94,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdf_upravlenciskie_reseniia(Stage $stage, Result $result)
+    private function pdf_upravlenceskie_reseniia(Stage $stage, Result $result)
     {
         $management = ManagementDecision::query()->where('user_id', $result->user_id)->first();
         $user = User::query()->where('id', $result->user_id)->first();

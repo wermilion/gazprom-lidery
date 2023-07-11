@@ -15,7 +15,6 @@ class StageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:100', 'cyrillic'],
             'desc' => ['string', 'max:200'],
             'instruction' => ['string', 'max:500'],
             'date_start' => ['date'],
@@ -26,10 +25,7 @@ class StageRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.string' => 'не пустым.',
             'instruction.string' => 'не пустым.',
-            'name.max' => 'не более 100 символов.',
-            'name.cyrillic' => 'состоящим только из кириллицы.',
             'desc.max' => 'не более 200 символов.',
             'desc.string' => 'не пустым.',
             'instruction.max' => 'не более 500 символов.',

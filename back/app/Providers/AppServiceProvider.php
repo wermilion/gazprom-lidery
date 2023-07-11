@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Validator;
 use Illuminate\Support\ServiceProvider;
+use URL;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
         Validator::extend('cyrillic', function ($attribute, $value) {
             return preg_match(pattern: '/^[?!,.а-яА-ЯёЁ0-9\s]+$/u', subject: $value);
         });
+
+        if (config('app.force_https')) {
+            URL::forceScheme('https');
+        }
     }
 }

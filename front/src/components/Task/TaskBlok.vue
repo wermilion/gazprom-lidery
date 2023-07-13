@@ -5,7 +5,7 @@
             <p>Описание задачи</p>
         </div>
         <h2>Решение</h2>
-        <textarea v-model="text"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
+        <textarea v-model="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
         <div class="under">
             <div class="checkbox1" v-on:click="Checbox" >
                 <div class="checkbox2" v-on:click="'Checkbox1'">
@@ -61,17 +61,22 @@ section{
         height: 299px;
         font-size: 32px;
         resize: vertical;
-         box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
+         
     }
-    
+    .task{
+        box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
+    }
     textarea{
         border: none;
         outline: none;
         min-height:299px;
+        box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
         
     }
+    .invalue{
+        box-shadow: 10px 10px 40px 0px rgba(246, 159, 50, 0.70);
+    }
     
-   
     p,textarea::placeholder {
             color: #064677;
         }

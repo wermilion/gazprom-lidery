@@ -2,7 +2,7 @@
     <section >
         <div v-for="(item, index) in items" :key="index">
             <h3>{{ item.title }}</h3>
-            <textarea v-model="item.value"   cols="30" rows="10" :placeholder="item.text"></textarea>
+            <textarea v-model="item.value"  :class="{ 'invalid': !isTextareaValid(index) }"  cols="30" rows="10" :placeholder="item.text"></textarea>
         </div>
         <div class="under">
                 <div class="checkbox1"  >
@@ -66,9 +66,10 @@ export default {
             this.chect=!this.chect
         },
          isTextareaValid(index) {
-            const value = this.items[index];
+            const value = this.items[index].value;
             return value && value.length > 50 && value.length < 1000;
         },
+        
     },
     computed:{
         isActivBtn(){
@@ -109,12 +110,10 @@ section{
 
 
         }
-        .valid{
-            box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
-        }
         .invalid{
-             box-shadow: 10px 10px 40px 0px #F69F32(51, 148, 206, 0.70);
+            box-shadow: 10px 10px 40px 0px rgba(246, 159, 50, 0.70);
         }
+      
         textarea::placeholder {
             color: #064677;
         }

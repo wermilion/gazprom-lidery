@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Filters\QueryFilter;
+use App\Http\Resources\ResultResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -80,5 +81,11 @@ class User extends Authenticatable
     public function scopeFilter(Builder $builder, QueryFilter $filters)
     {
         return $filters->apply($builder);
+    }
+
+
+    public function results(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Result::class, 'user_id');
     }
 }

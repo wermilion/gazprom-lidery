@@ -11,4 +11,10 @@ Route::middleware('auth:sanctum')->prefix('/stages')->name('api.stages.')->group
 
     Route::get('/{stage}', [StageController::class, 'show'])->name('show');
 
+    Route::post('/form', [StageController::class, 'form'])->name('form');
+
+    Route::post('/managementDecision', [StageController::class, 'managementDecision'])->name('managementDecision');
+
+    Route::post('/challenge', [StageController::class, 'challenge'])->name('challenge');
+    
 });

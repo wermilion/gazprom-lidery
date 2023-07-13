@@ -7,7 +7,7 @@
             <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
            
         </template>
-        <template v-if="$route.name == 'StagesCompetitionBlock'|| $route.name == 'QuestionnairePage' || $route.name =='ManagmentPage' || $route.name == 'TaskPage' ">
+        <template v-if="$route.meta.shouldRenderBlock">
             <div class="account">
                 <b>id: 00001</b>
                 <button v-on:click="openModel" >Выход</button>
@@ -136,7 +136,7 @@ section{
             }
             .top{
                 display: flex;
-                justify-content: FLend;
+                justify-content: flex-end;
                 margin-bottom: 16px;
                 .exst{
                     background-image: url('/public/image/Group 36.png');

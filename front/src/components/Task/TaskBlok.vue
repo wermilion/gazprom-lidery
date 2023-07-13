@@ -64,7 +64,7 @@ section{
          
     }
     .task{
-        box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
+        border: 1px solid #0079C2;
     }
     textarea{
         border: none;

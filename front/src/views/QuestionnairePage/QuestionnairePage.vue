@@ -14,20 +14,20 @@
         </div>
         <div v-if="$route.name == 'QuestionnairePage'" class="Tab">
             <ManualBlock 
-                @Checkbox1="Checkbox1" 
-                :checkbox="checkbox" 
-                @Questionnair="Questionnair" 
+                @chect="Checkbox1"
+                :checkbox_items="checkbox" 
+                @questionnaire_tab="Questionnair" 
                 v-show="manual"
                 >
             </ManualBlock>
             <QuestionnaireBlock v-show="questionnair"></QuestionnaireBlock>
         </div>
         <div v-if="$route.name == 'TaskPage'" class="tab">
-            <ManualBlock @Checkbox1="Checkbox1" :checkbox="checkbox"  @Questionnair="Questionnair" v-show="manual"></ManualBlock>
+            <ManualBlock @chect="Checkbox1" :chcheckbox_itemseckbox="checkbox"  @questionnaire_tab="Questionnair" v-show="manual"></ManualBlock>
             <TackBlock v-show="questionnair"></TackBlock>
         </div>
         <div v-if="$route.name == 'ManagmentPage'" class="Tab">
-            <ManualBlock @Checkbox1="Checkbox1" :checkbox="checkbox"  @Questionnair="Questionnair" v-show="manual"></ManualBlock>
+            <ManualBlock @chect="Checkbox1" :checkbox_items="checkbox"  @questionnaire_tab="Questionnair" v-show="manual"></ManualBlock>
             <ManagementBlock v-show="questionnair"></ManagementBlock>
         </div>
         
@@ -141,5 +141,6 @@ section{
            margin-right: 148px; 
         }
     }
+
 }
 </style>

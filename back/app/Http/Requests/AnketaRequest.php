@@ -12,10 +12,10 @@ class AnketaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:30'],
-            'surname' => ['required', 'string', 'max:30'],
-            'position' => ['required', 'string', 'max:50'],
-            'work_experience' => ['required', 'integer'],
+            'name' => ['required', 'cyrillic', 'string', 'min:2', 'max:35'],
+            'surname' => ['required', 'cyrillic', 'string', 'min:1', 'max:55'],
+            'position' => ['required', 'string', 'min:4', 'max:55'],
+            'work_experience' => ['required', 'integer', 'min:1', 'max:2'],
             'branch_id' => ['required', 'integer'],
             'check_video' => ['required', 'bool'],
         ];

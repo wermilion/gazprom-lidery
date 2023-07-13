@@ -14,7 +14,7 @@ class ChallengeRequest extends FormRequest
     {
         return [
             'solution' => ['required', 'string', 'min:50', 'max:5000'],
-            'check_file' => ['boolean']
+            'check_file' => ['bool']
         ];
     }
 

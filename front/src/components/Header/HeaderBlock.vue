@@ -2,18 +2,18 @@
     <section>
         <router-link to=""><img src="/image/GazpromLog.svg" alt="logo"></router-link>
         <template v-if="$route.name == 'MainPage' ">
+         
             <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
             <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
+           
         </template>
-        <template v-if="$route.name == 'StagesCompetitionBlock'|| $route.name == 'QuestionnairePage' || $route.name =='ManagmentPage' ">
+        <template v-if="$route.name == 'StagesCompetitionBlock'|| $route.name == 'QuestionnairePage' || $route.name =='ManagmentPage' || $route.name == 'TaskPage' ">
             <div class="account">
                 <b>id: 00001</b>
                 <button v-on:click="openModel" >Выход</button>
             
             </div>       
         </template>
-
-
         <div v-show="modalOpen" class="modal-wrapper">
             <div class="model-content">
                 <div class="top">
@@ -136,7 +136,7 @@ section{
             }
             .top{
                 display: flex;
-                justify-content: end;
+                justify-content: FLend;
                 margin-bottom: 16px;
                 .exst{
                     background-image: url('/public/image/Group 36.png');
@@ -174,7 +174,7 @@ section{
             width: 183px;
             height: 91px;
         }
-        p{ 
+        b{ 
             font-size: 28px; 
       
         }
@@ -188,7 +188,7 @@ section{
             width: 153px;
             height: 91px;
         }
-        p{ 
+        b{ 
             font-size: 24px; 
       
         }
@@ -205,7 +205,7 @@ section{
             flex-direction: column;
             
             align-items: center;
-            p{
+            b{
                 width: 100%;
                 margin: 20px 0 20px;
                 text-align: center;

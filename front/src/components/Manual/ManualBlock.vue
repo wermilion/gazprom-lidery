@@ -1,14 +1,20 @@
 <template>
     <section>
         <div class="top">
-            <p>Здесь будет инструкция</p>
+            <div v-for="(item, index) in questionnaire_tab" :key="index">
+                <p v-if="$route.name == item.names">{{ item.title }}</p>
+            </div>
+            <p></p>
         </div>
         <div class="under">
             <div class="checkbox1" >
                 <div class="checkbox2" v-on:click="$emit('Checkbox1')">
                     <img v-show="checkbox" src="/image/checkbox.png" alt="">
                 </div>
-                <label >Я изучил (-а) инструкцию, загрузил (-а) видеоинтервью.</label>
+                <div v-for="(items, index) in questionnaire_tab" :key="index">
+                    <label  v-if="$route.name == items.names">{{ items.text }}</label>
+                </div>
+                
             </div>
             <button v-on:click="$emit('Questionnair')">Далее</button>
         </div>
@@ -21,6 +27,31 @@
 export default{
     name:'ManualBlock',
     props: ['checkbox'],
+    data(){
+        return{
+            questionnaire_tab: [
+                {
+                    title: 'Здесь будет инструкция',
+                    text: 'Я изучил (-а) инструкцию, загрузил (-а) видеоинтервью.',
+                    names: 'QuestionnairePage'
+                },
+
+                {
+                    title: 'Здесь будет инструкция',
+                    text: 'Я изучил (-а) инструкцию.',
+                    names: 'TaskPage'
+                },
+
+                {
+                    title: 'Здесь будет инструкция',
+                    text: 'Я изучил (-а) инструкцию.',
+                    names: 'ManagmentPage'
+                }
+            ]
+        }
+    }
+     
+
     
 }
 </script>

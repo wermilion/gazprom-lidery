@@ -33,20 +33,15 @@ export default{
 @import url("./assets/fonts/Main.scss");
 
 #app {
+  display: flex;
+  flex-direction: column;
    height: 100vh;
 }  
-.LayoitBlock{
-  max-width: 100%;
-  padding: 0 40px;
-  margin: 0 auto;
-  
-}
+
 .FooterBlock{
   margin-top: 56px;
   border-top: 1px solid #0079C2;
-  width: 100%;
-  
-	height: 242px;
+  flex-shrink: 0;
 	
 
 }

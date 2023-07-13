@@ -8,12 +8,6 @@
             <form>
                 <input type="text" class="one" placeholder="Табельный номер " title = "Это тигр">
                 <input type="text" placeholder="Пароль"> 
-                <template v-if="$route.name == 'StagesCompetitionBlock'">
-                    <div class="checkpasword">
-                        <input id="checkbox" type="checkbox"> 
-                        <label for="checkbox">Запомнить меня</label>
-                    </div>    
-                </template>
             </form>
             <button ><router-link class="button" to="/stages_competition">Войти</router-link></button>
             

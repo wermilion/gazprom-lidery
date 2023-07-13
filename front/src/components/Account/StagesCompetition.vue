@@ -46,7 +46,7 @@ export default{
                     term: "ДОСТУПНО",
                     info: "",
                     statys: "inactive",
-                    router:"/questionnaire_page"
+                    router:""
                 },
                 {
                     title: "Анкета и видеоинтервью",
@@ -86,7 +86,7 @@ export default{
                     term: "ДОСТУПНО",
                     info: "До 31 октября",
                     statys: "active",
-                    router: ""
+                    router: "/task_page"
                 },
                 {
                     title: "Очный этап",

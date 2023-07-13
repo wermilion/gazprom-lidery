@@ -1,18 +1,34 @@
 <template>
     <section class="mainContener">
         <div class="shell ">
-            <div class="top">
+            <button v-on:click="Manual" class="top">
                 <p>Шаг 1 - Инструкция</p>
-                <button v-on:click="Manual"><img v-bind:class="{  'text-ratate-img1': this.manual }"  src="/image/Vector 1.png" alt="" ></button>
-            </div>
-            <div class="under">
-                <p>Шаг 2 - Анкета</p>
-                <button v-on:click="Questionnair"><img v-bind:class="{ 'text-ratate': questionnair }"  src="/image/Vector 1.png" alt=""></button>
-            </div>
+                <img v-bind:class="{  'text-ratate-img1': this.manual }"  src="/image/Vector 1.png" alt="" >
+            </button>
+            <button v-on:click="Questionnair" class="under">
+                <div v-for="(item, index) in text" :key="index" >
+                    <p v-if=" $route.name == item.name" >Шаг 2 - {{ item.title }}</p>
+                </div>
+                <img v-bind:class="{ 'text-ratate': questionnair }"  src="/image/Vector 1.png" alt="">
+            </button>
         </div>
-        <div class="tab">
-            <ManualBlock @Checkbox1="Checkbox1" :checkbox="checkbox"  @Questionnair="Questionnair" v-show="manual"></ManualBlock>
+        <div v-if="$route.name == 'QuestionnairePage'" class="Tab">
+            <ManualBlock 
+                @chect="Checkbox1"
+                :checkbox_items="checkbox" 
+                @questionnaire_tab="Questionnair" 
+                v-show="manual"
+                >
+            </ManualBlock>
             <QuestionnaireBlock v-show="questionnair"></QuestionnaireBlock>
+        </div>
+        <div v-if="$route.name == 'TaskPage'" class="tab">
+            <ManualBlock @chect="Checkbox1" :chcheckbox_itemseckbox="checkbox"  @questionnaire_tab="Questionnair" v-show="manual"></ManualBlock>
+            <TackBlock v-show="questionnair"></TackBlock>
+        </div>
+        <div v-if="$route.name == 'ManagmentPage'" class="Tab">
+            <ManualBlock @chect="Checkbox1" :checkbox_items="checkbox"  @questionnaire_tab="Questionnair" v-show="manual"></ManualBlock>
+            <ManagementBlock v-show="questionnair"></ManagementBlock>
         </div>
         
     </section>
@@ -21,17 +37,37 @@
 <script>
 import QuestionnaireBlock from '@/components/Questionnaire/QuestionnaireBlock.vue';
 import ManualBlock from '@/components/Manual/ManualBlock.vue';
+import TackBlock from '@/components/Task/TaskBlok.vue'
+import ManagementBlock from '@/components/ManagementBlock/ManagementBlock.vue';
+
 export default{
     name: "QuestionnairePage",
     components:{
         ManualBlock,
         QuestionnaireBlock,
+        TackBlock,
+        ManagementBlock
     },
     data(){
         return{
             manual:true,
             questionnair:false,
             checkbox:false,
+            text:[
+                {
+                    title:"Анкета",
+                    name:'QuestionnairePage'
+                },
+                {
+                    title: "Задача",
+                    name: 'TaskPage'
+                },
+                {
+                    title: "Управленческие решения",
+                    name: 'ManagmentPage'
+                }
+            ],
+           
            
         }
     }, 
@@ -65,61 +101,46 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+
 section{
-    .tab{
-        height: 973px;
-    }
+    flex: 1;
     .shell{
         
-        margin: 32px 0;
+        margin: 32px auto;
         display: flex;
         p{
-            font-size: 64px;
-            font-weight:bold ;
-            margin: 16px 24px 16px 34px ;
             
+            
+            margin-right: 24px;
             color: #064677;
         }   
         img{
-             
-            padding-bottom: -20px;
-            margin-right: 34px;
-            
+            transform: rotate(180deg);
+            width: 40px;
+            height: 20px;
         }
-    
+
         .top,.under{
+            background-color: white;
             display: flex;
-            border: 3px solid #064677;
-            justify-content: space-between;
             align-items: center;
-           
+            font-size: 52.5px;  
+            font-weight: 700;  
+            border: 3px solid #064677;
+            padding: 12px 32px;
             .text-ratate-img1{
-                transform: rotate(180deg);
+                transform: rotate(0deg);
             }
             .text-ratate{
-                transform: rotate(180deg);
+                transform: rotate(0deg);
             }
 
         }
+    
         .top{
-           margin-right: 115px;
-           display: flex;
-           align-items: center;
-            justify-content: center;
-            button{
-                background-color:white;
-               
-            }
-        }
-        .under{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            button{
-                background-color:white;
-                
-            }
+           margin-right: 148px; 
         }
     }
+
 }
 </style>

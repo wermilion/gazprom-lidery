@@ -37,6 +37,7 @@ export default{
 section{
     display: flex;
     flex-direction: column;
+    flex:1;
 }
 .OpprtunitiesBlock{
     margin: 56px 40px 112px 40px;

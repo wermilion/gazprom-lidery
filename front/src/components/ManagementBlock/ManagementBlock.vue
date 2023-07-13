@@ -2,16 +2,18 @@
     <section >
         <div v-for="(item, index) in items" :key="index">
             <h3>{{ item.title }}</h3>
-            <textarea name="" id="" cols="30" rows="10" :placeholder="item.text"></textarea>
+            <textarea v-model="item.value"  :class="{ 'invalid': !isTextareaValid(index) }"  cols="30" rows="10" :placeholder="item.text"></textarea>
         </div>
         <div class="under">
-                <div class="checkbox1" v-on:click="Checbox" >
-                    <div class="checkbox2" v-on:click="'Checkbox1'">
-                        <img v-show="chect" src="/image/checkbox.png" alt="">
+                <div class="checkbox1"  >
+                    <div class="checkbox1" v-on:click="Checbox">
+                        <div class="checkbox2" >
+                            <img v-show="chect" src="/image/checkbox.png" alt="">
+                        </div>
                     </div>
-                    <label >Я загрузил (-а) файлы.</label>
+                    <label  >Я загрузил (-а) файлы.</label>
                 </div>
-                <button :class="{ 'disabled ': chect==false }">
+                <button :class="{'disabled' : !isActivBtn}">
                     <router-link class="router"  to="/stages_competition">Завершить</router-link>
                 </button>
             </div>
@@ -27,32 +29,53 @@ export default {
             items: [
                 {
                     title: 'Проблема',
-                    text: 'Описание проблемы. Допустимое количество символов от 50 до 1000.'
+                    text: 'Описание проблемы. Допустимое количество символов от 50 до 1000.',
+                    value:''
+                    
                 },
                 {
                     title: 'Управленческая задача',
-                    text: 'Описание задачи. Допустимое количество символов от 50 до 1000.'
+                    text: 'Описание задачи. Допустимое количество символов от 50 до 1000.',
+                    value: ''
+                   
                 },
                 {
                     title: 'Решение',
-                    text: 'Описание решения. Допустимое количество символов от 50 до 1000.'
+                    text: 'Описание решения. Допустимое количество символов от 50 до 1000.',
+                    value: ''
+                    
                 },
                 {
                     title: 'Результаты',
-                    text: 'Результат. Допустимое количество символов от 50 до 1000.'
+                    text: 'Результат. Допустимое количество символов от 50 до 1000.',
+                    value: ''
+                    
                 },
                 {
                     title: 'Вывод',
-                    text: 'Вывод. Допустимое количество символов от 50 до 1000.'
+                    text: 'Вывод. Допустимое количество символов от 50 до 1000.',
+                    value: ''
+                 
                 },
             ],
-            chect:false
+            chect:false,
         }
-
     },
     methods:{
         Checbox(){
             this.chect=!this.chect
+        },
+         isTextareaValid(index) {
+            const value = this.items[index].value;
+            return value && value.length > 50 && value.length < 1000;
+        },
+        
+    },
+    computed:{
+        isActivBtn(){
+            return this.items.every(
+                (item) => item.value.length > 50 && item.value.length < 1000
+            );
         }
     }
 }
@@ -81,9 +104,16 @@ section{
             padding: 32px;
              box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
              color: #064677;
+             min-height: 299px;
+             border: none;
+             outline: none;
 
 
         }
+        .invalid{
+            box-shadow: 10px 10px 40px 0px rgba(246, 159, 50, 0.70);
+        }
+      
         textarea::placeholder {
             color: #064677;
         }

@@ -18,7 +18,7 @@ class ResultResource extends JsonResource
         return [
             'stage_id' => $this->stage_id,
             'user_id' => $this->user_id,
-            'result_status' => new ResultStatusResource($this->status->status_name),
+            'result_status' => $this->status->status_name,
         ];
     }
 }

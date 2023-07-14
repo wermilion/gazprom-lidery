@@ -1,13 +1,16 @@
 <template>
     <section>
-        <div class="Shell">
-            <div class="head">
+        <div @click="Accordion()" class="Shell">
+            <button  class="head">
                 <h3 >{{ item.title }}</h3>
-                <button @click="Accordion()">
+                <div>
+                    <!-- <span class="one"></span>
+                    <span class="two"></span> -->
+                    
                     <img v-bind:style="{ transform: isActive ? 'rotate(135deg)' : 'rotate(90deg)' }"  class="img1"  src="/image/Line 5.png" alt="">
                     <img v-bind:style="{ transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)' }"  class="img2" src="/image/Line 5.png" alt="">
-                </button>
-            </div>
+                </div>
+            </button>
             <p v-show="isActive === true">{{ item.text }}</p>
         </div>
     </section>
@@ -40,43 +43,52 @@ section{
         margin: 0 auto;
         background-color: #F5F5F5;
         margin-bottom:8px ;
-        .head{
+        button{
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
+            margin: 0 auto;
+            background-color: #F5F5F5;
+            font-size: 32px;
             h3{
                 padding-left: 40px;
+                font-weight: normal;
+                color: #000;
             }
-            button{
+            div{
                 display: flex;
                 align-items: center;
+                position: relative;
                 justify-content: center;
                 background-color: white;
                 border-radius: 50%;
                 width: 62px;
                 height: 62px;
-                margin:28px 42px 28px;
-                
-                .img1{
-                    transition-duration: .2s;
+                img{
                     position: absolute;
-                    transform: rotate(90deg);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
 
                 }
-                .img2{
-                     transition-duration: .2s;
+                span{
+                    flex: 2;
+                    background-color: #000;
                 }
-                
-                
+                .rorate{
+                    transform:  rotate(45deg);
+                }
             }
+        }
+        button:hover{
+           
             
         }
-        p{
-            
+        p{    
             padding: 40px ;
         }
-
+        
     }
 }
 

@@ -47,32 +47,38 @@ class StageController extends Controller
         $status = ResultStatus::where('status_name', 'На проверке')->first();
         $user_id = Auth::guard('web')->user()->id;
 
-        if (Auth::user()->name == null) {
-            User::where('id', $user_id)->update([
-                'name' => $data['name'],
-                'surname' => $data['surname'],
-                'position' => $data['position'],
-                'work_experience' => $data['work_experience'],
-                'check_video' => $data['check_video']
-            ]);
+        if ($stage->stage_status->status_name == 'Доступно') {
+            if (Auth::user()->name == null) {
+                User::where('id', $user_id)->update([
+                    'name' => $data['name'],
+                    'surname' => $data['surname'],
+                    'position' => $data['position'],
+                    'work_experience' => $data['work_experience'],
+                    'check_video' => $data['check_video']
+                ]);
 
-            Result::create([
-                'stage_id' => $stage->id,
-                'user_id' => $user_id,
-                'result_status_id' => $status->id
-            ]);
+                Result::create([
+                    'stage_id' => $stage->id,
+                    'user_id' => $user_id,
+                    'result_status_id' => $status->id
+                ]);
 
-            return response([
-                'status' => true,
-                'message' => 'Данные успешно отправлены'
-            ]);
+                return response([
+                    'status' => true,
+                    'message' => 'Данные успешно отправлены'
+                ]);
+            } else {
+                return response([
+                    'status' => false,
+                    'message' => 'Вы уже проходили этот этап'
+                ]);
+            }
         } else {
             return response([
                 'status' => false,
                 'message' => 'Вы уже проходили этот этап'
             ]);
         }
-
     }
 
     public function managementDecision(ManagementDecisionRequest $request)
@@ -83,31 +89,38 @@ class StageController extends Controller
         $status = ResultStatus::where('status_name', 'На проверке')->first();
         $user_id = Auth::guard('web')->user()->id;
 
-        if (!ManagementDecision::where('user_id', $user_id)->exists()) {
-            ManagementDecision::create([
-                'user_id' => $user_id,
-                'problem' => $data['problem'],
-                'management_task' => $data['management_task'],
-                'solution' => $data['solution'],
-                'result' => $data['result'],
-                'conclusion' => $data['conclusion'],
-                'check_file' => (bool)$data['check_file']
-            ]);
+        if ($stage->stage_status->status_name == 'Доступно') {
+            if (!ManagementDecision::where('user_id', $user_id)->exists()) {
+                ManagementDecision::create([
+                    'user_id' => $user_id,
+                    'problem' => $data['problem'],
+                    'management_task' => $data['management_task'],
+                    'solution' => $data['solution'],
+                    'result' => $data['result'],
+                    'conclusion' => $data['conclusion'],
+                    'check_file' => (bool)$data['check_file']
+                ]);
 
-            Result::create([
-                'stage_id' => $stage->id,
-                'user_id' => $user_id,
-                'result_status_id' => $status->id
-            ]);
+                Result::create([
+                    'stage_id' => $stage->id,
+                    'user_id' => $user_id,
+                    'result_status_id' => $status->id
+                ]);
 
-            return response([
-                'status' => true,
-                'message' => 'Данные успешно отправлены'
-            ]);
+                return response([
+                    'status' => true,
+                    'message' => 'Данные успешно отправлены'
+                ]);
+            } else {
+                return response([
+                    'status' => false,
+                    'message' => 'Вы уже проходили этот этап'
+                ]);
+            }
         } else {
             return response([
                 'status' => false,
-                'message' => 'Вы уже проходили этот этап'
+                'message' => 'Этап недоступен'
             ]);
         }
     }
@@ -120,27 +133,34 @@ class StageController extends Controller
         $status = ResultStatus::where('status_name', 'На проверке')->first();
         $user_id = Auth::guard('web')->user()->id;
 
-        if (!Challenge::where('user_id', $user_id)->exists()) {
-            Challenge::create([
-                'user_id' => $user_id,
-                'solution' => $data['solution'],
-                'check_file' => (bool)$data['check_file']
-            ]);
+        if ($stage->stage_status->status_name == 'Доступно') {
+            if (!Challenge::where('user_id', $user_id)->exists()) {
+                Challenge::create([
+                    'user_id' => $user_id,
+                    'solution' => $data['solution'],
+                    'check_file' => (bool)$data['check_file']
+                ]);
 
-            Result::create([
-                'stage_id' => $stage->id,
-                'user_id' => $user_id,
-                'result_status_id' => $status->id
-            ]);
+                Result::create([
+                    'stage_id' => $stage->id,
+                    'user_id' => $user_id,
+                    'result_status_id' => $status->id
+                ]);
 
-            return response([
-                'status' => true,
-                'message' => 'Данные успешно отправлены'
-            ]);
+                return response([
+                    'status' => true,
+                    'message' => 'Данные успешно отправлены'
+                ]);
+            } else {
+                return response([
+                    'status' => false,
+                    'message' => 'Вы уже проходили этот этап'
+                ]);
+            }
         } else {
             return response([
                 'status' => false,
-                'message' => 'Вы уже проходили этот этап'
+                'message' => 'Этап недоступен'
             ]);
         }
     }

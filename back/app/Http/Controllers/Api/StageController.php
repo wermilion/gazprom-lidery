@@ -97,7 +97,8 @@ class StageController extends Controller
                     'management_task' => $data['management_task'],
                     'solution' => $data['solution'],
                     'result' => $data['result'],
-                    'conclusion' => $data['conclusion']
+                    'conclusion' => $data['conclusion'],
+                    'check_file' => (bool)$data['check_file']
                 ]);
 
                 Result::create([
@@ -137,7 +138,8 @@ class StageController extends Controller
             if (!Challenge::where('user_id', $user_id)->exists()) {
                 Challenge::create([
                     'user_id' => $user_id,
-                    'solution' => $data['solution']
+                    'solution' => $data['solution'],
+                    'check_file' => (bool)$data['check_file']
                 ]);
 
                 Result::create([

@@ -45,7 +45,7 @@ Route::name('cp.')->prefix('cp/')->group(function () {
 
             Route::delete('destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
 
-            Route::get('printPdf', [UserController::class, 'printPdf'])->name('printPdf');
+            Route::get('export', [UserController::class, 'export'])->name('export');
         });
 
         Route::name('branches.')->prefix('branches/')->group(function () {

@@ -13,5 +13,6 @@ class Challenge extends Model
         'id',
         'user_id',
         'solution',
+        'check_file',
     ];
 }

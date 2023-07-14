@@ -17,5 +17,6 @@ class ManagementDecision extends Model
         'solution',
         'result',
         'conclusion',
+        'check_file'
     ];
 }

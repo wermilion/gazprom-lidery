@@ -30,7 +30,7 @@
                     <a class="w-max ml-2 text-white bg-gazprom-500 uppercase hover:bg-gazprom-400 py-2 px-4"
                        href="{{route('cp.users.index')}}">Сбросить фильтры</a>
                     <a class="w-max ml-2 text-white bg-gazprom-500 uppercase hover:bg-gazprom-400 py-2 px-4"
-                       href="{{route('cp.users.printPdf', [
+                       href="{{route('cp.users.export', [
                         'tabel_number' => request()->get('tabel_number'),
                         'branch_id' => request()->get('branch_id'),
                         ])}}">

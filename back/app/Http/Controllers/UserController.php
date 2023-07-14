@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserExport;
 use App\Http\Filters\UserFilter;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\Branch;
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Psy\Util\Str;
 
 class UserController extends Controller
 {
@@ -34,7 +33,7 @@ class UserController extends Controller
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function printPdf()
+    public function export()
     {
         $tabelNumber = request()->get('tabel_number');
         $branchId = request()->get('branch_id');
@@ -44,9 +43,7 @@ class UserController extends Controller
 
         $users = $userBuilder->get();
 
-        $pdf = PDF::loadView('admin.pdf.users', ['users' => $users])->setPaper('a4');
-
-        return $pdf->download('Список конкурсантов.pdf');
+        return Excel::download(new UserExport($users), 'Конкурсанты.xlsx');
     }
 
     /**
@@ -70,31 +67,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
+     * Удаление пользователя в БД
      */
     public function destroy(User $user)
     {

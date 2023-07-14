@@ -63,7 +63,7 @@ section{
         margin-bottom: 56px;
     }
     div{
-        width: 1362px;
+        width: 1218px;
         max-width: 100%;
         
     }

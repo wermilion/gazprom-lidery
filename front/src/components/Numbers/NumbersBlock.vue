@@ -4,18 +4,22 @@
         <div class="shell">
             <div class="shellOne">
                 <div class="first">
-                    <p>14 РЕГИОНОВ</p>
+                    <b>14</b>
+                    <p> РЕГИОНОВ</p>
                 </div>
                 <div class="second">
-                    <p> 10 000 УПРАВЛЕНЦЕВ В КОМПАНИИ </p>
+                    <b>10 000</b>
+                    <p> УПРАВЛЕНЦЕВ</p>
                 </div>
             </div>
             <div class="shellTwo">
                 <div class="third">
-                    <p>25 ПРИЗОВЫХ МЕСТ</p>
+                    <b>25</b>
+                    <p> ПРИЗОВЫХ МЕСТ</p>
                 </div>
                 <div class="fourth">
-                    <p>10 ПОБЕДИТЕЛЕЙ</p>
+                    <b>10</b>
+                    <p> ПОБЕДИТЕЛЕЙ</p>
                 </div>
             </div>
         </div>
@@ -34,7 +38,7 @@ section{
     
     text-align: center;
     h2{
-            margin-bottom: 56px;
+            margin-bottom: 112px;
         }
     .shell{
         
@@ -42,7 +46,7 @@ section{
         flex-direction: column;
         
         max-width: 100%;
-        width: 1564px;
+        width: 1530px;
         margin: 0 auto;
         
         .shellOne,
@@ -55,26 +59,35 @@ section{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                margin: 1px;
+                margin: 2px;
                 padding: 20px;
-                p{
-                    font-weight: bold;
-                    font-size: 48px;
-                    line-height: 57px;
+                b{
+                    font-family: HeliosCondBlack;
+                    font-size: 128px;
                     color: white;
+                    font-weight: 400;
+                    line-height: 128px;
+                    margin-right: 32px;
+                }
+                p{
+                    font-size: 48px;
+                    
+                    font-weight: 400;
+                    color: white;
+                   
                 }
             }
             .first{
-                width: 45%;
+                width: 46%;
             }
             .third{
-                width: 55%;
+                width: 54%;
             }
             .second{
-                width: 55%;
+                width: 54%;
             }
             .fourth{
-                width: 45%;
+                width: 46%;
             }
 
         }

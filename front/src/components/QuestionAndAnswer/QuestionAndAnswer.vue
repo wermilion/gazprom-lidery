@@ -49,7 +49,7 @@ section{
         margin-bottom: 64px;
     }
     div{
-        width: 1362px;
+        width: 1218px;
         max-width: 100%;
     }
 }

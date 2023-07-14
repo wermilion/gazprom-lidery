@@ -91,7 +91,7 @@ class StageController extends Controller
                 'solution' => $data['solution'],
                 'result' => $data['result'],
                 'conclusion' => $data['conclusion'],
-                'check_file' => $data['check_file']
+                'check_file' => (bool)$data['check_file']
             ]);
 
             Result::create([

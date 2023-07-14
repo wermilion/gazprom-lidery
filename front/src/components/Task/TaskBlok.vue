@@ -5,10 +5,10 @@
             <p>Описание задачи</p>
         </div>
         <h2>Решение</h2>
-        <textarea v-model="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
+        <textarea v-model.lazy="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
         <div class="under">
-            <div class="checkbox1" v-on:click="Checbox" >
-                <div class="checkbox2" v-on:click="'Checkbox1'">
+            <div class="checkbox1">
+                <div class="checkbox2" v-on:click="Checbox">
                     <img v-show="chect" src="/image/checkbox.png" alt="">
                 </div>
                 <label >Я загрузил (-а) файлы.</label>

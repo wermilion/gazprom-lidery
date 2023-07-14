@@ -1,7 +1,7 @@
 <template>
-    <section>
+    <section >
         <h2>УЧАСТИЕ ДАЕТ ВОЗМОЖНОСТЬ</h2>
-        <div>
+        <div >
 
 
         </div>
@@ -19,14 +19,15 @@ export default{
 <style lang="scss" scoped>
 section{
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    div{
+    
+    h2{
+        margin-top: 56px;
+    }   
+   div{
         background-color: #F5F5F5;
-        width: 100%;
         height: 527px;
-        margin: 56px 40px 0 40px;
+        margin: 56px 0 ;
+        
     }
 }
 </style>

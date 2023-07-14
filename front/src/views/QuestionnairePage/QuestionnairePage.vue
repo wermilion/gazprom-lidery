@@ -23,7 +23,7 @@
             <QuestionnaireBlock v-show="questionnair"></QuestionnaireBlock>
         </div>
         <div v-if="$route.name == 'TaskPage'" class="tab">
-            <ManualBlock @chect="Checkbox1" :chcheckbox_itemseckbox="checkbox"  @questionnaire_tab="Questionnair" v-show="manual"></ManualBlock>
+            <ManualBlock @chect="Checkbox1" :checkbox_items="checkbox"  @questionnaire_tab="Questionnair" v-show="manual"></ManualBlock>
             <TackBlock v-show="questionnair"></TackBlock>
         </div>
         <div v-if="$route.name == 'ManagmentPage'" class="Tab">

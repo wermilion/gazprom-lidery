@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Branch;
 use App\Models\Instrument;
 use App\Models\ResultStatus;
@@ -31,11 +30,87 @@ class DatabaseSeeder extends Seeder
 
         Branch::factory()->count(14)->create();
 
+        Branch::factory()->create([
+            'name' => 'Томск'
+        ]);
+
         User::factory()->create([
             'tabel_number' => '1234',
             'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'role_id' => 2,
+        ]);
+
+        User::factory()->create([
+            'tabel_number' => '23412',
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'custom_password' => true,
+            'name' => 'Василий',
+            'surname' => 'Игнатович',
+            'branch_id' => 15,
+            'work_experience' => 2,
+            'position' => 'Менеджер проекта',
+            'role_id' => 1,
+        ]);
+
+        User::factory()->create([
+            'tabel_number' => '51423',
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'custom_password' => true,
+            'name' => 'Богдан',
+            'surname' => 'Мухатдисов',
+            'branch_id' => 15,
+            'work_experience' => 1,
+            'position' => 'Backend разработчик',
+            'role_id' => 1,
+        ]);
+
+        User::factory()->create([
+            'tabel_number' => '34215',
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'custom_password' => true,
+            'name' => 'Карина',
+            'surname' => 'Бочарова',
+            'branch_id' => 15,
+            'work_experience' => 10,
+            'position' => 'Аналитик',
+            'role_id' => 1,
+        ]);
+
+        User::factory()->create([
+            'tabel_number' => '23142',
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'custom_password' => true,
+            'name' => 'Анна',
+            'surname' => 'Шкарбань',
+            'branch_id' => 15,
+            'work_experience' => 5,
+            'position' => 'Аналитик',
+            'role_id' => 1,
+        ]);
+
+        User::factory()->create([
+            'tabel_number' => '12234',
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'custom_password' => true,
+            'name' => 'Анастасия',
+            'surname' => 'Тарасовец',
+            'branch_id' => 15,
+            'work_experience' => 2,
+            'position' => 'UI/UX дизайнер',
+            'role_id' => 1,
+        ]);
+
+        User::factory()->create([
+            'tabel_number' => '12345',
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'custom_password' => true,
+            'name' => 'Вячеслав',
+            'surname' => 'Каратаев',
+            'branch_id' => 15,
+            'work_experience' => 1,
+            'position' => 'Frontend разработчик',
+            'role_id' => 1,
         ]);
 
         Instrument::factory()->create([

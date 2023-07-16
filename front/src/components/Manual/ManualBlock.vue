@@ -1,16 +1,22 @@
 <template>
     <section>
         <div class="top">
-            <p>Здесь будет инструкция</p>
+            <div v-for="(item, index) in questionnaire_tab" :key="index">
+                <p v-if="$route.name == item.names">{{ item.title }}</p>
+            </div>
+            <p></p>
         </div>
         <div class="under">
             <div class="checkbox1" >
-                <div class="checkbox2" v-on:click="$emit('Checkbox1')">
-                    <img v-show="checkbox" src="/image/checkbox.png" alt="">
+                <div class="checkbox2" v-on:click="$emit('chect')">
+                    <img v-show="checkbox_items" src="/image/checkbox.png" alt="">
                 </div>
-                <label >Я изучил (-а) инструкцию, загрузил (-а) видеоинтервью.</label>
+                <div v-for="(items, index) in questionnaire_tab" :key="index">
+                    <label  v-if="$route.name == items.names">{{ items.text }}</label>
+                </div>
+                
             </div>
-            <button v-on:click="$emit('Questionnair')">Далее</button>
+            <button :class="{'disable':!checkbox_items}" v-on:click="$emit('questionnaire_tab')">Далее</button>
         </div>
         
     </section>
@@ -20,7 +26,32 @@
 <script>
 export default{
     name:'ManualBlock',
-    props: ['checkbox'],
+    props: ['checkbox_items'],
+    data(){
+        return{
+            questionnaire_tab: [
+                {
+                    title: 'Здесь будет инструкция',
+                    text: 'Я изучил (-а) инструкцию, загрузил (-а) видеоинтервью.',
+                    names: 'QuestionnairePage'
+                },
+
+                {
+                    title: 'Здесь будет инструкция',
+                    text: 'Я изучил (-а) инструкцию.',
+                    names: 'TaskPage'
+                },
+
+                {
+                    title: 'Здесь будет инструкция',
+                    text: 'Я изучил (-а) инструкцию.',
+                    names: 'ManagmentPage'
+                }
+            ]
+        }
+    }
+     
+
     
 }
 </script>
@@ -44,6 +75,7 @@ section{
     .under{
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin: 0px auto;
         width: 1530px;
         max-width: 100%;
@@ -56,11 +88,17 @@ section{
                 font-size: 32px;
             }
             .checkbox2{
+                cursor: pointer;
                  width: 50px;
                 height: 50px;
                 border: 2px solid #064677;
                 margin-right: 32px;
             }
+        }
+        .disable{
+            background-color: #E7E8E5;
+            color: white;
+            pointer-events: none;
         }
         button{
             

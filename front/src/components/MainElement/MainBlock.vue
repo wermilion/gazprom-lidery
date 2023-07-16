@@ -13,8 +13,8 @@
                 сообщества лучших управленцев компании.
             </p>
         </div>
-        <img src="/image/ImgMain1.png" alt="" class="IMg1">
-        <img src="/image/ImgMain2.png" alt="" class="IMg2">
+        <img src="/image/ImgMain1.svg" alt="" class="IMg1">
+        <img src="/image/ImgMain2.svg" alt="" class="IMg2">
     </section>
 </template>
 
@@ -41,7 +41,7 @@ section{
     }
     .IMg2{
         position: absolute;
-        top: 322px;
+        bottom: 0;
         left: 0;
         height: 400px;
         width: 400px;
@@ -65,19 +65,17 @@ section{
         margin: 0 auto;
         
         h1{
-            width: 100%;
+            padding: 0px 16px;
             background-color: #F5F5F5;
             color: #1D4573;
-            padding: 0 19px 0 19px;
             
-
         }  
         p{
             width: 100%;
             font-size: 30px;
-            margin-bottom: 68px;
+            margin-bottom: 56px;
             
-            margin-top: 32px;
+            margin-top: 24px;
             
         }
        
@@ -86,23 +84,24 @@ section{
         .IMg1{
             height: 250px;
             width: 250px;
-            top: 230px;
+            top: 0;
         }
         .IMg2{
             height: 300px;
             width: 300px;
-            top:600px;
+            bottom: 0;
         }
     }
     @media screen and (max-width :1280px) {
         .IMg1{
             height: 240px;
             width: 230px;
+            top: 0;
         }
         .IMg2{
             height: 300px;
             width: 300px;
-            top:420px;
+            bottom: 0;
         }
         .top_inf{
             

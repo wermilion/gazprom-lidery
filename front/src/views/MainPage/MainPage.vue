@@ -1,5 +1,5 @@
 <template>
-    <section class="mainContener">
+    <section  class="mainContener">
         <MainBlock class="BanerBlock"></MainBlock>
         <OpprtunitiesBlock class="OpprtunitiesBlock"></OpprtunitiesBlock>
         <WhoCanTakePart class="WhoCanTakePart"></WhoCanTakePart>
@@ -37,9 +37,7 @@ export default{
 section{
     display: flex;
     flex-direction: column;
-}
-.OpprtunitiesBlock{
-    margin: 56px 40px 112px 40px;
+    flex:1;
 }
 .WhoCanTakePart{
     margin-bottom: 112px;
@@ -48,7 +46,7 @@ section{
     margin-bottom: 112px;
 }
 .NumbersBlock{
-    margin-bottom: 114px;
+    margin-bottom: 112px;
 }
 
 </style>

@@ -41,16 +41,19 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width:1564px ;
+    max-width:1546px ;
     width:100% ;
     margin: 0 auto;
+    h2{
+        margin-top: 56px;
+    }
     div{
         display: flex;
         width: 100%;
         justify-content: space-between;
         margin-top: 56px;
          .ItemsWho{
-                margin: 0 16px;
+                width: 32.5%;
             }
     }
     @media screen and (max-width :1024px) { 

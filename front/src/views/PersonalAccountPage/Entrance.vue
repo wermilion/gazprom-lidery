@@ -1,19 +1,13 @@
 <template>
     <section>
         <div class="left">
-            <img src="/image/ImgMain1.png" alt="">
+            <img src="/image/stages/Registration.svg" alt="">
         </div>
         <div class="right">
             <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
                 <input type="text" class="one" placeholder="Табельный номер " title = "Это тигр">
                 <input type="text" placeholder="Пароль"> 
-                <template v-if="$route.name == 'StagesCompetitionBlock'">
-                    <div class="checkpasword">
-                        <input id="checkbox" type="checkbox"> 
-                        <label for="checkbox">Запомнить меня</label>
-                    </div>    
-                </template>
             </form>
             <button ><router-link class="button" to="/stages_competition">Войти</router-link></button>
             
@@ -57,14 +51,13 @@ section{
         width: 40%;
     }
      .left{
-        background-color: #3394CE;
-        background: rgba(51, 148, 206, 0.40);
+        
         display: flex;
         align-items: center;
         justify-content: center;
         img{
             width: 100%;
-            height: hidden;
+            height: 411px;
         }
 
 
@@ -101,6 +94,8 @@ section{
             }
             input:focus{
                 border: none;
+                outline: none;
+                border-bottom:5px  solid #3394CE;
                 
             }
             input::placeholder{

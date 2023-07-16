@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('management_decisions', function (Blueprint $table) {
-            //
+            $table->boolean('check_file')->nullable()->change();
         });
     }
 };

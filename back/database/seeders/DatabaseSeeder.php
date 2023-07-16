@@ -16,15 +16,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        Role::truncate();
-        User::truncate();
-        Branch::truncate();
-        Stage::truncate();
-        StageStatus::truncate();
-        ResultStatus::truncate();
-        Instrument::truncate();
-
-
         Role::factory()->create([
             'name' => 'Конкурстант'
         ]);
@@ -133,7 +124,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Регистрация',
-            'slug' => Str::slug('Регистрация', '_'),
+            'slug' => Str::studly(Str::slug('регистрация')),
             'desc' => fake()->text('200'),
             'instruction' => 'Зарегистрироваться на сайте Лидеры Газпрома.',
             'image' => '/image/stages/Registration.svg',
@@ -144,7 +135,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Анкета и видеоинтервью',
-            'slug' => Str::slug('Анкета и видеоинтервью', '_'),
+            'slug' => Str::studly(Str::slug('анкета и видеоинтервью')),
             'desc' => fake()->text('200'),
             'instruction' => 'Пройти анкетирование и загрузить видеоинтервью.',
             'image' => '/image/stages/Questionnaire.svg',
@@ -155,7 +146,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Дистанционный этап',
-            'slug' => Str::slug('Дистанционный этап', '_'),
+            'slug' => Str::studly(Str::slug('дистанционный этап')),
             'desc' => fake()->text('200'),
             'instruction' => 'Пройти дистанционные тесты на сайте РСВ.',
             'image' => '/image/stages/Remote.svg',
@@ -166,7 +157,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Управленческие решения',
-            'slug' => Str::slug('Управленческие решения', '_'),
+            'slug' => Str::studly(Str::slug('управленческие решения')),
             'desc' => fake()->text('200'),
             'instruction' => 'Описать управленческое решение.',
             'image' => '/image/stages/Management.svg',
@@ -177,7 +168,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Задача',
-            'slug' => Str::slug('Задача', '_'),
+            'slug' => Str::studly(Str::slug('задача')),
             'desc' => fake()->text('200'),
             'instruction' => 'Решить задачу.',
             'image' => '/image/stages/Task.svg',
@@ -188,7 +179,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Очный этап',
-            'slug' => Str::slug('Очный этап', '_'),
+            'slug' => Str::studly(Str::slug('очный этап')),
             'desc' => fake()->text('200'),
             'instruction' => 'Очный этап будет проходить по адресу....',
             'image' => '/image/stages/InPerson.svg',
@@ -199,7 +190,7 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Финал',
-            'slug' => Str::slug('Финал', '_'),
+            'slug' => Str::studly(Str::slug('финал')),
             'desc' => fake()->text('200'),
             'instruction' => 'Финал будет проходить по адресу....',
             'image' => '/image/stages/Final.svg',

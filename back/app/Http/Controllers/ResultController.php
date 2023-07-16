@@ -12,8 +12,7 @@ use App\Models\ResultStatus;
 use App\Models\Stage;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 
 class ResultController extends Controller
 {
@@ -30,11 +29,11 @@ class ResultController extends Controller
 
     public function show(Stage $stage, StatusFilter $filter)
     {
-        $method = 'show_' . $stage->slug;
+        $method = 'show' . $stage->slug;
         return $this->$method($stage, $filter);
     }
 
-    private function show_anketa_i_videointerviu(Stage $stage, StatusFilter $filter)
+    private function showAnketaIVideointerviu(Stage $stage, StatusFilter $filter)
     {
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
@@ -45,9 +44,19 @@ class ResultController extends Controller
         ]);
     }
 
-    private function show_distancionnyi_etap(Stage $stage, StatusFilter $filter)
+    private function showDistancionnyiEtap(Stage $stage, StatusFilter $filter)
     {
         $instrument = Instrument::all()->first();
+        if (Carbon::now() > $stage->date_end) {
+            $prev_results = Result::where('stage_id', 2)->where('result_status_id', 1)->get();
+            foreach ($prev_results as $prev_result) {
+                Result::create([
+                    'stage_id' => $stage->id,
+                    'user_id' => $prev_result->user_id,
+                    'result_status_id' => 3
+                ]);
+            }
+        }
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.showDistance', [
@@ -58,7 +67,7 @@ class ResultController extends Controller
         ]);
     }
 
-    private function show_upravlenceskie_reseniia(Stage $stage, StatusFilter $filter)
+    private function showUpravlenceskieReseniia(Stage $stage, StatusFilter $filter)
     {
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
@@ -69,7 +78,7 @@ class ResultController extends Controller
         ]);
     }
 
-    private function show_zadaca(Stage $stage, StatusFilter $filter)
+    private function showZadaca(Stage $stage, StatusFilter $filter)
     {
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
@@ -82,11 +91,11 @@ class ResultController extends Controller
 
     public function printPdf(Stage $stage, Result $result)
     {
-        $pdf_method = 'pdf_' . $stage->slug;
+        $pdf_method = 'pdf' . $stage->slug;
         return $this->$pdf_method($stage, $result);
     }
 
-    private function pdf_anketa_i_videointerviu(Stage $stage, Result $result)
+    private function pdfAnketaIVideointerviu(Stage $stage, Result $result)
     {
         $user = User::query()->where('id', $result->user_id)->first();
         $pdf = PDF::loadView('admin.pdf.form', ['user' => $user, 'stage' => $stage])->setPaper('a4');
@@ -94,7 +103,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdf_upravlenceskie_reseniia(Stage $stage, Result $result)
+    private function pdfUpravlenceskieReseniia(Stage $stage, Result $result)
     {
         $management = ManagementDecision::query()->where('user_id', $result->user_id)->first();
         $user = User::query()->where('id', $result->user_id)->first();
@@ -103,7 +112,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdf_zadaca(Stage $stage, Result $result)
+    private function pdfZadaca(Stage $stage, Result $result)
     {
         $instrument = Instrument::all()->first();
         $task = Challenge::query()->where('user_id', $result->user_id)->first();

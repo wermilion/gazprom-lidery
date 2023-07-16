@@ -14,11 +14,16 @@ use Str;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
+        Role::truncate();
+        User::truncate();
+        Branch::truncate();
+        Stage::truncate();
+        StageStatus::truncate();
+        ResultStatus::truncate();
+        Instrument::truncate();
+
 
         Role::factory()->create([
             'name' => 'Конкурстант'

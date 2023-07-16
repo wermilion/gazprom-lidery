@@ -1,44 +1,24 @@
-<table class="table">
+<table>
     <thead>
     <tr>
-        <th>Табельный номер</th>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Филиал</th>
-        <th>Должность</th>
-        <th>Опыт работы</th>
+        <th style="font-weight: bold; text-align: center;">Табельный номер</th>
+        <th style="font-weight: bold; text-align: center;">Имя</th>
+        <th style="font-weight: bold; text-align: center;">Фамилия</th>
+        <th style="font-weight: bold; text-align: center;">Филиал</th>
+        <th style="font-weight: bold; text-align: center;">Должность</th>
+        <th style="font-weight: bold; text-align: center;">Опыт работы</th>
     </tr>
     </thead>
     <tbody>
     @foreach($users as $user)
         <tr>
-            <td>{{ $user->tabel_number }}</td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->surname }}</td>
-            <td>{{ $user->branch?->name }}</td>
-            <td>{{ $user->position }}</td>
-            <td>{{ $user->work_experience }}</td>
+            <td style="text-align: left">{{ $user->tabel_number }}</td>
+            <td style="text-align: left">{{ $user->name }}</td>
+            <td style="text-align: left">{{ $user->surname }}</td>
+            <td style="text-align: left">{{ $user->branch?->name }}</td>
+            <td style="text-align: left">{{ $user->position }}</td>
+            <td style="text-align: left">{{ $user->work_experience }}</td>
         </tr>
     @endforeach
     </tbody>
 </table>
-
-<style>
-    .table {
-        width: 100%;
-        border: 1px solid #dddddd;
-        border-collapse: collapse;
-    }
-
-    .table th {
-        font-weight: bold;
-        padding: 5px;
-        background: #efefef;
-        border: 1px solid #dddddd;
-    }
-
-    .table td {
-        border: 1px solid #dddddd;
-        padding: 5px;
-    }
-</style>

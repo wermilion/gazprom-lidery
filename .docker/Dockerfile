@@ -16,7 +16,7 @@ RUN npm install
 RUN npm run build
 
 FROM harbor.tomsk-it.ru/asap-infra/unit:php8.2-pdo-psql as back
-RUN apt-get update && apt-get install -y git unzip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git unzip libpng-dev libzip-dev && docker-php-ext-install gd zip && docker-php-source delete && rm -rf /var/lib/apt/lists/* && rm -rf /var/cache/*
 COPY --from=harbor.tomsk-it.ru/dockerhub/library/composer:2.5.8 /usr/bin/composer /usr/bin/composer
 COPY .docker/unit-config.json /docker-entrypoint.d/
 WORKDIR /app

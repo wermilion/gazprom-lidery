@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 
-class AnketaRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     public function rules(): array
     {

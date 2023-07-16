@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AnketaRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\ChallengeRequest;
 use App\Http\Requests\ManagementDecisionRequest;
 use App\Http\Resources\StageResource;
@@ -38,7 +38,7 @@ class StageController extends Controller
         return new StageResource($stage);
     }
 
-    public function form(AnketaRequest $request)
+    public function form(ProfileRequest $request)
     {
         $data = $request->all();
 

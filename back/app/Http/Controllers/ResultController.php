@@ -12,8 +12,7 @@ use App\Models\ResultStatus;
 use App\Models\Stage;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
 
 class ResultController extends Controller
 {
@@ -48,6 +47,16 @@ class ResultController extends Controller
     private function show_distancionnyi_etap(Stage $stage, StatusFilter $filter)
     {
         $instrument = Instrument::all()->first();
+        if (Carbon::now() > $stage->date_end) {
+            $prev_results = Result::where('stage_id', 2)->where('result_status_id', 1)->get();
+            foreach ($prev_results as $prev_result) {
+                Result::create([
+                    'stage_id' => $stage->id,
+                    'user_id' => $prev_result->user_id,
+                    'result_status_id' => 3
+                ]);
+            }
+        }
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.showDistance', [
@@ -146,5 +155,10 @@ class ResultController extends Controller
         $result->update();
 
         return redirect()->route('cp.results.show', $result->stage->slug);
+    }
+
+    public function test()
+    {
+        return 1;
     }
 }

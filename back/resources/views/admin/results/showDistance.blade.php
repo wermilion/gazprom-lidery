@@ -45,7 +45,7 @@
                                 type="button"
                                 class="mt-4 inline-block py-2 px-3 bg-gazprom-500 hover:bg-gazprom-400 text-white"
                                 data-te-toggle="modal"
-                                data-te-target="#ModalCenter"
+                                data-te-target="#ModalCenter{{ $result->id }}"
                                 data-te-ripple-init
                                 data-te-ripple-color="#0079fa">
                                 Вписать балл
@@ -53,7 +53,7 @@
                             <div
                                 data-te-modal-init
                                 class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                                id="ModalCenter"
+                                id="ModalCenter{{ $result->id }}"
                                 tabindex="-1"
                                 aria-labelledby="exampleModalCenterTitle"
                                 aria-modal="true"

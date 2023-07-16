@@ -19,7 +19,7 @@
                         <p class="term">{{ item.term }}</p> 
                     </template>
                     <template v-if="item.info">
-                        <p>{{ item.info }}</p>
+                        <p class="term1">{{ item.info }}</p>
                     </template>
                 </div>
                 <template v-if="item.button">
@@ -49,6 +49,7 @@ section {
     border: 3px solid #064677;
     display: flex;
     flex-direction: column;
+ 
     
     .contenerStage{
         
@@ -60,16 +61,16 @@ section {
                 border: 2px solid #064677;
                 color: #064677;  
                 font-weight: bold;
-                padding: 0 16px;
+                padding: 8px 16px;
             }
         
         }
         .between{
             display: flex;
             align-items: center;
-            margin-top: 8px;
+            margin-top: 15px;
             .text{
-                width: 59%;
+                width: 55%;
             }
             p{
                 border: 1px solid #000;
@@ -80,30 +81,36 @@ section {
 
             img{
             
-                width: 216px;
-                height: 216px;
+                width: 238px;
+                height: 186px;
             
             }
         }
         .botton{
             display: flex;
             justify-content: space-between;
-            margin-top: 6px;
             align-items: center;
+            margin-top: 7px;
             .router{
                 background-color: #0079C2;
                 color: white;
                 font-weight: 700;
-                font-size: 32px;
-                line-height: 37px;
+                font-size: 48px;
+                line-height: 48px;
                 border-radius: 0px;
                 border: none;
+                margin-top: 16px;
+                width: 50%;
+                height: 64px;
                 padding: 10px 25px 10px 25px;
             }
             .botton_under{
-                
+                .term1{
+                    font-size: 32px;
+                    font-weight: 400;
+                }
                 .term{
-                    font-size: 24px;
+                    font-size: 32px;
                     font-weight: 700;
                 }   
             }

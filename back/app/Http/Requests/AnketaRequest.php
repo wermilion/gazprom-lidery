@@ -15,7 +15,7 @@ class AnketaRequest extends FormRequest
             'name' => ['required', 'cyrillic', 'alpha', 'string', 'min:2', 'max:35'],
             'surname' => ['required', 'cyrillic', 'alpha', 'string', 'min:1', 'max:55'],
             'position' => ['required', 'string', 'min:4', 'max:55'],
-            'work_experience' => ['required', 'integer', 'min:1', 'max:2'],
+            'work_experience' => ['required', 'integer', 'digits_between:1,2'],
             'branch_id' => ['required', 'integer'],
             'check_video' => ['required', 'bool', 'accepted'],
         ];
@@ -25,9 +25,11 @@ class AnketaRequest extends FormRequest
     {
         return [
             'name.required' => "Поле \"Имя\" обязательное",
+            'name.cyrillic' => "Поле \"Имя\" должно состоять из кириллицы",
             'name.alpha' => "Поле \"Имя\" не должно содержать цифры и символы",
             'name.max' => "Поле \"Имя\" должно не превышать больше 30 символов",
             'surname.required' => "Поле \"Фамилия\" обязательное",
+            'surname.cyrillic' => "Поле \"Фамилия\" должно состоять из кириллицы",
             'surname.alpha' => "Поле \"Фамилия\" не должно содержать цифры и символы",
             'surname.max' => "Поле \"Фамилия\" должно не превышать больше 30 символов",
             'position.required' => "Поле \"Должность\" обязательное",

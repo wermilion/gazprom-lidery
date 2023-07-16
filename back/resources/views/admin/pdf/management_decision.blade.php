@@ -37,6 +37,7 @@
 <p>Решение: {{ $management->solution }}</p>
 <p>Результат: {{ $management->result }}</p>
 <p>Вывод: {{ $management->conclusion }}</p>
+<p>Доп. файлы: {{$management->check_file ? 'Да' : 'Нет'}}</p>
 <div class="footer">
     <span class="pagenum"></span>
 </div>

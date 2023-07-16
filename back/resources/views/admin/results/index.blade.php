@@ -22,7 +22,7 @@
                                 </a>
                             </div>
                             <div class="flex justify-end">
-                                <span>{{\Carbon\Carbon::parse($stage->date_start)->translatedFormat("F j, H:i")}} - {{\Carbon\Carbon::parse($stage->date_end)->translatedFormat("F j, H:i")}} (по МСК)</span>
+                                <span>{{\Carbon\Carbon::parse($stage->date_start)->translatedFormat("F j, H:i")}} - {{\Carbon\Carbon::parse($stage->date_end)->translatedFormat("F j, H:i")}} (по Томску)</span>
                             </div>
                         </div>
                     </div>

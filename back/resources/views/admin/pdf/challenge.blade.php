@@ -34,6 +34,7 @@
 <p>Табельный номер: {{ $user->tabel_number }}</p>
 <p>Задача: {{ $instrument->task }}</p>
 <p>Решение: {{ $task->solution }}</p>
+<p>Доп. файлы: {{$task->check_file ? 'Да' : 'Нет'}}</p>
 <div class="footer">
     <span class="pagenum"></span>
 </div>

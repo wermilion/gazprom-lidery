@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 class StageController extends Controller
 {
+
     public function index()
     {
         $currentTime = Carbon::now();
@@ -76,7 +77,7 @@ class StageController extends Controller
         } else {
             return response([
                 'status' => false,
-                'message' => 'Этап недоступен'
+                'message' => 'Вы уже проходили этот этап'
             ]);
         }
     }
@@ -123,7 +124,6 @@ class StageController extends Controller
                 'message' => 'Этап недоступен'
             ]);
         }
-
     }
 
     public function challenge(ChallengeRequest $request)

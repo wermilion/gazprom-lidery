@@ -30,7 +30,7 @@
                     <a class="w-max ml-2 text-white bg-gazprom-500 uppercase hover:bg-gazprom-400 py-2 px-4"
                        href="{{route('cp.users.index')}}">Сбросить фильтры</a>
                     <a class="w-max ml-2 text-white bg-gazprom-500 uppercase hover:bg-gazprom-400 py-2 px-4"
-                       href="{{route('cp.users.printPdf', [
+                       href="{{route('cp.users.export', [
                         'tabel_number' => request()->get('tabel_number'),
                         'branch_id' => request()->get('branch_id'),
                         ])}}">
@@ -64,7 +64,7 @@
                         type="button"
                         class="inline-block"
                         data-te-toggle="modal"
-                        data-te-target="#ModalCenter"
+                        data-te-target="#ModalCenter{{$user->id}}"
                         data-te-ripple-init
                         data-te-ripple-color="#0079fa">
                         <img src="{{URL('/images/delete-icon.svg')}}" alt="delete-icon" draggable="false">
@@ -72,7 +72,7 @@
                     <div
                         data-te-modal-init
                         class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-                        id="ModalCenter"
+                        id="ModalCenter{{$user->id}}"
                         tabindex="-1"
                         aria-labelledby="exampleModalCenterTitle"
                         aria-modal="true"

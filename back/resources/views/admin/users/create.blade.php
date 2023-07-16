@@ -33,10 +33,10 @@
                     Пароль
                 </label>
                 <input
-                    disabled
+                    readonly
                     oninput="switchDisabled()"
                     class="border-gray-300 bg-gray-100 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm block mt-1"
-                    id="password" type="text" name="password" autofocus="autofocus" placeholder="Сгенерированный пароль" required>
+                    id="password" type="text" name="password" placeholder="Сгенерированный пароль" required>
             </div>
             <div class=" mt-4 flex flex-col">
                 <button

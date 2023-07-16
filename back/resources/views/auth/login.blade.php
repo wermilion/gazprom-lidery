@@ -24,8 +24,12 @@
 
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox"
-                       class="rounded border-gray-300 text-gazprom-500 shadow-sm focus:ring-gazprom-500" name="remember">
+                <input id="remember_me" type="checkbox" value="0"
+                       class="hidden border-gray-300 text-gazprom-500 shadow-sm focus:ring-gazprom-500"
+                       name="remember">
+                <input id="remember_me" type="checkbox" value="1"
+                       class="border-gray-300 text-gazprom-500 shadow-sm focus:ring-gazprom-500"
+                       name="remember">
                 <span class="ml-2 text-sm text-gray-600">{{ __('Запомнить меня') }}</span>
             </label>
         </div>

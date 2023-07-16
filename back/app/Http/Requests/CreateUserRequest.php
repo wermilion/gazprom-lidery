@@ -11,7 +11,7 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'tabel_number' => ['required', 'numeric', 'digits_between :1,9', ' unique:' . User::class],
-            'password' => ['required', 'string']
+            'password' => ['string']
         ];
     }
 

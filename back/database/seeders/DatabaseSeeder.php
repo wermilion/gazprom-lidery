@@ -31,18 +31,20 @@ class DatabaseSeeder extends Seeder
 
         Branch::factory()->count(14)->create();
 
+        Branch::factory()->create([
+            'name' => 'Томск'
+        ]);
+
         User::factory()->create([
             'tabel_number' => '1234',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'role_id' => 2,
         ]);
 
-        User::factory()->count(40)->create();
-
         Instrument::factory()->create([
             'min_points' => 100,
-            'task' => 'Задача для этапа Задача.',
+            'task' => 'Описание задачи...',
         ]);
 
         StageStatus::factory()->create([

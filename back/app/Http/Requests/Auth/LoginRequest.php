@@ -27,6 +27,7 @@ class LoginRequest extends FormRequest
         return [
             'tabel_number' => ['required', 'int'],
             'password' => ['required', 'string'],
+            'remember' => ['boolean']
         ];
     }
 

@@ -38,8 +38,7 @@
                                 </div>
                             </div>
                             <div class="flex justify-end">
-                                {{setlocale(LC_ALL, 'ru_RU', 'ru_RU.UTF-8', 'ru', 'russian')}}
-                                <span>{{date("F j, H:i", strtotime($stage->date_start))}} - {{date("F j, H:i", strtotime($stage->date_end))}} (по МСК)</span>
+                                <span>{{\Carbon\Carbon::parse($stage->date_start)->translatedFormat("F j, H:i")}} - {{\Carbon\Carbon::parse($stage->date_end)->translatedFormat("F j, H:i")}} (по МСК)</span>
                             </div>
                         </div>
                     </div>

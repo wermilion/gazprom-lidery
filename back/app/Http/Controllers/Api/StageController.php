@@ -98,7 +98,6 @@ class StageController extends Controller
                     'solution' => $data['solution'],
                     'result' => $data['result'],
                     'conclusion' => $data['conclusion'],
-                    'check_file' => (bool)$data['check_file']
                 ]);
 
                 Result::create([
@@ -138,7 +137,6 @@ class StageController extends Controller
                 Challenge::create([
                     'user_id' => $user_id,
                     'solution' => $data['solution'],
-                    'check_file' => (bool)$data['check_file']
                 ]);
 
                 Result::create([

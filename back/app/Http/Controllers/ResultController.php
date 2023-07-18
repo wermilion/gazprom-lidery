@@ -21,7 +21,17 @@ class ResultController extends Controller
      */
     public function index()
     {
-        $stages = Stage::query()->where('name', '!=', 'Регистрация')->orderBy('date_start', 'ASC')->get();
+        $stages = Stage::where('name', '!=', 'Регистрация')->orderBy('date_start')->get();
+        $currentTime = Carbon::now();
+
+        foreach ($stages as $stage) {
+            if ($stage->date_start <= $currentTime and $stage->date_end > $currentTime) {
+                $stage->stage_status_id = 1;
+            } else {
+                $stage->stage_status_id = 2;
+            }
+            $stage->update();
+        }
         return view('admin.results.index', [
             'stages' => $stages,
         ]);
@@ -48,13 +58,16 @@ class ResultController extends Controller
     {
         $instrument = Instrument::all()->first();
         if (Carbon::now() > $stage->date_end) {
-            $prev_results = Result::where('stage_id', 2)->where('result_status_id', 1)->get();
+            $prev_stage = Stage::where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
+            $prev_results = Result::where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
             foreach ($prev_results as $prev_result) {
-                Result::create([
-                    'stage_id' => $stage->id,
-                    'user_id' => $prev_result->user_id,
-                    'result_status_id' => 3
-                ]);
+                if (!Result::where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                    Result::create([
+                        'stage_id' => $stage->id,
+                        'user_id' => $prev_result->user_id,
+                        'result_status_id' => 3
+                    ]);
+                }
             }
         }
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
@@ -80,6 +93,54 @@ class ResultController extends Controller
 
     private function showZadaca(Stage $stage, StatusFilter $filter)
     {
+        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $statuses = ResultStatus::all();
+        return view('admin.results.show', [
+            'stage' => $stage,
+            'results' => $results,
+            'statuses' => $statuses,
+        ]);
+    }
+
+    public function showOcnyiEtap(Stage $stage, StatusFilter $filter)
+    {
+        if (Carbon::now() > $stage->date_end) {
+            $prev_stage = Stage::where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
+            $prev_results = Result::where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
+            foreach ($prev_results as $prev_result) {
+                if (!Result::where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                    Result::create([
+                        'stage_id' => $stage->id,
+                        'user_id' => $prev_result->user_id,
+                        'result_status_id' => 3
+                    ]);
+                }
+            }
+        }
+        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $statuses = ResultStatus::all();
+        return view('admin.results.show', [
+            'stage' => $stage,
+            'results' => $results,
+            'statuses' => $statuses,
+        ]);
+    }
+
+    public function showFinal(Stage $stage, StatusFilter $filter)
+    {
+        if (Carbon::now() > $stage->date_end) {
+            $prev_stage = Stage::where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
+            $prev_results = Result::where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
+            foreach ($prev_results as $prev_result) {
+                if (!Result::where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                    Result::create([
+                        'stage_id' => $stage->id,
+                        'user_id' => $prev_result->user_id,
+                        'result_status_id' => 3
+                    ]);
+                }
+            }
+        }
         $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.show', [

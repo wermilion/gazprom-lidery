@@ -13,15 +13,20 @@ use App\Models\Stage;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 class ResultController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        $stages = Stage::where('name', '!=', 'Регистрация')->orderBy('date_start')->get();
+        $stages = Stage::query()->where('name', '!=', 'Регистрация')->orderBy('date_start')->get();
         $currentTime = Carbon::now();
 
         foreach ($stages as $stage) {
@@ -43,9 +48,9 @@ class ResultController extends Controller
         return $this->$method($stage, $filter);
     }
 
-    private function showAnketaIVideointerviu(Stage $stage, StatusFilter $filter)
+    private function showAnketaIVideointerviu(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.show', [
             'stage' => $stage,
@@ -54,23 +59,11 @@ class ResultController extends Controller
         ]);
     }
 
-    private function showDistancionnyiEtap(Stage $stage, StatusFilter $filter)
+    private function showDistancionnyiEtap(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
+        $this->createResult($stage);
         $instrument = Instrument::all()->first();
-        if (Carbon::now() > $stage->date_end) {
-            $prev_stage = Stage::where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
-            $prev_results = Result::where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
-            foreach ($prev_results as $prev_result) {
-                if (!Result::where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
-                    Result::create([
-                        'stage_id' => $stage->id,
-                        'user_id' => $prev_result->user_id,
-                        'result_status_id' => 3
-                    ]);
-                }
-            }
-        }
-        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.showDistance', [
             'stage' => $stage,
@@ -80,9 +73,9 @@ class ResultController extends Controller
         ]);
     }
 
-    private function showUpravlenceskieReseniia(Stage $stage, StatusFilter $filter)
+    private function showUpravlenceskieReseniia(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.show', [
             'stage' => $stage,
@@ -91,9 +84,9 @@ class ResultController extends Controller
         ]);
     }
 
-    private function showZadaca(Stage $stage, StatusFilter $filter)
+    private function showZadaca(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.show', [
             'stage' => $stage,
@@ -102,22 +95,10 @@ class ResultController extends Controller
         ]);
     }
 
-    public function showOcnyiEtap(Stage $stage, StatusFilter $filter)
+    public function showOcnyiEtap(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        if (Carbon::now() > $stage->date_end) {
-            $prev_stage = Stage::where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
-            $prev_results = Result::where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
-            foreach ($prev_results as $prev_result) {
-                if (!Result::where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
-                    Result::create([
-                        'stage_id' => $stage->id,
-                        'user_id' => $prev_result->user_id,
-                        'result_status_id' => 3
-                    ]);
-                }
-            }
-        }
-        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $this->createResult($stage);
+        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.show', [
             'stage' => $stage,
@@ -126,22 +107,10 @@ class ResultController extends Controller
         ]);
     }
 
-    public function showFinal(Stage $stage, StatusFilter $filter)
+    public function showFinal(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
-        if (Carbon::now() > $stage->date_end) {
-            $prev_stage = Stage::where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
-            $prev_results = Result::where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
-            foreach ($prev_results as $prev_result) {
-                if (!Result::where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
-                    Result::create([
-                        'stage_id' => $stage->id,
-                        'user_id' => $prev_result->user_id,
-                        'result_status_id' => 3
-                    ]);
-                }
-            }
-        }
-        $results = Result::orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+        $this->createResult($stage);
+        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
         return view('admin.results.show', [
             'stage' => $stage,
@@ -156,7 +125,7 @@ class ResultController extends Controller
         return $this->$pdf_method($stage, $result);
     }
 
-    private function pdfAnketaIVideointerviu(Stage $stage, Result $result)
+    private function pdfAnketaIVideointerviu(Stage $stage, Result $result): Response
     {
         $user = User::query()->where('id', $result->user_id)->first();
         $pdf = PDF::loadView('admin.pdf.form', ['user' => $user, 'stage' => $stage])->setPaper('a4');
@@ -164,7 +133,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdfUpravlenceskieReseniia(Stage $stage, Result $result)
+    private function pdfUpravlenceskieReseniia(Stage $stage, Result $result): Response
     {
         $management = ManagementDecision::query()->where('user_id', $result->user_id)->first();
         $user = User::query()->where('id', $result->user_id)->first();
@@ -173,7 +142,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdfZadaca(Stage $stage, Result $result)
+    private function pdfZadaca(Stage $stage, Result $result): Response
     {
         $instrument = Instrument::all()->first();
         $task = Challenge::query()->where('user_id', $result->user_id)->first();
@@ -183,28 +152,28 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    public function accept(Result $result)
+    public function accept(Result $result): RedirectResponse
     {
         $result->result_status_id = 1;
         $result->update();
         return redirect()->back();
     }
 
-    public function reject(Result $result)
+    public function reject(Result $result): RedirectResponse
     {
         $result->result_status_id = 2;
         $result->update();
         return redirect()->back();
     }
 
-    public function onCheck(Result $result)
+    public function onCheck(Result $result): RedirectResponse
     {
         $result->result_status_id = 3;
         $result->update();
         return redirect()->back();
     }
 
-    public function storeDistance(Result $result, DistanceRequest $request)
+    public function storeDistance(Result $result, DistanceRequest $request): RedirectResponse
     {
         $instrument = Instrument::all()->first();
 
@@ -216,5 +185,22 @@ class ResultController extends Controller
         $result->update();
 
         return redirect()->route('cp.results.show', $result->stage->slug);
+    }
+
+    private function createResult(Stage $stage): void
+    {
+        if (Carbon::now() > $stage->date_end) {
+            $prev_stage = Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
+            $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
+            foreach ($prev_results as $prev_result) {
+                if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                    Result::create([
+                        'stage_id' => $stage->id,
+                        'user_id' => $prev_result->user_id,
+                        'result_status_id' => 3
+                    ]);
+                }
+            }
+        }
     }
 }

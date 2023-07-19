@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BranchRequest;
 use App\Models\Branch;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BranchController extends Controller
@@ -38,6 +39,7 @@ class BranchController extends Controller
 
         return redirect()->route('cp.branches.index')->with(['success' => true, 'message' => 'Филиал успешно добавлен!']);
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -64,6 +66,9 @@ class BranchController extends Controller
      */
     public function destroy(Branch $branch)
     {
+        if (User::query()->where('branch_id', $branch->id)->exists()) {
+            return redirect()->back()->with(['success' => true, 'message' => 'Филиал не может быть удалён, так как есть связанные с ним конкурсанты.']);
+        }
         $branch->delete();
         return redirect()->back()->with(['success' => true, 'message' => 'Филиал удалён.']);
     }

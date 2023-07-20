@@ -10,12 +10,27 @@ use App\Models\Stage;
 use App\Models\StageStatus;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Str;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::table('roles')->truncate();
+        DB::table('branches')->truncate();
+        DB::table('users')->truncate();
+        DB::table('instruments')->truncate();
+        DB::table('stage_statuses')->truncate();
+        DB::table('stages')->truncate();
+        DB::table('result_statuses')->truncate();
+        DB::table('results')->truncate();
+        DB::table('distances')->truncate();
+        DB::table('management_decisions')->truncate();
+        DB::table('challenges')->truncate();
+        DB::table('results')->truncate();
+
+
         Role::factory()->create([
             'name' => 'Конкурстант'
         ]);
@@ -28,6 +43,10 @@ class DatabaseSeeder extends Seeder
 
         Branch::factory()->create([
             'name' => 'Томск'
+        ]);
+
+        User::factory()->count(30)->create([
+            'custom_password' => true
         ]);
 
         User::factory()->create([

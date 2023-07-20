@@ -46,15 +46,15 @@ class ResultController extends Controller
 
         switch ($stage->name) {
             case 'Дистанционный этап':
-                $this->createResult($stage);
-                $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-                $instrument = Instrument::all()->first();
-                return view('admin.results.showDistance', [
-                    'stage' => $stage,
-                    'results' => $results,
-                    'statuses' => $statuses,
-                    'instrument' => $instrument
-                ]);
+            $this->createResult($stage);
+            $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+            $instrument = Instrument::all()->first();
+            return view('admin.results.showDistance', [
+                'stage' => $stage,
+                'results' => $results,
+                'statuses' => $statuses,
+                'instrument' => $instrument
+            ]);
             case 'Очный этап' || 'Финал':
                 $this->createResult($stage);
                 $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);

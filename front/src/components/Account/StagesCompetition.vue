@@ -37,6 +37,7 @@ export default{
     name:'StagesCompetitionBlock',
     data: () => {
         return {
+            
             items: [
                 {
                     title: "Регистрация",
@@ -56,7 +57,7 @@ export default{
                     term: "ДОСТУПНО",
                     info: "До 31 октября",
                     statys: "active",
-                    router: "/questionnaire_page"
+                    router: "QuestionnairePage"
                 },
                 {
                     title: "Дистанционный этап",
@@ -76,7 +77,7 @@ export default{
                     term: "ДОСТУПНО",
                     info: "До 31 октября",
                     statys: "active",
-                    router: "/managment_page"
+                    router: "ManagmentPage"
                 },
                 {
                     title: "Задачи",
@@ -86,7 +87,7 @@ export default{
                     term: "ДОСТУПНО",
                     info: "До 31 октября",
                     statys: "active",
-                    router: "/task_page"
+                    router: "TaskPage"
                 },
                 {
                     title: "Очный этап",
@@ -169,7 +170,7 @@ section{
                     
                     font-family: HeliosCondBlack;
                     font-size: 128px;
-                    padding: 8px 16px;
+                    padding: 0 16px;
                     font-weight: 400;
                     line-height: 128px;
                     

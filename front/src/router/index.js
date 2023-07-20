@@ -17,7 +17,11 @@ const routes = [
     component: MainPage,
     
   },
-  
+  {
+    path:'/',
+    name:'MainPage',
+    component: MainPage,
+  },
   {
     path:'/questionnaire_page',
     name:'QuestionnairePage',

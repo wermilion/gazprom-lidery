@@ -39,26 +39,23 @@ export  default{
         Remember(){
             this.remember=!this.remember
         },
-        POST() {
+       POST() {
             axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', {
-                tabel_number: this.tabel_number, password: this.password, remember:this.remember
+                tabel_number: this.tabel_number, password: this.password, remember: this.remember
             })
-            .then(response => {
-                
-                if(response.data.custom_password===true){
-                    router.push('/stages_competition')
-                }else{
-                    router.push('/changing_the_password')
-                }
-            }
-            )
-            .catch(error => { this.status = error.status } )
-            
-        }, 
-        
-    
-    }
-
+                .then(response => {
+                    if (response.data.custom_password === true) {
+                        router.push('/stages_competition')
+                    } else {
+                        router.push('/changing_the_password')
+                    }
+                    
+                })
+                .catch(error => { this.status = error.status })
+        },
+    },
+  
+   
 }
 </script>
 

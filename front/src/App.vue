@@ -24,7 +24,12 @@ export default{
   components:{
     FooterBlock,
     HeaderBlock,
-  }
+  },
+  methods:{
+    
+  },
+ 
+
 }
 </script>
 

@@ -6,9 +6,9 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input  @mouseover="showPopup" @mouseout="hidePopup" type="text"  placeholder="Введите пароль ">
+                    <input v-model="password1"  @mouseover="showPopup" @mouseout="hidePopup" type="text"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input class="one" type="text" placeholder="Повторите новый пароль"> 
+                    <input  v-model="password2" class="one" type="text" placeholder="Повторите новый пароль"> 
                 </form>
             <button ><router-link class="button" to="/stages_competition">Сохранить</router-link></button>
         </div>
@@ -20,16 +20,22 @@ export default{
     name:'ChangingThePassword',
     data(){
         return{
-            isPopupVisible: false
+            isPopupVisible: false,
+            SruvnPassword:false,
+            password1:'',
+            password2:''
         }
     },
     methods:{
         showPopup() {
-        this.isPopupVisible = true;
+            this.isPopupVisible = true;
+        },
+        hidePopup() {
+            this.isPopupVisible = false;
+        }
     },
-    hidePopup() {
-        this.isPopupVisible = false;
-    }
+    computed:{
+       
     }
 
 }

@@ -13,7 +13,7 @@
                     </div>
                     <label  >Я загрузил (-а) файлы.</label>
                 </div>
-                <button :class="{'disabled' : !isActivBtn}">
+                <button @click="POST" :class="{'disabled' : !isActivBtn}">
                     <router-link class="router"  to="/stages_competition">Завершить</router-link>
                 </button>
             </div>
@@ -22,6 +22,7 @@
 
 
 <script>
+import axios from "axios"
 export default {
     name: 'ManagementBlock',
     data() {
@@ -68,6 +69,20 @@ export default {
          isTextareaValid(index) {
             const value = this.items[index].value;
             return value && value.length > 50 && value.length < 1000;
+        },
+         POST() {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/managementDecision', {
+                chectproblem:this.items.value[0],
+                management_task: this.items.value[1],
+				solution: this.items.value[2],
+				result: this.items.value[3],
+				conclusion: this.items.value[4],
+				check_file:this.chect
+            })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => { console.log(error) })
         },
         
     },

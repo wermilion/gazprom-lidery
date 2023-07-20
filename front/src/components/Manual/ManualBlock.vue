@@ -24,6 +24,7 @@
 
 
 <script>
+
 export default{
     name:'ManualBlock',
     props: ['checkbox_items'],
@@ -49,7 +50,8 @@ export default{
                 }
             ]
         }
-    }
+    },
+    
      
 
     

@@ -32,9 +32,9 @@
                 <input required type="text" v-model.lazy="experience" :class="{ 'errorExperience': errorExperience }"  placeholder="Ваш стаж">
             </div>
             <div class="form-action">
-                <button :class="{ 'disabled ': disableBtn }"   >
-                        <router-link class="router"  to="/stages_competition">Завершить</router-link>
-                </button>
+            <button @click="POST" :class="{ 'disabled ': disableBtn }"   >
+                    <router-link class="router"  to="/stages_competition">Завершить</router-link>
+            </button>
         
             </div>
         </form>
@@ -43,6 +43,7 @@
 
 
 <script>
+import axios from "axios"
 export default{
     name: "QuestionnaireBlock",
     data(){
@@ -59,35 +60,7 @@ export default{
             error_service_number:false,
             errorbranch:false,
             errorPost:false,
-            items:[
-                {
-                    title:'A'
-                },
-                {
-                    title: 'B'
-                },
-                {
-                    title: 'C'
-                },
-                {
-                    title: 'A'
-                },
-                {
-                    title: 'B'
-                },
-                {
-                    title: 'C'
-                },
-                  {
-                    title: 'A'
-                },
-                {
-                    title: 'B'
-                },
-                {
-                    title: 'C'
-                }
-            ]
+            items:[]
         }
     },
     computed: {
@@ -112,6 +85,35 @@ export default{
             const re = /^[1-9]/ui
             this.errorExperience = re.test(b)
         }
+    },
+    methods:{
+        POST() {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/form', {
+                name:this.name,
+				surname: this.service_number,
+				position: this.post,
+				work_experience: this.experience,
+				branch_id: this.branch,
+														
+            })
+                .then(response => {
+                   console.log(response.data)
+                    axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
+                })
+                .catch(error => { this.status = error.status })
+        },
+        fetchData() {
+            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/branches')
+                .then(response => {
+                    this.items = response.data
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    },
+    mounted() {
+        this.fetchData()
     },
  
   

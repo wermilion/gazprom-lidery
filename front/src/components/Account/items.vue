@@ -23,7 +23,7 @@
                     </template>
                 </div>
                 <template v-if="item.button">
-                    <router-link class="router"  :to=" item.router" >{{ item.button }}</router-link>
+                    <router-link class="router"  :to="{name:item.router} " >{{ item.button }}</router-link>
                 </template>
             </div>
         </div>

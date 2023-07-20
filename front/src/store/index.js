@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import stage from './stage'
 
 Vue.use(Vuex)
 
@@ -13,5 +14,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    stage,
+   
   }
 })

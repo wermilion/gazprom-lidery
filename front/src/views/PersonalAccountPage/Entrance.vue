@@ -6,24 +6,57 @@
         <div class="right">
             <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
-                <input type="text" class="one" placeholder="Табельный номер " title = "Это тигр">
-                <input type="text" placeholder="Пароль"> 
+                <input :class="{'eror_tabel_number': !status }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
+                <input  :class="{ 'eror_password': !status }" v-model="password" type="text" placeholder="Пароль"> 
+                <div class="shell_checkbox">
+                    <div v-on:click="Remember" class="checkbox" >
+                        <img v-if="remember" src="/image/checkbox.png" alt="">
+                    </div>
+                    <b>Запомнить меня</b>
+                </div>
             </form>
-            <button ><router-link class="button" to="/stages_competition">Войти</router-link></button>
-            
+            <button v-on:click="POST" >Войти</button>
         </div>
     </section>
 </template>
 
 
 <script>
+import router from "@/router"
+import axios from "axios"
 export  default{
     name: "EntranceBlock",
-    data(){
-        return{
-            pasword:'1234'
-
+    data() {
+        return {
+            remember: false,
+            tabel_number:'',
+            password:'',
+            status:true,
+            
         }
+    },
+    methods:{
+        Remember(){
+            this.remember=!this.remember
+        },
+        POST() {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', {
+                tabel_number: this.tabel_number, password: this.password, remember:this.remember
+            })
+            .then(response => {
+                
+                if(response.data.custom_password===true){
+                    router.push('/stages_competition')
+                }else{
+                    router.push('/changing_the_password')
+                }
+            }
+            )
+            .catch(error => { this.status = error.status } )
+            
+        }, 
+        
+    
     }
 
 }
@@ -32,50 +65,43 @@ export  default{
 
 <style lang="scss" scoped>
 section{
-    width: 1456px;
-    max-width: 100%;
-    margin-top: 109px;
-    margin-bottom: 243px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    color: #064677;
-    margin: 104px auto;
+    justify-content: center;
+    width: 1456px;
+    max-width: 100%;
+    margin: 109px auto;
     h2{
-        font-size: 48px;
-        font-weight: 400;
-        line-height: 52px;
+        margin: 40px 0 58px;
+    }
+    b{
+        font-size: 64px;
+        color: #064677;
+        
     }
     div{
-        height: 594px;
+        height: 540px;
         width: 40%;
     }
      .left{
-        
+        margin-right: 106px;
         display: flex;
         align-items: center;
-        justify-content: center;
         img{
-            width: 100%;
-            height: 411px;
+            width: 526px;
+            height:411px;
         }
-
-
     }
     .right{
         box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        
         .one{
-            margin-bottom: 80px;
+            margin-bottom: 82px;
         }
-        h2{
-            font-size: 48px;
-            line-height: normal;
-            margin: 42px 0 82px;
-        }
+        
         form{
             display: flex;
             flex-direction: column;
@@ -83,14 +109,36 @@ section{
             input{
                 margin: 0 auto ;
                 border: none;
-                width: 90%;
-                height: 34px;
+                width: 86%;
+                height: 38px;
                 border-bottom:5px  solid #3394CE;
                 
                 font-size: 32px;
                 font-weight: 400;
                 
                 
+            }
+            .shell_checkbox{
+                display: flex;
+                width: 90%;
+                height: 38px;
+                margin: 16px 41px;
+                .checkbox{
+                    border: 1px solid #0079C2;
+                    margin-right: 16px;
+                    width: 30px;
+                    height: 30px;
+                    cursor: pointer;
+                    img{
+                        width: 33px;
+                        height: 30px;
+                    }
+                }
+                b{
+                    font-size: 24px;
+                    color: #064677;
+                }
+
             }
             input:focus{
                 border: none;
@@ -104,25 +152,26 @@ section{
             .checkpasword{
                 display: flex;
             }
+            .eror_tabel_number,.eror_password{
+                border-bottom:5px  solid #F69F32;
+            }
         }
     }
-    .button{
-        color: #064677;
-        font-size: 48px; 
-    }
     button{
-        border:4px solid #3394CE;
-        color: #064677;
-        background-color: white;
-        padding: 22px auto;
-        color: #064677;
-        font-size: 48px;
-        font-weight: 700;
-        height: 100px;
-        width: 35%;
-        margin: 80px auto;
-        text-align: center;
-    }
+            background: #064677;
+            padding: 16px 32px;
+            color: white;    
+            font-size: 48px;
+            margin: 20px 0 44px;
+           
+        }
+    button:hover{
+            background: white;
+            border: 4px solid #3394CE;
+            color: #064677;
+                
+           
+        }
 }
 
 

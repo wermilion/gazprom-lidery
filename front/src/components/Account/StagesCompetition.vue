@@ -15,7 +15,7 @@
                             <p class="term">{{ lastItem.term }}</p> 
                         </template>
                         <template v-if="lastItem.info">
-                            <p>{{ lastItem.info }}</p>
+                            <p class="term1">{{ lastItem.info }}</p>
                         </template>
                     </div>
                 </div>
@@ -136,9 +136,9 @@ section{
     
     .GreadBlock{
         display: grid;
-        grid-template-columns: repeat(3, 31.52%);
-        grid-template-rows: repeat(2, 400px);
-        gap:32px 50px ; 
+        grid-template-columns: repeat(3, 32.60%);
+        grid-template-rows: repeat(2, 404px);
+        gap:32px 20px ; 
         
     }
     .inactive{
@@ -147,8 +147,8 @@ section{
         background: #F5F5F5;
         }
     .GreadBlock6{
-        max-width: 100%;
-        width: 1840px;
+        max-width:100% ;
+        width: 1900px;
         height: 400px;
         border: 3px solid #064677;
         margin-top: 32px;
@@ -156,7 +156,7 @@ section{
         .contenerStage1{
             width: 1792px;
             max-width: 100%;
-            margin: 24px auto;
+            margin: 24px 24px;
             display: flex;
             justify-content: space-between;
             .top{
@@ -166,28 +166,39 @@ section{
                 h2{
                     border: 2px solid #064677;
                     color: #064677;  
-                    font-weight: bold;
-                    padding: 32px 32px;
                     
-                    font-size: 96px;
+                    font-family: HeliosCondBlack;
+                    font-size: 128px;
+                    padding: 8px 16px;
+                    font-weight: 400;
+                    line-height: 128px;
+                    
+                    
                 }
                 .botton_under{
                     .term{
-                        font-size: 24px;
+                        font-size: 32px;
                         font-weight: 700;
-                    }   
+                    }  
+                     .term1{
+                        font-size: 32px;
+                        font-weight: 400;
+                    } 
                 }
                 button{
-                    font-size: 36px;
+                    font-size: 42px;
                     padding: 4px auto;
                     width: 214px;
+                    
                 }
             }
             .between{
                 display: flex;
                 align-items: center;
                 width: 49%;
+                margin: 0 62px 0 92px;
                 p{
+                    
                     width: 767px;
                     height: 202px;
                     border: 1px solid #000;
@@ -197,8 +208,8 @@ section{
                 display: flex;
                 align-items: center;
                 img{
-                    width: 216px;
-                    height: 216px;
+                   width: 492px;
+                    height: 328px;
                 }
 
             }

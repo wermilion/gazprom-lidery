@@ -5,7 +5,7 @@
     </nav>
     <router-view/>
     <footer>
-       <template v-if="$route.name!='EntranceBlock'">
+       <template v-if="$route.name!='EntranceBlock' && $route.name != 'ChangingThePassword'">
         <FooterBlock class="FooterBlock"/>
       </template>
     

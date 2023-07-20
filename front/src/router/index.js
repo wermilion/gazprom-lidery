@@ -18,11 +18,6 @@ const routes = [
     
   },
   {
-    path:'/',
-    name:'MainPage',
-    component: MainPage,
-  },
-  {
     path:'/questionnaire_page',
     name:'QuestionnairePage',
     component:QuestionnairePage,

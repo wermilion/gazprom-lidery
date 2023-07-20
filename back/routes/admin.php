@@ -73,7 +73,7 @@ Route::name('cp.')->prefix('cp/')->group(function () {
 
             Route::get('', [ResultController::class, 'index'])->name('index');
 
-            Route::get('/{stage:slug}', [ResultController::class, 'show'])->name('show');
+            Route::get('/{stage}', [ResultController::class, 'show'])->name('show');
 
             Route::post('accept/{result}', [ResultController::class, 'accept'])->name('accept');
 
@@ -83,7 +83,7 @@ Route::name('cp.')->prefix('cp/')->group(function () {
 
             Route::post('storeDistance/{result}', [ResultController::class, 'storeDistance'])->name('storeDistance');
 
-            Route::get('/{stage:slug}/{result}', [ResultController::class, 'printPdf'])->name('printPdf');
+            Route::get('/{stage}/{result}', [ResultController::class, 'printPdf'])->name('printPdf');
 
         });
     });

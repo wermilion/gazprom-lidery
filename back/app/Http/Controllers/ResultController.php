@@ -21,9 +21,6 @@ use Illuminate\Http\Response;
 
 class ResultController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $stages = Stage::query()->where('name', '!=', 'Регистрация')->orderBy('date_start')->get();
@@ -42,16 +39,32 @@ class ResultController extends Controller
         ]);
     }
 
-    public function show(Stage $stage, StatusFilter $filter)
-    {
-        $method = 'show' . $stage->slug;
-        return $this->$method($stage, $filter);
-    }
-
-    private function showAnketaIVideointerviu(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
+    public function show(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
+
+        switch ($stage->name) {
+            case 'Дистанционный этап':
+                $this->createResult($stage);
+                $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+                $instrument = Instrument::all()->first();
+                return view('admin.results.showDistance', [
+                    'stage' => $stage,
+                    'results' => $results,
+                    'statuses' => $statuses,
+                    'instrument' => $instrument
+                ]);
+            case 'Очный этап' || 'Финал':
+                $this->createResult($stage);
+                $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+                return view('admin.results.show', [
+                    'stage' => $stage,
+                    'results' => $results,
+                    'statuses' => $statuses,
+                ]);
+        }
+
         return view('admin.results.show', [
             'stage' => $stage,
             'results' => $results,
@@ -59,73 +72,16 @@ class ResultController extends Controller
         ]);
     }
 
-    private function showDistancionnyiEtap(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
+    public function printPdf(Stage $stage, Result $result): Response
     {
-        $this->createResult($stage);
-        $instrument = Instrument::all()->first();
-        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-        $statuses = ResultStatus::all();
-        return view('admin.results.showDistance', [
-            'stage' => $stage,
-            'results' => $results,
-            'statuses' => $statuses,
-            'instrument' => $instrument,
-        ]);
+        return match ($stage->name) {
+            'Анкета и видеоинтервью' => $this->pdfQuestionnaireAndVideoInterview($stage, $result),
+            'Управленческие решения' => $this->pdfManagementDecisions($stage, $result),
+            'Задача' => $this->pdfTask($stage, $result),
+        };
     }
 
-    private function showUpravlenceskieReseniia(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
-    {
-        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-        $statuses = ResultStatus::all();
-        return view('admin.results.show', [
-            'stage' => $stage,
-            'results' => $results,
-            'statuses' => $statuses,
-        ]);
-    }
-
-    private function showZadaca(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
-    {
-        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-        $statuses = ResultStatus::all();
-        return view('admin.results.show', [
-            'stage' => $stage,
-            'results' => $results,
-            'statuses' => $statuses,
-        ]);
-    }
-
-    public function showOcnyiEtap(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
-    {
-        $this->createResult($stage);
-        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-        $statuses = ResultStatus::all();
-        return view('admin.results.show', [
-            'stage' => $stage,
-            'results' => $results,
-            'statuses' => $statuses,
-        ]);
-    }
-
-    public function showFinal(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
-    {
-        $this->createResult($stage);
-        $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-        $statuses = ResultStatus::all();
-        return view('admin.results.show', [
-            'stage' => $stage,
-            'results' => $results,
-            'statuses' => $statuses,
-        ]);
-    }
-
-    public function printPdf(Stage $stage, Result $result)
-    {
-        $pdf_method = 'pdf' . $stage->slug;
-        return $this->$pdf_method($stage, $result);
-    }
-
-    private function pdfAnketaIVideointerviu(Stage $stage, Result $result): Response
+    private function pdfQuestionnaireAndVideoInterview(Stage $stage, Result $result): Response
     {
         $user = User::query()->where('id', $result->user_id)->first();
         $pdf = PDF::loadView('admin.pdf.form', ['user' => $user, 'stage' => $stage])->setPaper('a4');
@@ -133,7 +89,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdfUpravlenceskieReseniia(Stage $stage, Result $result): Response
+    private function pdfManagementDecisions(Stage $stage, Result $result): Response
     {
         $management = ManagementDecision::query()->where('user_id', $result->user_id)->first();
         $user = User::query()->where('id', $result->user_id)->first();
@@ -142,7 +98,7 @@ class ResultController extends Controller
         return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
     }
 
-    private function pdfZadaca(Stage $stage, Result $result): Response
+    private function pdfTask(Stage $stage, Result $result): Response
     {
         $instrument = Instrument::all()->first();
         $task = Challenge::query()->where('user_id', $result->user_id)->first();

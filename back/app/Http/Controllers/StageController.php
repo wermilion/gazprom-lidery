@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StageRequest;
 use App\Models\Stage;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class StageController extends Controller
 {
@@ -19,7 +18,11 @@ class StageController extends Controller
         $currentTime = Carbon::now();
 
         foreach ($stages as $stage) {
-            $stage->date_start <= $currentTime && $currentTime < $stage->date_end ? $stage->stage_status_id = 1 : $stage->stage_status_id = 2;
+            if ($stage->date_start <= $currentTime and $stage->date_end > $currentTime) {
+                $stage->stage_status_id = 1;
+            } else {
+                $stage->stage_status_id = 2;
+            }
             $stage->update();
         }
 

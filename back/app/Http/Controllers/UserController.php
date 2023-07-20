@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\UserExport;
 use App\Http\Filters\UserFilter;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UserFilterRequest;
 use App\Models\Branch;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -17,8 +18,9 @@ class UserController extends Controller
     /**
      * Вывод списка конкурсантов
      */
-    public function index(UserFilter $filter)
+    public function index(UserFilterRequest $request, UserFilter $filter)
     {
+        
         $users = User::orderBy('id', 'DESC')->where('role_id', 1)->where('custom_password', true)->filter($filter)->paginate(10);
 
         $branches = Branch::all();

@@ -54,14 +54,7 @@ export  default{
                 .catch(error => { this.status = error.status })
         },
     },
-     mounted() {
-        axios.get('https://gazprom-lidery-dev.tomsk-it.ru/sanctum/csrf-cookie').then(response => {
-            console.log(response)
-            axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
-        }).catch(error => {
-            console.error(error);
-        });
-    }
+  
    
 }
 </script>

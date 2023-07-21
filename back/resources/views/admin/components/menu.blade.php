@@ -13,7 +13,7 @@
         data-te-ripple-color="primary">
         <img
             class="mr-2 w-3/5"
-            src="{{URL('/images/gazprom-logo.svg')}}"
+            src="{{asset('/images/gazprom-logo.svg')}}"
             alt="Gazprom Tomsk"
             draggable="false"/>
     </a>

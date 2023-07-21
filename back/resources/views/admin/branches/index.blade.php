@@ -14,13 +14,13 @@
                     {{$branch->name}}
                     <div class="flex ml-4">
                         <a class="mr-4" href="{{ route('cp.branches.edit', $branch) }}">
-                            <img src="{{asset('/images/edit-pen.svg')}}" alt="edit">
+                            <img src="{{asset('cp/images/edit-pen.svg')}}" alt="edit">
                         </a>
                         <form action="{{route('cp.branches.destroy', $branch)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button>
-                                <img src="{{asset('/images/delete-icon.svg')}}" alt="delete-icon">
+                                <img src="{{asset('cp/images/delete-icon.svg')}}" alt="delete-icon">
                             </button>
                         </form>
                     </div>

@@ -21,7 +21,7 @@
             <div>
                 <a href="/"></a>
             </div>
-            <img src="{{asset('images/gazprom-logo.svg')}}" alt="gazprom">
+            <img src="{{asset('cp/images/gazprom-logo.svg')}}" alt="gazprom">
             <div class="w-full sm:max-w-md mt-6 mb-20 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>

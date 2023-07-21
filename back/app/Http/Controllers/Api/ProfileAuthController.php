@@ -23,6 +23,7 @@ class ProfileAuthController extends Controller
         $request->authenticate();
         return response([
             'status' => true,
+            'id' => Auth::user()->id,
             'custom_password' => (bool)Auth::user()->custom_password,
         ]);
     }

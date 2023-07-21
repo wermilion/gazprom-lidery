@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ProfileAuthController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/csrf-cookie', CsrfCookieController::class . '@show')->middleware('web')->name('api.sanctum.csrf-cookie');

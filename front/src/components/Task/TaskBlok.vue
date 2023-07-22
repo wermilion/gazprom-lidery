@@ -2,10 +2,10 @@
     <section class="stagesContener">
         <h2>Задача</h2>
         <div class="task">
-            <p>Описание задачи</p>
+            <p>{{ task }}</p>
         </div>
         <h2>Решение</h2>
-        <textarea v-model.lazy="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
+        <textarea v-model="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
         <div class="under">
             <div class="checkbox1">
                 <div class="checkbox2" v-on:click="Checbox">
@@ -13,7 +13,7 @@
                 </div>
                 <label >Я загрузил (-а) файлы.</label>
             </div>
-            <button :class="{ 'disabled ': disableButton }">
+            <button @click="POST" :class="{ 'disabled ': disableButton }">
                 <router-link class="router"  to="/stages_competition">Завершить</router-link>
             </button>
         </div>
@@ -22,24 +22,49 @@
 
 
 <script>
+import axios from "axios"
 export default{
     name:'TaskBlock',
     data(){
         return{
              chect: false,
              text:'',
-             erortext:false
+             erortext:false,
+             task: []
         }
     },
-     methods: {
+    methods: {
         Checbox() {
             this.chect = !this.chect
+        },
+         POST() {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/challenge', {
+                solution:this.text , check_file:this.chect
+            })
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(error => { console.log(error) })
+        },
+        fetchData() {
+            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/task')
+                .then(response => {
+                    this.task=response.data
+                   
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     },
     computed:{
         disableButton(){
           return this.text.length<50||this.text.length>5000
-        }
+        },
+     
+    },
+    mounted(){
+        this.fetchData()
     },
      watch: {
         erortext() {

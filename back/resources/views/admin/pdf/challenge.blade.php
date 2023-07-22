@@ -28,7 +28,7 @@
 
 </style>
 <div class="header">
-    <img id="logo" src="{{URL('/images/gazprom-logo.svg')}}" alt="logo">
+    <img id="logo" src="{{public_path('cp/images/gazprom-logo.svg')}}" alt="logo">
     <h1>{{$stage->name}}</h1>
 </div>
 <p>Табельный номер: {{ $user->tabel_number }}</p>

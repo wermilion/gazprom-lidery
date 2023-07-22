@@ -14,7 +14,7 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches = Branch::all();
+        $branches = Branch::query()->orderBy('id')->get();
         return view('admin.branches.index', [
             'branches' => $branches,
         ]);

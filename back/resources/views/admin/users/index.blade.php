@@ -72,7 +72,7 @@
                         data-te-target="#ModalCenter{{$user->id}}"
                         data-te-ripple-init
                         data-te-ripple-color="#0079fa">
-                        <img src="{{URL('/images/delete-icon.svg')}}" alt="delete-icon" draggable="false">
+                        <img src="{{asset('cp/images/delete-icon.svg')}}" alt="delete-icon" draggable="false">
                     </button>
                     <div
                         data-te-modal-init

@@ -9,7 +9,7 @@
                             <div class="flex justify-between">
                                 <h1 class="font-bold text-2xl">{{$stage->name}}</h1>
                                 <a href="{{route('cp.stages.edit', $stage)}}">
-                                    <img src="{{URL('/images/edit-pen.svg')}}" alt="edit">
+                                    <img src="{{asset('cp/images/edit-pen.svg')}}" alt="edit">
                                 </a>
                             </div>
                             <div>

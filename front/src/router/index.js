@@ -17,7 +17,6 @@ const routes = [
     component: MainPage,
     
   },
-  
   {
     path:'/questionnaire_page',
     name:'QuestionnairePage',

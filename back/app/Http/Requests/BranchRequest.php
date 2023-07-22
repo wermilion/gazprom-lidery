@@ -15,7 +15,7 @@ class BranchRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'обязательным.',

@@ -9,6 +9,7 @@ services:
     volumes:
       - ./tls:/tmp/tls
       - ./server_blocks/:/opt/bitnami/nginx/conf/server_blocks/
+      - ./app/:/app/
     networks:
       - server
 networks:

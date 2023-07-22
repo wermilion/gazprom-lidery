@@ -17,7 +17,7 @@ deploy-prod:
     - .deploy
     - .for_prod
   variables:
-    SHARED_PROXY_CONFIG_FILE: "proxy-config.conf.tpl"
+    SHARED_PROXY_CONFIG_FILE: "proxy-config-tls.conf.tpl"
     DOMAIN: "leaders-gtt.tpu.ru"
   environment:
     name: prod

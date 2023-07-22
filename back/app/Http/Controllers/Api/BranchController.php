@@ -7,12 +7,13 @@ use App\Http\Requests\BranchRequest;
 use App\Http\Resources\BranchResource;
 use App\Models\Branch;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BranchController extends Controller
 {
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        $branches = Branch::all();
+        $branches = Branch::query()->orderBy('name')->get();
         return BranchResource::collection($branches);
     }
 }

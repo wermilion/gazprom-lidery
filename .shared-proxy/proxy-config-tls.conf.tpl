@@ -5,7 +5,7 @@ server {
 
     location ^~ /.well-known/acme-challenge/ {
     default_type "text/plain";
-    root /app/acme-challenge;
+    root /app;
     }
 
     location / {

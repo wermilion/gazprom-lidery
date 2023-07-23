@@ -9,14 +9,15 @@ class UserFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tabel_number' => ['numeric']
+            'tabel_number' => ['nullable', 'integer'],
+            'branch_id' => ['nullable', 'integer']
         ];
     }
 
     public function messages()
     {
         return [
-            'tabel_number.numeric' => 'Поле должно состоять только из цифр.',
+            'tabel_number.integer' => 'Поле должно состоять только из цифр.',
         ];
     }
 }

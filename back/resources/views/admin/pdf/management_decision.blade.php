@@ -21,23 +21,28 @@
         content: counter(page);
     }
 
-    .header {
-        display: flex;
-        flex-direction: row;
+    .content {
+        word-break: break-word;
     }
 
+
 </style>
-<div class="header">
+
+<div>
     <img id="logo" src="{{public_path('cp/images/gazprom-logo.svg')}}" alt="logo">
     <h1>{{$stage->name}}</h1>
 </div>
-<p>Табельный номер: {{ $user->tabel_number }}</p>
-<p>Проблема: {{ $management->problem }}</p>
-<p>Управленческая задача: {{ $management->management_task }}</p>
-<p>Решение: {{ $management->solution }}</p>
-<p>Результат: {{ $management->result }}</p>
-<p>Вывод: {{ $management->conclusion }}</p>
-<p>Доп. файлы: {{$management->check_file ? 'Да' : 'Нет'}}</p>
+
+<div class="content">
+    <p>Табельный номер: {{ $user->tabel_number }}</p>
+    <p>Проблема: {{ $management->problem }}</p>
+    <p>Управленческая задача: {{ $management->management_task }}</p>
+    <p>Решение: {{ $management->solution }}</p>
+    <p>Результат: {{ $management->result }}</p>
+    <p>Вывод: {{ $management->conclusion }}</p>
+    <p>Доп. файлы: {{$management->check_file ? 'Да' : 'Нет'}}</p>
+</div>
+
 <div class="footer">
     <span class="pagenum"></span>
 </div>

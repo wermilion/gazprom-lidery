@@ -20,9 +20,7 @@ class UserController extends Controller
      */
     public function index(UserFilterRequest $request, UserFilter $filter)
     {
-        
-        $users = User::orderBy('id', 'DESC')->where('role_id', 1)->where('custom_password', true)->filter($filter)->paginate(10);
-
+        $users = User::query()->orderBy('id', 'DESC')->where('role_id', 1)->where('custom_password', true)->filter($filter)->paginate(10);
         $branches = Branch::all();
 
         return view('admin.users.index', [

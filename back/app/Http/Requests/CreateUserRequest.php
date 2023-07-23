@@ -10,7 +10,7 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tabel_number' => ['required', 'numeric', 'max:9', 'unique:' . User::class],
+            'tabel_number' => ['required', 'numeric', 'max_digits:9', 'unique:' . User::class],
             'password' => ['required', 'string']
         ];
     }
@@ -21,7 +21,7 @@ class CreateUserRequest extends FormRequest
             'tabel_number.unique' => 'уникальным.',
             'tabel_number.numeric' => 'состоящим только из цифр (0-9).',
             'tabel_number.required' => 'обязательным.',
-            'tabel_number.max' => 'содержать не более 9 символов.',
+            'tabel_number.max_digits' => 'содержать не более 9 символов.',
             'password.required' => 'обязательным.',
         ];
     }

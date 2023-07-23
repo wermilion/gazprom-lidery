@@ -28,7 +28,7 @@ class StageController extends Controller
     {
         $currentTime = Carbon::now();
 
-        $stages = Stage::query()->orderBy('date_start')->where('activity', false)->get();
+        $stages = Stage::query()->orderBy('date_start')->get();
 
         foreach ($stages as $stage) {
             $stage->date_start <= $currentTime && $currentTime < $stage->date_end ? $stage->stage_status_id = 1 : $stage->stage_status_id = 2;

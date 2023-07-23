@@ -11,14 +11,18 @@ use App\Models\ResultStatus;
 use App\Models\Stage;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use function Symfony\Component\Translation\t;
 
 class ProfileAuthController extends Controller
 {
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): \Illuminate\Foundation\Application|Response|Application|ResponseFactory
     {
         $request->authenticate();
         return response([
@@ -28,7 +32,7 @@ class ProfileAuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): \Illuminate\Foundation\Application|Response|Application|ResponseFactory
     {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
@@ -39,45 +43,52 @@ class ProfileAuthController extends Controller
         ]);
     }
 
-    public function changePassword(ChangePasswordRequest $request)
+    public function changePassword(ChangePasswordRequest $request): \Illuminate\Foundation\Application|Response|Application|ResponseFactory
     {
-        $data = $request->all();
+        if (!Auth::user()->custom_password) {
+            $data = $request->all();
 
-        $stageReg = Stage::where('name', 'Регистрация')->first();
-        $successStatus = ResultStatus::where('status_name', 'Пройдено')->first();
-        $user_id = Auth::guard('web')->user()->id;
+            $stageReg = Stage::query()->where('name', 'Регистрация')->first();
+            $successStatus = ResultStatus::query()->where('status_name', 'Пройдено')->first();
+            $user_id = Auth::guard('web')->user()->id;
 
-        if ($stageReg->date_start <= Carbon::now() && Carbon::now() < $stageReg->date_end) {
+            if ($stageReg->date_start <= Carbon::now() && Carbon::now() < $stageReg->date_end) {
 
-            try {
+                try {
 
-                User::where('id', $user_id)->update(array(
-                    'password' => Hash::make($data['new_password']),
-                    'custom_password' => true,
-                ));
-                Result::create([
-                    'stage_id' => $stageReg->id,
-                    'user_id' => $user_id,
-                    'result_status_id' => $successStatus->id,
-                ]);
+                    User::query()->where('id', $user_id)->update(array(
+                        'password' => Hash::make($data['new_password']),
+                        'custom_password' => true,
+                    ));
+                    Result::query()->create([
+                        'stage_id' => $stageReg->id,
+                        'user_id' => $user_id,
+                        'result_status_id' => $successStatus->id,
+                    ]);
 
-                $arr = response([
-                    'status' => true,
-                    'message' => 'Пароль был успешно изменён'
-                ]);
+                    $arr = response([
+                        'status' => true,
+                        'message' => 'Пароль был успешно изменён'
+                    ]);
 
-            } catch (\Exception $ex) {
-                $msg = $ex->getMessage();
-                $arr = response([
+                } catch (Exception $ex) {
+                    $msg = $ex->getMessage();
+                    $arr = response([
+                        'status' => false,
+                        'message' => $msg
+                    ]);
+                }
+
+            } else {
+                return response([
                     'status' => false,
-                    'message' => $msg
+                    'message' => 'Сроки входа (регистрации) были нарушены'
                 ]);
             }
-
         } else {
-            return response([
+            $arr = response([
                 'status' => false,
-                'message' => 'Сроки входа (регистрации) были нарушены'
+                'message' => 'Вы больше не можете изменить пароль'
             ]);
         }
         return $arr;

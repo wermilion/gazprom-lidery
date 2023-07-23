@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Validator::extend('cyrillic', function ($attribute, $value) {
-            return preg_match(pattern: '/^[?!,.а-яА-ЯёЁ0-9\s]+$/u', subject: $value);
+            return preg_match(pattern: '/^[?!--,.а-яА-ЯёЁ0-9\s]+$/u', subject: $value);
         });
 
         Paginator::useTailwind();

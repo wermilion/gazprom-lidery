@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::table('stages', function (Blueprint $table) {
             $table->dropColumn('activity');
+            $table->dropColumn('slug');
         });
     }
 
@@ -22,6 +23,7 @@ return new class extends Migration {
     {
         Schema::table('stages', function (Blueprint $table) {
             $table->boolean('activity')->default(false);
+            $table->string('slug');
         });
     }
 };

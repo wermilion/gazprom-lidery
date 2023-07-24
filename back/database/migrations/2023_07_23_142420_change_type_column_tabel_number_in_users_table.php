@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('stages', function (Blueprint $table) {
-            $table->dropColumn('activity');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('tabel_number')->change();
         });
     }
 
@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('stages', function (Blueprint $table) {
-            $table->boolean('activity')->default(false);
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('tabel_number')->change();
         });
     }
 };

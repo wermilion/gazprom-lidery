@@ -23,7 +23,7 @@
                 <div class="selector_wraper"   >
                     <select list="selector" foe="selector"  v-model="branch" class="select">
                         <option disabled  value="">Ваш филиал</option>
-                        <option v-for="(item, index) in items" :key="index" >{{ item.title }}</option>
+                        <option v-for="(item, index) in items" :key="index" >{{ item.name }}</option>
                     </select>
                 </div>
             </div>
@@ -105,7 +105,8 @@ export default{
         fetchData() {
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/branches')
                 .then(response => {
-                    this.items = response.data
+                    this.items = response.data.data
+                  
                 })
                 .catch(error => {
                     console.error(error);

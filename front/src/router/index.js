@@ -15,54 +15,95 @@ const routes = [
     path:'/',
     name:'MainPage',
     component: MainPage,
+    meta:{
+      title: 'Лидеры Газпрома'
+    }
     
   },
   {
     path:'/questionnaire_page',
     name:'QuestionnairePage',
     component:QuestionnairePage,
-    meta: { shouldRenderBlock: true }
+    meta: { 
+      title:'Анкета | Лидеры Газпрома',
+      shouldRenderBlock: true 
+    }
 
   },
   {
     path:'/task_page',
     name:'TaskPage',
     component:QuestionnairePage,
-    meta: { shouldRenderBlock: true }
+    meta: { 
+      title:'Задача | Лидеры Газпрома',
+      shouldRenderBlock: true 
+    }
   },
   {
-    path:'/managment_page',
+    path:'/management_page',
     name:'ManagmentPage',
     component:QuestionnairePage,
-    meta: { shouldRenderBlock: true }
+    meta: { 
+      title:'Управленческие решения | Лидеры Газпрома',
+      shouldRenderBlock: true 
+    }
   },
   {
     path:'/entrance',
     name:'EntranceBlock',
-    component: Entrance
+    component: Entrance,
+    meta:{
+      title: 'Авторизация | Лидеры Газпрома'
+    }
   },
   {
     path:'/changing_the_password',
     name:'ChangingThePassword',
-    component: ChangingThePassword
+    component: ChangingThePassword,
+    meta:{
+      title: 'Смена пароля | Лидеры Газпрома'
+    }
   },
   {
     path:'/stages_competition',
     name:'StagesCompetitionBlock',
     component: StagesCompetition,
-    meta: { shouldRenderBlock: true }
+    meta: { 
+      title: 'Этапы конкурса | Лидеры Газпрома',
+      shouldRenderBlock: true 
+    }
   },
   {
     path:'*',
     name:'Page404',
-    component: Page404
+    component: Page404,
+     meta:{
+      title: 'Ошибка 404 | Лидеры Газпрома'
+    }
   },
 ]
+
+
+
+
+
+
+
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
+
+
+router.beforeEach((to,from, next) => {
+  
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+
+  next();
+});
 
 export default router

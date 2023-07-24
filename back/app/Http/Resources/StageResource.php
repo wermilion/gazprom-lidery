@@ -19,7 +19,7 @@ class StageResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'desc' => $this->desc,
+            'desc' => $this->when($this->name != 'Регистрация', $this->desc),
             'instruction' => $this->when($this->name != 'Регистрация', $this->instruction),
             'image' => $this->image,
             'date_start' => $this->when($this->name != 'Регистрация', $this->date_start),

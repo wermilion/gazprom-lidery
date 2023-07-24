@@ -29,7 +29,7 @@ class ProfileAuthController extends Controller
             'status' => true,
             'id' => Auth::user()->id,
             'custom_password' => (bool)Auth::user()->custom_password,
-        ]);
+        ])->setStatusCode(200);
     }
 
     public function logout(Request $request): \Illuminate\Foundation\Application|Response|Application|ResponseFactory
@@ -40,7 +40,7 @@ class ProfileAuthController extends Controller
         return response([
             'status' => true,
             'message' => 'Выход из системы выполнен успешно'
-        ]);
+        ])->setStatusCode(200);
     }
 
     public function changePassword(ChangePasswordRequest $request): \Illuminate\Foundation\Application|Response|Application|ResponseFactory
@@ -69,7 +69,7 @@ class ProfileAuthController extends Controller
                     $arr = response([
                         'status' => true,
                         'message' => 'Пароль был успешно изменён'
-                    ]);
+                    ])->setStatusCode(200);
 
                 } catch (Exception $ex) {
                     $msg = $ex->getMessage();
@@ -78,18 +78,17 @@ class ProfileAuthController extends Controller
                         'message' => $msg
                     ]);
                 }
-
             } else {
                 return response([
                     'status' => false,
                     'message' => 'Сроки входа (регистрации) были нарушены'
-                ]);
+                ])->setStatusCode(403);
             }
         } else {
             $arr = response([
                 'status' => false,
                 'message' => 'Вы больше не можете изменить пароль'
-            ]);
+            ])->setStatusCode(403);
         }
         return $arr;
     }

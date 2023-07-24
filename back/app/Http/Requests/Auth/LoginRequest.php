@@ -28,28 +28,15 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    public function failedValidation(Validator $validator): void
-    {
-        if ($this->expectsJson()) {
-            throw new HttpResponseException(
-                response([
-                    'status' => false,
-                    'errors' => 'Были введены некорректные данные.'
-                ])
-            );
-        }
-    }
-
-    /**
-     * @throws ValidationException
-     */
     public function authenticate(): void
     {
         if (!Auth::attempt($this->only('tabel_number', 'password'), $this->boolean('remember'))) {
-            throw ValidationException::withMessages([
-                'status' => false,
-                'message' => 'Ошибка авторизации'
-            ]);
+            throw new HttpResponseException(
+                response([
+                    'status' => false,
+                    'message' => 'Ошибка авторизации'
+                ])->setStatusCode(401)
+            );
         }
     }
 }

@@ -51,12 +51,7 @@ export  default{
                         router.push('/changing_the_password')
                     }
                     this.id=response.data.id
-                     axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/csrf-cookie').then(response => {
-                        console.log(response)
-                        axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
-                    }).catch(error => {
-                        console.error(error);
-                    });
+                    
                 })
                 .catch(error => { this.status = error.status })
         },

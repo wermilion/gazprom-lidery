@@ -16,7 +16,7 @@
 
 
 <script>
-
+import axios from "axios"
 import FooterBlock from './components/Footer/FooterBlock.vue';
 import HeaderBlock from './components/Header/HeaderBlock.vue';
 export default{
@@ -25,7 +25,14 @@ export default{
     FooterBlock,
     HeaderBlock,
   },
-   
+    mounted() {
+      axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/csrf-cookie').then(response => {
+      console.log(response)
+      axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
+      }).catch(error => {
+      console.error(error);
+    });
+  }
 
 }
 </script>

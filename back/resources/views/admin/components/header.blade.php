@@ -1,4 +1,4 @@
-<div class="flex ml-60 p-4 justify-between items-center dark:bg-zinc-800 font-HeliosCond text-white">
+<div class="flex ml-60 p-4 justify-between items-center bg-zinc-800 font-HeliosCond text-white">
     <div class="flex items-center">
         <h1 class="text-2xl ml-4">Административная панель</h1>
         @yield('header-content')

@@ -78,17 +78,6 @@
                        type="datetime-local" value="{{old('date_end', $stage->date_end)}}">
             </div>
         </div>
-        <div class="mt-4">
-            <label for="activity">Вкл/выкл</label>
-            <input
-                hidden
-                value="0" name="activity">
-            <input
-                @checked(old('activity', $stage->activity))
-                value="1"
-                id="activity" type="checkbox" name="activity"
-                class="border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 shadow-sm">
-        </div>
         <button
             type="submit"
             class="mt-4 bg-gazprom-500 uppercase hover:bg-gazprom-400 py-2 px-3 text-white disabled:opacity-25">

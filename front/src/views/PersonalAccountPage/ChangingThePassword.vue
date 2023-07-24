@@ -6,16 +6,20 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input v-model="password1"  @mouseover="showPopup" @mouseout="hidePopup" type="text"  placeholder="Введите пароль ">
+                    <input v-model="password1"  @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input  v-model="password2" class="one" type="text" placeholder="Повторите новый пароль"> 
+                    <input  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
-            <button ><router-link class="button" to="/stages_competition">Сохранить</router-link></button>
+            <button v-on:click="CreateUserPasswprd" :disabled="castom_pasword">Сохранить</button>
         </div>
     </section>
 </template>
 
 <script>
+import router from "@/router"
+import axios from "axios"
+
+
 export default{
     name:'ChangingThePassword',
     data(){
@@ -23,7 +27,8 @@ export default{
             isPopupVisible: false,
             SruvnPassword:false,
             password1:'',
-            password2:''
+            password2:'',
+            castom_pasword:true
         }
     },
     methods:{
@@ -32,7 +37,23 @@ export default{
         },
         hidePopup() {
             this.isPopupVisible = false;
-        }
+        },
+         CreateUserPasswprd() {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/changePassword', {
+                new_password: this.password1,
+				confirm_password:this.password2
+            })
+                .then(response => {
+                    if(this.password1==this.password2){
+                        console.log(response)
+                        this.castom_pasword=false
+                        router.push('/stages_competition')
+                    }
+                  
+                })
+                .catch(error => {error})
+        },
+
     },
     computed:{
        

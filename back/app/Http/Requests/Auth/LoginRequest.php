@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -31,18 +32,15 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * Attempt to authenticate the request's credentials.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function authenticate(): void
     {
         if (!Auth::attempt($this->only('tabel_number', 'password'), $this->boolean('remember'))) {
-            throw ValidationException::withMessages([
-                'status' => false,
-                'message' => 'Ошибка авторизации'
-            ]);
+            throw new HttpResponseException(
+                response([
+                    'status' => false,
+                    'message' => 'Ошибка авторизации'
+                ])->setStatusCode(401)
+            );
         }
     }
 }

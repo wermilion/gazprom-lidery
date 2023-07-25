@@ -6,11 +6,11 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input v-model="password1" @input="checkPasswordsMatch"  @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
+                    <input v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input @input="checkPasswordsMatch"   v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
+                    <input    v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
-            <button v-on:click="CreateUserPasswprd" :disabled="castom_pasword">Сохранить</button>
+            <button v-on:click="CreateUserPasswprd" >Сохранить</button>
         </div>
     </section>
 </template>
@@ -28,15 +28,10 @@ export default{
             SruvnPassword:false,
             password1:'',
             password2:'',
-            castom_pasword:true
+            castom_pasword:''
         }
     },
     methods:{
-        checkPasswordsMatch() {
-            if(this.password1==this.password2){
-                this.castom_pasword=false
-            }
-        },
         showPopup() {
             this.isPopupVisible = true;
         },
@@ -49,8 +44,10 @@ export default{
 				confirm_password:this.password2
             })
                 .then(response => {
-                    console.log(response)
-                    router.push('/stages_competition')
+                    if(response.status){
+                       router.push('/stages_competition') 
+                    }
+                    
                 })
                 .catch(error => {error})
         },

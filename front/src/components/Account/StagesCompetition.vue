@@ -32,86 +32,16 @@
 </template>
 
 <script>
+import axios from "axios"
 import GreadBlock from './items.vue';
+
+
 export default{
     name:'StagesCompetitionBlock',
     data: () => {
         return {
             
-            items: [
-                {
-                    title: "Регистрация",
-                    img: '/image/stages/Registration.svg',
-                    text:"",
-                    button:"",
-                    term: "ДОСТУПНО",
-                    info: "",
-                    statys: "inactive",
-                    router:""
-                },
-                {
-                    title: "Анкета и видеоинтервью",
-                    img: '/image/stages/Questionnaire.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "Приступить",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "active",
-                    router: "QuestionnairePage"
-                },
-                {
-                    title: "Дистанционный этап",
-                    img: '/image/stages/Remote.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "inactive",
-                    router: ""
-                },
-                {
-                    title: "Управленческие решения",
-                    img: '/image/stages/Management.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "Приступить",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "active",
-                    router: "ManagmentPage"
-                },
-                {
-                    title: "Задачи",
-                    img: '/image/stages/Task.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: " Приступить",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "active",
-                    router: "TaskPage"
-                },
-                {
-                    title: "Очный этап",
-                    img: '/image/stages/InPerson.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "inactive",
-                    router: ""
-                },
-                {
-                    title: "Финал",
-                    img: '/image/stages/Final.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys:"inactive", 
-                    router: ""
-
-                },
-
-            ],
+            items: []
         }
     },
     components:{
@@ -124,7 +54,23 @@ export default{
           lastItem() {
             return this.items[this.items.length - 1];
         }
-    }
+
+    },
+    methods:{
+        GetStages() {
+            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/stages')
+                .then(response => {
+                    this.items = response.data
+                    console.log(this.items)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+    },
+     mounted() {
+        this.GetStages()
+    },
 };
 
 </script>

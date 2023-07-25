@@ -28,7 +28,7 @@ export default{
     mounted() {
       axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/csrf-cookie').then(response => {
       console.log(response)
-      axios.defaults.headers.common['XSRF-TOKEN'] = document.cookie.split('=')[1];
+      axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
       }).catch(error => {
       console.error(error);
     });

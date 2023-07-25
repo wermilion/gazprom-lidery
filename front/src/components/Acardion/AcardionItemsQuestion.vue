@@ -2,17 +2,23 @@
     <section>
         <div @click="Accordion()" class="Shell">
             <button  class="head">
-                <h3 >{{ item.title }}</h3>
+                <p >{{ item.title }}</p>
                 <div>
                     <!-- <span class="one"></span>
                     <span class="two"></span> -->
                     
-                    <img v-bind:style="{ transform: isActive ? 'rotate(135deg)' : 'rotate(90deg)' }"  class="img1"  src="/image/Line 5.png" alt="">
-                    <img v-bind:style="{ transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)' }"  class="img2" src="/image/Line 5.png" alt="">
+                    
+                    <img  v-bind:style="{ transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)' }"  class="img2" src="/image/Frame 3.svg" alt="">
                 </div>
             </button>
-            <div v-show="isActive === true">
-             
+            <div class="inside" v-show="isActive === true">
+                <p v-if="item.p">{{ item.p }}</p>
+                <ul>
+                    <li v-if="item.li1">{{ item.li1 }}</li>
+                    <li v-if="item.li2">{{ item.li2 }}<router-link class="router-link" to="" v-if="item.router">{{ item.router }}</router-link></li>
+                    <li v-if="item.li3">{{ item.li3 }}</li>
+                    <li v-if="item.li4">{{ item.li4 }}</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -21,7 +27,7 @@
 
 <script>
 export default {
-    name: 'AcardionItems',
+    name: 'AcardionItemsQuestion',
     props: {
         item: Object
     },
@@ -53,9 +59,11 @@ section{
             margin: 0 auto;
             background-color: #F5F5F5;
             font-size: 32px;
-            h3{
-                padding-left: 40px;
-                font-weight: normal;
+            p{
+                padding-left: 16px;
+                font-family: HeliosCond;
+                font-size: 32px;
+                font-weight: 400;
                 color: #000;
             }
             div{
@@ -67,13 +75,7 @@ section{
                 border-radius: 50%;
                 width: 62px;
                 height: 62px;
-                img{
-                    position: absolute;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                }
+                
                 span{
                     flex: 2;
                     background-color: #000;
@@ -83,13 +85,25 @@ section{
                 }
             }
         }
-        button:hover{
-           
-            
+        .inside{
+            padding: 0  80px 40px 40px;
+            p{
+                margin: 0;
+                padding: 0;
+                font-size: 32px;
+                font-weight: 400;
+            }
+            li{
+                margin-left:40px ;
+                font-size: 32px;
+                font-weight: 400;
+                text-align: justify;
+                .router-link{
+                    margin-left: 5px;
+                }
+            }
         }
-        p{    
-            padding: 40px ;
-        }
+        
         
     }
 }

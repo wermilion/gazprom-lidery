@@ -6,9 +6,9 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input v-model="password1"  @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
+                    <input v-model="password1" @input="checkPasswordsMatch"  @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
+                    <input @input="checkPasswordsMatch"   v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
             <button v-on:click="CreateUserPasswprd" :disabled="castom_pasword">Сохранить</button>
         </div>
@@ -32,6 +32,11 @@ export default{
         }
     },
     methods:{
+        checkPasswordsMatch() {
+            if(this.password1==this.password2){
+                this.castom_pasword=false
+            }
+        },
         showPopup() {
             this.isPopupVisible = true;
         },
@@ -44,12 +49,8 @@ export default{
 				confirm_password:this.password2
             })
                 .then(response => {
-                    if(this.password1==this.password2){
-                        console.log(response)
-                        this.castom_pasword=false
-                        router.push('/stages_competition')
-                    }
-                  
+                    console.log(response)
+                    router.push('/stages_competition')
                 })
                 .catch(error => {error})
         },
@@ -141,22 +142,18 @@ section{
         }
         button{
             background: #064677;
-            margin-top: 90px;
-            .button{
-                color: white;
-                margin: 16px 32px;
-                font-size: 48px;
-
-            }
+            padding: 16px 32px;
+            color: white;    
+            font-size: 48px;
+            margin: 20px 0 44px;
+           
         }
         button:hover{
             background: white;
             border: 4px solid #3394CE;
-            .button{
-                color: #064677;
+            color: #064677;
                 
-                
-            }
+           
         }
     }
    

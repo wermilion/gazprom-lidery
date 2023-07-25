@@ -14,12 +14,11 @@ class Stage extends Model
     protected $fillable = [
         'id',
         'name',
-        'slug',
         'instruction',
         'date_start',
         'date_end',
         'stage_status_id',
-        'activity',
+        'desc'
     ];
 
     public function stage_status()

@@ -60,7 +60,32 @@ export default{
         GetStages() {
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/stages')
                 .then(response => {
-                    this.items = response.data.data
+                    this.items = response.data.data.map((item) => {
+                        let to = null
+                        switch (item.id) {
+                            case '2':
+                                to = {
+                                    name: 'QuestionnairePage'
+                                }
+                                break;
+                            
+                            case '3':
+                                 to = {
+                                    name: 'ManagmentPage'
+                                }
+                                break;
+                            
+                            case '4':
+                                to = {
+                                    name: 'TaskPage'
+                                }
+                                break;
+                        }
+                        return {
+                            ...item,
+                            to,
+                        }
+                    })
                     console.log(this.items)
                 })
                 .catch(error => {
@@ -145,10 +170,11 @@ section{
                 width: 49%;
                 margin: 0 62px 0 92px;
                 p{
-                    
+                    font-size: 32px;
                     width: 767px;
                     height: 202px;
                     border: 1px solid #000;
+                    text-align: center;
                 }
             }
             .botton{

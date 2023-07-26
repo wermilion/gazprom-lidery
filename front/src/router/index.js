@@ -21,7 +21,7 @@ const routes = [
     
   },
   {
-    path:'/questionnaire_page',
+    path:'/questionnaire',
     name:'QuestionnairePage',
     component:QuestionnairePage,
     meta: { 
@@ -31,7 +31,7 @@ const routes = [
 
   },
   {
-    path:'/task_page',
+    path:'/task',
     name:'TaskPage',
     component:QuestionnairePage,
     meta: { 
@@ -40,7 +40,7 @@ const routes = [
     }
   },
   {
-    path:'/management_page',
+    path:'/management',
     name:'ManagmentPage',
     component:QuestionnairePage,
     meta: { 
@@ -49,7 +49,7 @@ const routes = [
     }
   },
   {
-    path:'/entrance',
+    path:'/login',
     name:'EntranceBlock',
     component: Entrance,
     meta:{
@@ -57,7 +57,7 @@ const routes = [
     }
   },
   {
-    path:'/changing_the_password',
+    path:'/changing_password',
     name:'ChangingThePassword',
     component: ChangingThePassword,
     meta:{
@@ -65,7 +65,7 @@ const routes = [
     }
   },
   {
-    path:'/stages_competition',
+    path:'/stages',
     name:'StagesCompetitionBlock',
     component: StagesCompetition,
     meta: { 

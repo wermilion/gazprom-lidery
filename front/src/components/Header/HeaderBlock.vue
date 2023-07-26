@@ -59,12 +59,12 @@ export default{
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/profile')
                 .then(response => {
                     console.log(response.data.data) 
-                    router.push('/stages_competition')
+                    router.push('/stages')
                     
                 })
                 .catch(error => {
                     console.error(error);
-                    router.push('/entrance')
+                    router.push('/login')
                 });
         },
         LogoutPost(){
@@ -158,8 +158,7 @@ section{
             border: 3px solid #064677;
             background: #FFF;
             position: absolute;
-            top: 340px;
-            left: 587px;
+            
             z-index: 1000;
             width: 743px;
             height: 400px;

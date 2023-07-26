@@ -1,21 +1,21 @@
 <template>
     <section>
-        <h2>ДАННЫЕ ЗА  2023 В ЦИФРАХ</h2>
+        <h2>КОНКУРС “ЛИДЕРЫ ГАЗПРОМ ТРАНСГАЗ ТОМСК” В ЦИФРАХ</h2>
         <div class="shell">
             <div class="shellOne">
                 <div class="first">
                     <b>14</b>
-                    <p> РЕГИОНОВ</p>
+                    <p> РЕГИОНОВ РФ</p>
                 </div>
                 <div class="second">
-                    <b>10 000</b>
-                    <p> УПРАВЛЕНЦЕВ</p>
+                    <b>&gt; 10 000</b>
+                    <p> УЧАСТНИКОВ</p>
                 </div>
             </div>
             <div class="shellTwo">
                 <div class="third">
-                    <b>25</b>
-                    <p> ПРИЗОВЫХ МЕСТ</p>
+                    <b>50</b>
+                    <p> ЛИДЕРОВ</p>
                 </div>
                 <div class="fourth">
                     <b>10</b>

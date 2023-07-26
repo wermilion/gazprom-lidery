@@ -10,7 +10,7 @@
                 <input  :class="{ 'eror_password': !status }" v-model="password" type="password" placeholder="Пароль"> 
                 <div class="shell_checkbox">
                     <div v-on:click="Remember" class="checkbox" >
-                        <img v-if="remember" src="/image/checkbox.png" alt="">
+                        <img v-if="remember==1" src="/image/checkbox.png" alt="">
                     </div>
                     <b>Запомнить меня</b>
                 </div>
@@ -28,7 +28,7 @@ export  default{
     name: "EntranceBlock",
     data() {
         return {
-            remember: false,
+            remember: 0,
             tabel_number:'',
             password:'',
             status:true,
@@ -38,7 +38,12 @@ export  default{
     },
     methods:{
         Remember(){
-            this.remember=!this.remember
+            if(this.remember ==0){
+                this.remember=1
+            }else{
+                this.remember = 0
+            }
+            
         },
        POST() {
             axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', {
@@ -48,7 +53,7 @@ export  default{
                     if (response.data.custom_password === true) {
                         router.push('/stages_competition')
                     } else {
-                        router.push('/changing_the_password')
+                        router.push(' /changing_the_password')
                     }
                     this.id=response.data.id
                     

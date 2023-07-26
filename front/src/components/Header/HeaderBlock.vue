@@ -1,6 +1,6 @@
 <template>
     <section>
-        <router-link to=""><img src="/image/GazpromLog.svg" alt="logo"></router-link>
+        <router-link to="/"><img src="/image/GazpromLog.svg" alt="logo"></router-link>
         <template v-if="$route.name == 'MainPage' || $route.name == 'Page404' ">
          
             <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
@@ -117,8 +117,8 @@ section{
         border: 3px solid #064677;
         background: #FFF;
         position: absolute;
-        top:25%;
-        left: 30%;
+        top: 340px;
+        left: 587px;
         z-index: 1000;
         width: 743px;
         height: 400px;

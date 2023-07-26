@@ -8,9 +8,8 @@
        <template v-if="$route.name!='EntranceBlock' && $route.name != 'ChangingThePassword'">
         <FooterBlock class="FooterBlock"/>
       </template>
-    
     </footer>
-   
+    <Cookeis class="Cookeis" ></Cookeis>
   </div>
 </template>
 
@@ -19,11 +18,13 @@
 import axios from "axios"
 import FooterBlock from './components/Footer/FooterBlock.vue';
 import HeaderBlock from './components/Header/HeaderBlock.vue';
+import Cookeis from './components/Cookeis/Cookeis.vue'
 export default{
   
   components:{
     FooterBlock,
     HeaderBlock,
+    Cookeis
   },
     mounted() {
       axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/csrf-cookie').then(response => {

@@ -60,7 +60,7 @@ export default{
         GetStages() {
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/stages')
                 .then(response => {
-                    this.items = response.data
+                    this.items = response.data.data
                     console.log(this.items)
                 })
                 .catch(error => {

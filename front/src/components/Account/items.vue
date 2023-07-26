@@ -73,9 +73,10 @@ section {
                 width: 55%;
             }
             p{
+                font-size: 20px;
                 border: 1px solid #000;
-                font-size: 10px;
                 height: 176px;
+                text-align: center;
             }
 
 

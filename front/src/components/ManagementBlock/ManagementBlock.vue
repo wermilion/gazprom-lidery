@@ -71,7 +71,7 @@ export default {
             return value && value.length > 50 && value.length < 1000;
         },
          POST() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/managementDecision', {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/management-decision', {
                 chectproblem:this.items.value[0],
                 management_task: this.items.value[1],
 				solution: this.items.value[2],

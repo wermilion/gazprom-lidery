@@ -39,13 +39,13 @@ export default{
             this.isPopupVisible = false;
         },
          CreateUserPasswprd() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/changePassword', {
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {
                 new_password: this.password1,
 				confirm_password:this.password2
             })
                 .then(response => {
                     if(response.status){
-                       router.push('/stages_competition') 
+                       router.push('/stages') 
                     }
                     
                 })

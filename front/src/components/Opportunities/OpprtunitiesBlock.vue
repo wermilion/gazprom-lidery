@@ -51,6 +51,7 @@ section{
         margin-top: 112px;
     }
     div{
+        
         display: flex;
         width: 100%;
         justify-content: space-between;

@@ -51,9 +51,9 @@ export  default{
             })
                 .then(response => {
                     if (response.data.custom_password === true) {
-                        router.push('/stages_competition')
+                        router.push('/stages')
                     } else {
-                        router.push(' /changing_the_password')
+                        router.push(' /changing_password')
                     }
                     this.id=response.data.id
                     

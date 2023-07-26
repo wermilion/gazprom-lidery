@@ -24,8 +24,8 @@ class StageResource extends JsonResource
             'image' => $this->image,
             'date_start' => $this->when($this->name != 'Регистрация', $this->date_start),
             'date_end' => $this->when($this->name != 'Регистрация', $this->date_end),
-            'status' => $this->when(ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(), $this->stage_status->status_name),
+            /*'status' => $this->when(ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(), $this->stage_status->status_name),
             'result' => $this->when(!ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(), ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))),
-        ];
+        */];
     }
 }

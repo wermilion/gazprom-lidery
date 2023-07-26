@@ -1,22 +1,22 @@
 <template>
-    <section :class="item.statys">
+    <section :class="item.activity_status">
         <div class="contenerStage" >
             <div class="top " >
-                <h2>{{ item.title }}</h2>
+                <h2>{{ item.name }}</h2>
             </div>
             <div class="between">
                 <div class="text">
-                    <template v-if="item.text">
-                        <p>{{ item.text }}</p>
+                    <template v-if="item.desc">
+                        <p>{{ item.desc }}</p>
                     </template>  
                 </div>
                 
-                <img :src="item.img" alt="">
+                <img :src="item.image" alt="">
             </div>
             <div class="botton">
                 <div class="botton_under">
-                    <template v-if="item.term">
-                        <p class="term">{{ item.term }}</p> 
+                    <template v-if="item.status">
+                        <p class="term">{{ item.status}}</p> 
                     </template>
                     <template v-if="item.info">
                         <p class="term1">{{ item.info }}</p>

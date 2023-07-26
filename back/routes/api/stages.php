@@ -13,7 +13,7 @@ Route::/*middleware('auth:sanctum')->*/prefix('/stages')->name('api.stages.')->g
 
     Route::post('/form', [StageController::class, 'form'])->name('form');
 
-    Route::post('/managementDecision', [StageController::class, 'managementDecision'])->name('managementDecision');
+    Route::post('/management-decision', [StageController::class, 'managementDecision'])->name('management-decision');
 
     Route::post('/challenge', [StageController::class, 'challenge'])->name('challenge');
 

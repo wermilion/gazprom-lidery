@@ -28,7 +28,7 @@ class StageController extends Controller
     {
         $currentTime = Carbon::now();
 
-        $stages = Stage::query()->orderBy('date_start')->where('activity', false)->get();
+        $stages = Stage::query()->orderBy('date_start')->get();
 
         foreach ($stages as $stage) {
             $stage->date_start <= $currentTime && $currentTime < $stage->date_end ? $stage->stage_status_id = 1 : $stage->stage_status_id = 2;
@@ -71,18 +71,18 @@ class StageController extends Controller
                 return response([
                     'status' => true,
                     'message' => 'Данные успешно отправлены'
-                ]);
+                ])->setStatusCode(200);
             } else {
                 return response([
                     'status' => false,
                     'message' => 'Вы уже проходили этот этап'
-                ]);
+                ])->setStatusCode(403);
             }
         } else {
             return response([
                 'status' => false,
                 'message' => 'Этот этап Вам недоступен'
-            ]);
+            ])->setStatusCode(403);
         }
     }
 
@@ -115,18 +115,18 @@ class StageController extends Controller
                 return response([
                     'status' => true,
                     'message' => 'Данные успешно отправлены'
-                ]);
+                ])->setStatusCode(200);
             } else {
                 return response([
                     'status' => false,
                     'message' => 'Вы уже проходили этот этап'
-                ]);
+                ])->setStatusCode(403);
             }
         } else {
             return response([
                 'status' => false,
                 'message' => 'Этот этап Вам недоступен'
-            ]);
+            ])->setStatusCode(403);
         }
     }
 
@@ -155,18 +155,18 @@ class StageController extends Controller
                 return response([
                     'status' => true,
                     'message' => 'Данные успешно отправлены'
-                ]);
+                ])->setStatusCode(200);
             } else {
                 return response([
                     'status' => false,
                     'message' => 'Вы уже проходили этот этап'
-                ]);
+                ])->setStatusCode(403);
             }
         } else {
             return response([
                 'status' => false,
                 'message' => 'Этот этап Вам недоступен'
-            ]);
+            ])->setStatusCode(403);
         }
     }
 }

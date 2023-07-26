@@ -9,15 +9,15 @@ class UserFilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'tabel_number' => ['nullable', 'integer'],
-            'branch_id' => ['nullable', 'integer']
+            'tabel_number' => ['nullable', 'digits_between:1,9'],
+            'branch_id' => ['nullable', 'numeric']
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'tabel_number.integer' => 'Поле должно состоять только из цифр.',
+            'tabel_number.digits_between' => 'Поле должно состоять только из цифр и быть не больше 9 цифр.',
         ];
     }
 }

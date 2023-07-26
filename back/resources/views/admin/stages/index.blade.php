@@ -20,15 +20,6 @@
                                 </span>
                             </div>
                             <div>
-                                <span>Статус по активности:
-                                    @if($stage->activity)
-                                        Доступно
-                                    @else
-                                        Недоступно
-                                    @endif
-                                </span>
-                            </div>
-                            <div>
                                 <span>Описание этапа: {{$stage->desc}}</span>
                             </div>
                             <div class="container mt-4">

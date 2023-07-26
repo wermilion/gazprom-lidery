@@ -11,6 +11,7 @@ use App\Models\StageStatus;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Str;
 
 class DatabaseSeeder extends Seeder
@@ -51,14 +52,14 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'tabel_number' => '1234',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'role_id' => 2,
         ]);
 
         User::factory()->create([
             'tabel_number' => '23412',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'name' => 'Василий',
             'surname' => 'Игнатович',
@@ -70,7 +71,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'tabel_number' => '51423',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'name' => 'Богдан',
             'surname' => 'Мухатдисов',
@@ -82,7 +83,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'tabel_number' => '34215',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'name' => 'Карина',
             'surname' => 'Бочарова',
@@ -94,7 +95,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'tabel_number' => '23142',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'name' => 'Анна',
             'surname' => 'Шкарбань',
@@ -106,7 +107,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'tabel_number' => '12234',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'name' => 'Анастасия',
             'surname' => 'Тарасовец',
@@ -118,7 +119,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'tabel_number' => '12345',
-            'password' => \Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
+            'password' => Hash::make('password')/*'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'*/, // password
             'custom_password' => true,
             'name' => 'Вячеслав',
             'surname' => 'Каратаев',
@@ -143,7 +144,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Регистрация',
-            'slug' => Str::studly(Str::slug('регистрация')),
             'desc' => fake()->text('200'),
             'instruction' => 'Зарегистрироваться на сайте Лидеры Газпрома.',
             'image' => '/image/stages/Registration.svg',
@@ -154,7 +154,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Анкета и видеоинтервью',
-            'slug' => Str::studly(Str::slug('анкета и видеоинтервью')),
             'desc' => fake()->text('200'),
             'instruction' => 'Пройти анкетирование и загрузить видеоинтервью.',
             'image' => '/image/stages/Questionnaire.svg',
@@ -165,7 +164,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Дистанционный этап',
-            'slug' => Str::studly(Str::slug('дистанционный этап')),
             'desc' => fake()->text('200'),
             'instruction' => 'Пройти дистанционные тесты на сайте РСВ.',
             'image' => '/image/stages/Remote.svg',
@@ -176,7 +174,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Управленческие решения',
-            'slug' => Str::studly(Str::slug('управленческие решения')),
             'desc' => fake()->text('200'),
             'instruction' => 'Описать управленческое решение.',
             'image' => '/image/stages/Management.svg',
@@ -187,7 +184,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Задача',
-            'slug' => Str::studly(Str::slug('задача')),
             'desc' => fake()->text('200'),
             'instruction' => 'Решить задачу.',
             'image' => '/image/stages/Task.svg',
@@ -198,7 +194,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Очный этап',
-            'slug' => Str::studly(Str::slug('очный этап')),
             'desc' => fake()->text('200'),
             'instruction' => 'Очный этап будет проходить по адресу....',
             'image' => '/image/stages/InPerson.svg',
@@ -209,7 +204,6 @@ class DatabaseSeeder extends Seeder
 
         Stage::factory()->create([
             'name' => 'Финал',
-            'slug' => Str::studly(Str::slug('финал')),
             'desc' => fake()->text('200'),
             'instruction' => 'Финал будет проходить по адресу....',
             'image' => '/image/stages/Final.svg',

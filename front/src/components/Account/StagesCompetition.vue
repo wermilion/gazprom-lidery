@@ -3,16 +3,16 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
         </div> 
-        <div :class="lastItem.statys" class="GreadBlock6">
+        <div :class="lastItem.activity_status" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
-                    <h2>{{ lastItem.title }}</h2>
+                    <h2>{{ lastItem.name }}</h2>
                     <template v-if="lastItem.button">
                         <button>{{ lastItem.button }}</button>
                     </template>
                     <div class="botton_under">
-                        <template v-if="lastItem.term">
-                            <p class="term">{{ lastItem.term }}</p> 
+                        <template v-if="lastItem.status">
+                            <p class="term">{{ lastItem.status }}</p> 
                         </template>
                         <template v-if="lastItem.info">
                             <p class="term1">{{ lastItem.info }}</p>
@@ -20,10 +20,10 @@
                     </div>
                 </div>
                 <div class="between">
-                    <p>{{ lastItem.text }}</p>
+                    <p>{{ lastItem.desc }}</p>
                 </div>
                 <div class="botton">
-                    <img :src="lastItem.img" alt="">
+                    <img :src="lastItem.image" alt="">
                 </div>
             </div> 
             

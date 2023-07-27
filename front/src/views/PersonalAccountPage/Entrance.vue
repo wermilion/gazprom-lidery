@@ -7,10 +7,10 @@
             <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
                 <input :class="{'eror_tabel_number': !status }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
-                <input  :class="{ 'eror_password': !status }" v-model="password" type="text" placeholder="Пароль"> 
+                <input  :class="{ 'eror_password': !status }" v-model="password" type="password" placeholder="Пароль"> 
                 <div class="shell_checkbox">
                     <div v-on:click="Remember" class="checkbox" >
-                        <img v-if="remember" src="/image/checkbox.png" alt="">
+                        <img v-if="remember==1" src="/image/checkbox.png" alt="">
                     </div>
                     <b>Запомнить меня</b>
                 </div>
@@ -28,16 +28,22 @@ export  default{
     name: "EntranceBlock",
     data() {
         return {
-            remember: false,
+            remember: 0,
             tabel_number:'',
             password:'',
             status:true,
+            id:''
             
         }
     },
     methods:{
         Remember(){
-            this.remember=!this.remember
+            if(this.remember ==0){
+                this.remember=1
+            }else{
+                this.remember = 0
+            }
+            
         },
        POST() {
             axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', {
@@ -45,10 +51,11 @@ export  default{
             })
                 .then(response => {
                     if (response.data.custom_password === true) {
-                        router.push('/stages_competition')
+                        router.push({name:'StagesCompetitionBlock'})
                     } else {
-                        router.push('/changing_the_password')
+                        router.push({name: 'ChangingThePassword'})
                     }
+                    this.id=response.data.id
                     
                 })
                 .catch(error => { this.status = error.status })

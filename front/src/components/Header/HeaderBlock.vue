@@ -1,10 +1,10 @@
 <template>
     <section>
-        <router-link to=""><img src="/image/GazpromLog.svg" alt="logo"></router-link>
+        <router-link to="/"><img src="/image/GazpromLog.svg" alt="logo"></router-link>
         <template v-if="$route.name == 'MainPage' || $route.name == 'Page404' ">
          
             <b>РЕГИСТРАЦИЯ НА ПЕРВЫЙ СЕЗОН НАЧНЕТСЯ <span>15 ОКТЯБРЯ</span> 2023 ГОДА</b>
-            <router-link class="router" to="/entrance">ЛИЧНЫЙ КАБИНЕТ</router-link>
+            <button v-on:click="GetLogin">ЛИЧНЫЙ КАБИНЕТ</button>
            
         </template>
         <template v-if="$route.meta.shouldRenderBlock">
@@ -14,26 +14,29 @@
             
             </div>       
         </template>
-        <div v-show="modalOpen" class="modal-wrapper">
-            <div class="model-content">
-                <div class="top">
-                  <button  v-on:click="closeModel" class="exst"></button>  
-                </div>
-                <div class="betwen">
-                    <b>Вы действительно хотите выйти?</b>
-                </div>
-                <div class="botton">
-                    <router-link  to="/"><button v-on:click="closeModel">Да</button></router-link>
-                    <button v-on:click="closeModel">Нет</button>
+        <div  v-show="modalOpen" class="modal-container" v-on:click.self="closeModel">
+            <div v-show="modalOpen" class="modal-wrapper">
+                <div class="model-content">
+                    <div class="top">
+                      <button  v-on:click="closeModel" class="exst"></button>  
+                    </div>
+                    <div class="betwen">
+                        <b>Вы действительно хотите выйти?</b>
+                    </div>
+                    <div class="botton">
+                        <button v-on:click="LogoutPost">Да</button>
+                        <button v-on:click="closeModel ">Нет</button>
+                    </div>
                 </div>
             </div>
-
-
         </div>
+        
     </section>
 </template>
 
 <script>
+import axios from "axios"
+import router from "@/router"
 
 export default{
     name: "HeaderBlock",
@@ -45,9 +48,38 @@ export default{
     methods: {
         openModel(){
             this.modalOpen=true
+            document.body.style.overflow = "hidden";
         },
+        
         closeModel(){
             this.modalOpen=false
+            document.body.style.overflow = "auto";
+        },
+        GetLogin() {
+            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/profile')
+                .then(response => {
+                    console.log(response.data.data) 
+                    router.push('/stages')
+                    
+                })
+                .catch(error => {
+                    console.error(error);
+                    router.push('/login')
+                });
+        },
+        LogoutPost(){
+            this.modalOpen = false
+            document.body.style.overflow = "auto";
+            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/logout', {
+            })
+                .then(response => {
+                    console.log(response)
+                    router.push('/')
+                })
+                .catch(error => { 
+                    console.log(error) 
+                    router.push('/')
+                })
         }
     }
 }
@@ -97,74 +129,84 @@ section{
         }
     }
     
-    .router{
-        background-color: #0079C2;
-        color: white;
-        font-weight: 700;
-        font-size: 32px;
-        line-height: 37px;
-        border-radius: 0px;
-        border: none;
-        padding: 10px 25px 10px 25px;
-        
-        
-    }
+ 
+    
     button{
         padding: 16px 24px;
         font-size: 32px;
+         font-weight: 700;
+        font-size: 32px;
+        line-height: 37px;
+        border: none;
     }
-    .modal-wrapper{
-        border: 3px solid #064677;
-        background: #FFF;
-        position: absolute;
-        top:25%;
-        left: 30%;
-        z-index: 1000;
-        width: 743px;
-        height: 400px;
-        .model-content{
-            width: 100%;
-            max-width: 641px;
-            margin: 31px auto;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            .betwen{
+    
+    .modal-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(244, 244, 244, 0.10);
+        backdrop-filter: blur(7.5px);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .modal-wrapper{
+        
+            border: 3px solid #064677;
+            background: #FFF;
+            position: absolute;
+            
+            z-index: 1000;
+            width: 743px;
+            height: 400px;
+            .model-content{
+                width: 100%;
+                max-width: 641px;
+                margin: 31px auto;
                 display: flex;
-                justify-content: center;
-                margin-bottom: 88px;
+                flex-direction: column;
+                height: 100%;
+                .betwen{
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 88px;
+                }
+                .top{
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 16px;
+                    .exst{
+                        background-image: url('/public/image/Group 36.png');
+                        background-color: white;
+                        background-size:cover ;
+                        width: 62px;
+                        height: 62px;
+                    }
+                    .exst:hover{
+                        background-image: url('/public/image/Group 36 (1).png');
+                    }
+                }
+                .botton{
+                    display: flex;
+                    justify-content: space-around;
+                    button{
+                        border: 4px solid #064677;
+                        background-color: white;
+                        color: #064677;
+
+                        padding: 8px 29px;
+                    }
+                    button:hover{
+                        background-color: #064677;
+                        color: white;
+                    }
+                }
             }
-            .top{
-                display: flex;
-                justify-content: flex-end;
-                margin-bottom: 16px;
-                .exst{
-                    background-image: url('/public/image/Group 36.png');
-                    background-color: white;
-                    background-size:cover ;
-                    width: 62px;
-                    height: 62px;
-                }
-                .exst:hover{
-                    background-image: url('/public/image/Group 36 (1).png');
-                }
-            }
-            .botton{
-                display: flex;
-                justify-content: space-around;
-                button{
-                    border: 4px solid #064677;
-                    background-color: white;
-                    color: #064677;
-                    
-                    padding: 8px 29px;
-                }
-                button:hover{
-                    background-color: #064677;
-                    color: white;
-                }
-            }
-        }
+    }
+
     }
   
     }

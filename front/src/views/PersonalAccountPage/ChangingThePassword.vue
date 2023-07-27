@@ -6,9 +6,9 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
+                    <input :class='{"erorPassword": errorPassword}' required aria-required="true" v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input    v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
+                    <input  required aria-required="true"  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
             <button v-on:click="CreateUserPasswprd" >Сохранить</button>
         </div>
@@ -26,9 +26,10 @@ export default{
         return{
             isPopupVisible: false,
             SruvnPassword:false,
+            errorPassword:false,
             password1:'',
             password2:'',
-            castom_pasword:''
+            
         }
     },
     methods:{
@@ -39,29 +40,37 @@ export default{
             this.isPopupVisible = false;
         },
          CreateUserPasswprd() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {
+            if(this.password1!=this.password2 || this.password1.length>8 || this.password2.length>8){
+                this.errorPassword=true
+            }else {
+                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {
                 new_password: this.password1,
 				confirm_password:this.password2
-            })
+                })
                 .then(response => {
-                    if(response.status){
-                       router.push('/stages') 
+                    if(response.data.status){
+                        router.push('/stages') 
+                    }else{
+                        this.errorPassword = true
                     }
                     
                 })
-                .catch(error => {error})
+                .catch(errors => {errors})
+            }
+            
         },
 
     },
-    computed:{
-       
-    }
+    
 
 }
 </script>
 
 
 <style lang="scss" scoped>
+.erorPassword{
+    border-bottom:5px  solid #F69F32;
+}
 section{
     display: flex;
     align-items: center;

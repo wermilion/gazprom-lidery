@@ -3,7 +3,7 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
         </div> 
-        <div :class="lastItem.activity_status" class="GreadBlock6">
+        <div v-if="lastItem" :class="lastItem.activity_status" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
@@ -14,8 +14,8 @@
                         <template v-if="lastItem.status">
                             <p class="term">{{ lastItem.status }}</p> 
                         </template>
-                        <template v-if="lastItem.info">
-                            <p class="term1">{{ lastItem.info }}</p>
+                        <template v-if="lastItem.date_end">
+                            <p class="term1">{{ Convet(lastItem.date_end) }}</p>
                         </template>
                     </div>
                 </div>
@@ -32,69 +32,41 @@
 </template>
 
 <script>
-import axios from "axios"
-import GreadBlock from './items.vue';
 
+import GreadBlock from './items.vue';
+import { ConvertDate } from '@/java/stages_data.js'
+import {mapState, mapActions} from 'vuex';
 
 export default{
     name:'StagesCompetitionBlock',
-    data: () => {
-        return {
-            
-            items: []
-        }
-    },
     components:{
         GreadBlock,
     },
     computed:{
+        ...mapState(['items']),
+        
+        
         getListWithoutLastItem() {
             return this.items.slice(0, this.items.length - 1);
         },
           lastItem() {
+            if(!this.items.length) return null
             return this.items[this.items.length - 1];
         }
 
     },
-    methods:{
-        GetStages() {
-            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/stages')
-                .then(response => {
-                    this.items = response.data.data.map((item) => {
-                        let to = null
-                        switch (item.id) {
-                            case '2':
-                                to = {
-                                    name: 'QuestionnairePage'
-                                }
-                                break;
-                            
-                            case '3':
-                                 to = {
-                                    name: 'ManagmentPage'
-                                }
-                                break;
-                            
-                            case '4':
-                                to = {
-                                    name: 'TaskPage'
-                                }
-                                break;
-                        }
-                        return {
-                            ...item,
-                            to,
-                        }
-                    })
-                    console.log(this.items)
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+    methods:{  
+         ...mapActions([
+            'getStages'
+        ]),
+        Convet(data) {
+            ConvertDate(data)
         }
+        
     },
-     mounted() {
-        this.GetStages()
+    mounted() {
+        this.getStages()
+
     },
 };
 

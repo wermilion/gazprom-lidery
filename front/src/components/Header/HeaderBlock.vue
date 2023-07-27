@@ -9,7 +9,7 @@
         </template>
         <template v-if="$route.meta.shouldRenderBlock">
             <div class="account">
-                <b>id: 00001</b>
+                <b >id: {{ userId }}</b>
                 <button v-on:click="openModel" >Выход</button>
             
             </div>       
@@ -37,6 +37,8 @@
 <script>
 import axios from "axios"
 import router from "@/router"
+import {mapGetters } from "vuex"
+
 
 export default{
     name: "HeaderBlock",
@@ -44,6 +46,11 @@ export default{
         return{
             modalOpen:false
         }
+    },
+    computed: {
+        ...mapGetters([
+            'userId'
+        ]),
     },
     methods: {
         openModel(){

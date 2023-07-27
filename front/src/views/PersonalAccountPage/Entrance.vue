@@ -15,15 +15,16 @@
                     <b>Запомнить меня</b>
                 </div>
             </form>
-            <button v-on:click="POST" >Войти</button>
+            <button v-on:click="performPost" >Войти</button>
         </div>
     </section>
 </template>
 
 
 <script>
-import router from "@/router"
-import axios from "axios"
+import { mapActions } from 'vuex';
+
+
 export  default{
     name: "EntranceBlock",
     data() {
@@ -45,21 +46,15 @@ export  default{
             }
             
         },
-       POST() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', {
-                tabel_number: this.tabel_number, password: this.password, remember: this.remember
-            })
-                .then(response => {
-                    if (response.data.custom_password === true) {
-                        router.push({name:'StagesCompetitionBlock'})
-                    } else {
-                        router.push({name: 'ChangingThePassword'})
-                    }
-                    this.id=response.data.id
-                    
-                })
-                .catch(error => { this.status = error.status })
-        },
+         ...mapActions(['POST']),
+        async performPost() {
+            const data = {
+                tabel_number: this.tabel_number,
+                password: this.password,
+                remember: this.remember
+            };
+            await this.POST(data);
+        }
     },
   
    

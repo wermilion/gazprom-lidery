@@ -3,7 +3,14 @@ server {
 
     server_name $DOMAIN;
 
-    return 301 https://$host$request_uri;
+    location ^~ /.well-known/acme-challenge/ {
+    default_type "text/plain";
+    root /app;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }
 
 server {

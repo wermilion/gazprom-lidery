@@ -2,7 +2,7 @@
     <section class="stagesContener">
         <h2>Задача</h2>
         <div class="task">
-            <p>{{ task }}</p>
+            <p>{{ data}}</p>
         </div>
         <h2>Решение</h2>
         <textarea v-model="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
@@ -30,7 +30,7 @@ export default{
              chect: false,
              text:'',
              erortext:false,
-             task: []
+             data: ''
         }
     },
     methods: {
@@ -49,8 +49,7 @@ export default{
         fetchData() {
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/task')
                 .then(response => {
-                    this.task=response.data
-                   
+                    this.data =response.data.data[0].task
                 })
                 .catch(error => {
                     console.error(error);

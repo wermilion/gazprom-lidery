@@ -10,20 +10,28 @@
                         <p>{{ item.desc }}</p>
                     </template>  
                 </div>
-                
                 <img :src="item.image" alt="">
             </div>
             <div class="botton">
                 <div class="botton_under">
-                    <template v-if="item.status">
-                        <p class="term">{{ item.status}}</p> 
+                    <template v-if="item.result">
+                        <p class="term">{{ item.reault}}</p> 
                     </template>
-                    <template v-if="item.info">
-                        <p class="term1">{{ item.info }}</p>
+                    <template v-else-if="item.status">
+                        <p class="term1">Доступно</p>
+                    </template>
+                    <template v-else>
+                        <p class="term1">Недоступно</p>
+                    </template>
+                    <template>
+                        <p v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
-                <template v-if="item.button">
+                <template v-if="item.router">
                     <router-link class="router"  :to="{name:item.router} " >{{ item.button }}</router-link>
+                </template>
+                <template v-else>
+                    <button></button>
                 </template>
             </div>
         </div>
@@ -31,11 +39,18 @@
 </template>
 
 <script>
+import { ConvertDate } from '@/java/stages_data.js'
 export default{
     name:'GreadBlock',
      props: {
         item: Object
+    },
+    methods:{
+        Convet(data){
+            ConvertDate(data)
+        }
     }
+    
 }
 </script>
 

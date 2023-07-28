@@ -8,17 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ResultResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
+    public function toArray(Request $request)
     {
-        return [
-            'stage_id' => $this->stage_id,
-            'user_id' => $this->user_id,
-            'result_status' => $this->status->status_name,
-        ];
+        return $this->status->status_name;
     }
 }

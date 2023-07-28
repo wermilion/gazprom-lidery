@@ -9,7 +9,7 @@
         <div class="under">
             <div class="checkbox1">
                 <div class="checkbox2" v-on:click="Checbox">
-                    <img v-show="chect" src="/image/checkbox.png" alt="">
+                    <img v-show="chect" src="/image/checkbox.svg" alt="">
                 </div>
                 <label >Я загрузил (-а) файлы.</label>
             </div>

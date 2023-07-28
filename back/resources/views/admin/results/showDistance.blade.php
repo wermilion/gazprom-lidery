@@ -3,7 +3,12 @@
     <div class="flex items-center">
         <h1 class="text-2xl m-2 font-bold">{{$stage->name}}</h1>
         <div>
-            <form action="">
+            <form action="" method="get">
+                <input
+                    placeholder="Поиск по табельному номеру"
+                    class="w-60 h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 placeholder-gray-500"
+                    type="text" name="tabel_number"
+                    value="{{ old('tabel_number', request()->get('tabel_number')) }}">
                 <select name="result_status_id" id="status"
                         class="w-max h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500">
                     <option selected value="0" class="text-gray-600">Выберите статус</option>

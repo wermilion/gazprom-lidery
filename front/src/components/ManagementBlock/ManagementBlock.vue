@@ -8,7 +8,7 @@
                 <div class="checkbox1"  >
                     <div class="checkbox1" v-on:click="Checbox">
                         <div class="checkbox2" >
-                            <img v-show="chect" src="/image/checkbox.png" alt="">
+                            <img v-show="chect" src="/image/checkbox.svg" alt="">
                         </div>
                     </div>
                     <label  >Я загрузил (-а) файлы.</label>

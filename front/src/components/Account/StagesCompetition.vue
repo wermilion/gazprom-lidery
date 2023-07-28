@@ -3,27 +3,27 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
         </div> 
-        <div :class="lastItem.statys" class="GreadBlock6">
+        <div v-if="lastItem" :class="lastItem.activity_status" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
-                    <h2>{{ lastItem.title }}</h2>
+                    <h2>{{ lastItem.name }}</h2>
                     <template v-if="lastItem.button">
                         <button>{{ lastItem.button }}</button>
                     </template>
                     <div class="botton_under">
-                        <template v-if="lastItem.term">
-                            <p class="term">{{ lastItem.term }}</p> 
+                        <template v-if="lastItem.status">
+                            <p class="term">{{ lastItem.status }}</p> 
                         </template>
-                        <template v-if="lastItem.info">
-                            <p class="term1">{{ lastItem.info }}</p>
+                        <template v-if="lastItem.date_end">
+                            <p class="term1">{{ Convet(lastItem.date_end) }}</p>
                         </template>
                     </div>
                 </div>
                 <div class="between">
-                    <p>{{ lastItem.text }}</p>
+                    <p>{{ lastItem.desc }}</p>
                 </div>
                 <div class="botton">
-                    <img :src="lastItem.img" alt="">
+                    <img :src="lastItem.image" alt="">
                 </div>
             </div> 
             
@@ -32,99 +32,42 @@
 </template>
 
 <script>
+
 import GreadBlock from './items.vue';
+import { ConvertDate } from '@/java/stages_data.js'
+import {mapState, mapActions} from 'vuex';
+
 export default{
     name:'StagesCompetitionBlock',
-    data: () => {
-        return {
-            
-            items: [
-                {
-                    title: "Регистрация",
-                    img: '/image/stages/Registration.svg',
-                    text:"",
-                    button:"",
-                    term: "ДОСТУПНО",
-                    info: "",
-                    statys: "inactive",
-                    router:""
-                },
-                {
-                    title: "Анкета и видеоинтервью",
-                    img: '/image/stages/Questionnaire.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "Приступить",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "active",
-                    router: "QuestionnairePage"
-                },
-                {
-                    title: "Дистанционный этап",
-                    img: '/image/stages/Remote.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "inactive",
-                    router: ""
-                },
-                {
-                    title: "Управленческие решения",
-                    img: '/image/stages/Management.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "Приступить",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "active",
-                    router: "ManagmentPage"
-                },
-                {
-                    title: "Задачи",
-                    img: '/image/stages/Task.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: " Приступить",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "active",
-                    router: "TaskPage"
-                },
-                {
-                    title: "Очный этап",
-                    img: '/image/stages/InPerson.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys: "inactive",
-                    router: ""
-                },
-                {
-                    title: "Финал",
-                    img: '/image/stages/Final.svg',
-                    text: 'С помощью CSS можно добавить рамку к элементу несколькими способами. В основном, конечно же, применяется свойство border, как наиболее универсальное, а также outline и, как ни удивительно, box-shadow, основная задача которого — создание тени. Далее рассмотрим эти методы и их различия между собой.',
-                    button: "",
-                    term: "ДОСТУПНО",
-                    info: "До 31 октября",
-                    statys:"inactive", 
-                    router: ""
-
-                },
-
-            ],
-        }
-    },
     components:{
         GreadBlock,
     },
     computed:{
+        ...mapState(['items']),
+        
+        
         getListWithoutLastItem() {
             return this.items.slice(0, this.items.length - 1);
         },
           lastItem() {
+            if(!this.items.length) return null
             return this.items[this.items.length - 1];
         }
-    }
+
+    },
+    methods:{  
+         ...mapActions([
+            'getStages'
+        ]),
+        Convet(data) {
+            ConvertDate(data)
+        }
+        
+    },
+    mounted() {
+        this.getStages()
+
+    },
 };
 
 </script>
@@ -199,10 +142,11 @@ section{
                 width: 49%;
                 margin: 0 62px 0 92px;
                 p{
-                    
+                    font-size: 32px;
                     width: 767px;
                     height: 202px;
                     border: 1px solid #000;
+                    text-align: center;
                 }
             }
             .botton{

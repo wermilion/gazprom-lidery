@@ -7,52 +7,54 @@
             <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
                 <input :class="{'eror_tabel_number': !status }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
-                <input  :class="{ 'eror_password': !status }" v-model="password" type="text" placeholder="Пароль"> 
+                <input  :class="{ 'eror_password': !status }" v-model="password" type="password" placeholder="Пароль"> 
                 <div class="shell_checkbox">
                     <div v-on:click="Remember" class="checkbox" >
-                        <img v-if="remember" src="/image/checkbox.png" alt="">
+                        <img v-if="remember==1" src="/image/checkbox.png" alt="">
                     </div>
                     <b>Запомнить меня</b>
                 </div>
             </form>
-            <button v-on:click="POST" >Войти</button>
+            <button v-on:click="performPost" >Войти</button>
         </div>
     </section>
 </template>
 
 
 <script>
-import router from "@/router"
-import axios from "axios"
+import { mapActions } from 'vuex';
+
+
 export  default{
     name: "EntranceBlock",
     data() {
         return {
-            remember: false,
+            remember: 0,
             tabel_number:'',
             password:'',
             status:true,
+            id:''
             
         }
     },
     methods:{
         Remember(){
-            this.remember=!this.remember
+            if(this.remember ==0){
+                this.remember=1
+            }else{
+                this.remember = 0
+            }
+            
         },
-       POST() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', {
-                tabel_number: this.tabel_number, password: this.password, remember: this.remember
-            })
-                .then(response => {
-                    if (response.data.custom_password === true) {
-                        router.push('/stages_competition')
-                    } else {
-                        router.push('/changing_the_password')
-                    }
-                    
-                })
-                .catch(error => { this.status = error.status })
-        },
+         ...mapActions(['POST']),
+        async performPost() {
+            const data = {
+                tabel_number: this.tabel_number,
+                password: this.password,
+                remember: this.remember
+            };
+            await this.POST(data);
+        }
     },
   
    

@@ -6,24 +6,30 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input v-model="password1"  @mouseover="showPopup" @mouseout="hidePopup" type="text"  placeholder="Введите пароль ">
+                    <input :class='{"erorPassword": errorPassword}' required aria-required="true" v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input  v-model="password2" class="one" type="text" placeholder="Повторите новый пароль"> 
+                    <input  required aria-required="true"  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
-            <button ><router-link class="button" to="/stages_competition">Сохранить</router-link></button>
+            <button v-on:click="CreateUserPasswprd" >Сохранить</button>
         </div>
     </section>
 </template>
 
 <script>
+import router from "@/router"
+import axios from "axios"
+
+
 export default{
     name:'ChangingThePassword',
     data(){
         return{
             isPopupVisible: false,
             SruvnPassword:false,
+            errorPassword:false,
             password1:'',
-            password2:''
+            password2:'',
+            
         }
     },
     methods:{
@@ -32,17 +38,39 @@ export default{
         },
         hidePopup() {
             this.isPopupVisible = false;
-        }
+        },
+         CreateUserPasswprd() {
+            if(this.password1!=this.password2 || this.password1.length>8 || this.password2.length>8){
+                this.errorPassword=true
+            }else {
+                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {
+                new_password: this.password1,
+				confirm_password:this.password2
+                })
+                .then(response => {
+                    if(response.data.status){
+                        router.push('/stages') 
+                    }else{
+                        this.errorPassword = true
+                    }
+                    
+                })
+                .catch(errors => {errors})
+            }
+            
+        },
+
     },
-    computed:{
-       
-    }
+    
 
 }
 </script>
 
 
 <style lang="scss" scoped>
+.erorPassword{
+    border-bottom:5px  solid #F69F32;
+}
 section{
     display: flex;
     align-items: center;
@@ -120,22 +148,18 @@ section{
         }
         button{
             background: #064677;
-            margin-top: 90px;
-            .button{
-                color: white;
-                margin: 16px 32px;
-                font-size: 48px;
-
-            }
+            padding: 16px 32px;
+            color: white;    
+            font-size: 48px;
+            margin: 20px 0 44px;
+           
         }
         button:hover{
             background: white;
             border: 4px solid #3394CE;
-            .button{
-                color: #064677;
+            color: #064677;
                 
-                
-            }
+           
         }
     }
    

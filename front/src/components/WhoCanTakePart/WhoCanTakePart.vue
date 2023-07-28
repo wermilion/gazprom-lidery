@@ -1,70 +1,72 @@
 <template>
     <section>
         <h2>КТО МОЖЕТ ПРИНЯТЬ УЧАСТИЕ</h2>
-        <div>
-            <itemsWho v-for="(item, index) in items" :key="index" :item="item" class="ItemsWho"></itemsWho>
+        <div class="shell">
+            <div v-for="(item, index) in title" :key="index">
+                <img src="/image/who_can_take/star.svg" alt="">
+                <p>{{ item.title }}</p>
+            </div>
+            <img class="line" src="/image/who_can_take/Line 10.svg" alt="">
         </div>
-        
     </section>
 </template>
 
 <script>
-import itemsWho from './items.vue'
+
 export default{
     name:'WhoCanTacePart',
-    components:{
-        itemsWho,
-    },
-    data: () => {
-        return {
-            items: [
-                {
-                    title: 1
-                },
-                {
-                   title: 1
-                },
-                {
-                    title: 1
-                },
-               
-            ],
-        }
-    },
+   data(){
+    return{
+        title:[
+            {
+                title:'Сотрудник со стажем работы не менее 3-х лет в Компании'
+            },
+            {
+                title: 'Имеющий опыт реализации проектов: социальных, развивающих, спортивных'
+            },
+            {
+                title: 'В возрасте до 45 лет включительно'
+            },
+            {
+                title: 'Наличие высшего образования или обучение в вузе на данный момент'
+            }
+        ]
+    }
+   }
 }
 </script>
 
 
 <style lang="scss" scoped>
+
+
 section{
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width:1546px ;
-    width:100% ;
-    margin: 0 auto;
+    
     h2{
-        margin-top: 56px;
-    }
-    div{
+        margin-top: 112px;
+    }   
+    .shell{
+        height: 527px;
+        margin: 112px 0 ;
         display: flex;
-        width: 100%;
-        justify-content: space-between;
-        margin-top: 56px;
-         .ItemsWho{
-                width: 32.5%;
-            }
-    }
-    @media screen and (max-width :1024px) { 
-        div{
-            display: flex;
-            flex-direction: column;
-            .ItemsWho{
-                margin-top: 20px;
-            }
-            
+        justify-content: space-around;
+        position: relative;
+        .line{
+            position: absolute;
+            top:30%;
         }
+        div{
+            text-align: center;
+            p{
+                width: 368px;
+                color: #1D4573;
+                font-size: 32px;         
+                font-weight: 400;
+            }
+        }
+        
+        
     }
 }
 

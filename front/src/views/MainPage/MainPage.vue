@@ -6,7 +6,9 @@
         <StagesBlock class="StagesBlock"></StagesBlock>
         <NumbersBlock class="NumbersBlock"></NumbersBlock>
         <QuestionAndAnswer class="QuestionAndAnswer"></QuestionAndAnswer>
-        
+          <button class="scroll-to-top" @click="scrollToTop" v-if="showButton">
+            <img src="/image/up.svg" alt="">
+        </button>
     </section>
     
 </template>
@@ -28,20 +30,49 @@ export default{
         StagesBlock,
         NumbersBlock,
         QuestionAndAnswer,
+    },
+    data() {
+        return {
+            showButton: false
+        };
+    },
+    methods: {
+        handleScroll() {
+            this.showButton = window.scrollY > 100;
+        },
+        scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+    },
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.handleScroll);
     }
    
 }
 </script>
 
 <style lang="scss" scoped>
+.scroll-to-top {
+  position: fixed;
+  bottom: 50px;
+  right: 89px;
+  background:none;
+  border: none;
+  display: flex;
+  align-items: center;
+}
 section{
     display: flex;
     flex-direction: column;
     flex:1;
 }
-.WhoCanTakePart{
-    margin-bottom: 112px;
-}
+
 .StagesBlock{
     margin-bottom: 112px;
 }

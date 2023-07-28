@@ -60,7 +60,7 @@ section{
     align-items: center;
     justify-content: center;
     h2{
-        margin-bottom: 56px;
+        margin-bottom: 112px;
     }
     div{
         width: 1218px;

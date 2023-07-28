@@ -1,8 +1,8 @@
 
 <template>
     <section>
-       
-            <p>{{ item.title }}</p>
+       <img :src="item.img" alt="">
+        <p>{{ item.title }}</p>
         
     </section>
 </template>
@@ -22,7 +22,13 @@ section{
     height: 500px;
     border:1px solid black;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    img{
+        margin: 32px 0 24px;
+    }
+    p{
+        font-size: 48px;
+        font-weight: 400;
+    }
+    
 }
 </style>

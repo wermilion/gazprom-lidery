@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Filters\StatusFilter;
+use App\Http\Filters\ResultFilter;
 use App\Http\Requests\DistanceRequest;
+use App\Http\Requests\ResultRequest;
 use App\Models\Challenge;
 use App\Models\Instrument;
 use App\Models\ManagementDecision;
@@ -39,22 +40,22 @@ class ResultController extends Controller
         ]);
     }
 
-    public function show(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
+    public function show(ResultRequest $request, Stage $stage, ResultFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
 
         switch ($stage->name) {
             case 'Дистанционный этап':
-            $this->createResult($stage);
-            $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
-            $instrument = Instrument::all()->first();
-            return view('admin.results.showDistance', [
-                'stage' => $stage,
-                'results' => $results,
-                'statuses' => $statuses,
-                'instrument' => $instrument
-            ]);
+                $this->createResult($stage);
+                $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
+                $instrument = Instrument::all()->first();
+                return view('admin.results.showDistance', [
+                    'stage' => $stage,
+                    'results' => $results,
+                    'statuses' => $statuses,
+                    'instrument' => $instrument
+                ]);
             case 'Очный этап' || 'Финал':
                 $this->createResult($stage);
                 $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
@@ -86,7 +87,7 @@ class ResultController extends Controller
         $user = User::query()->where('id', $result->user_id)->first();
         $pdf = PDF::loadView('admin.pdf.form', ['user' => $user, 'stage' => $stage])->setPaper('a4');
 
-        return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
+        return $pdf->download($stage->name . '_' . $user->tabel_number . '.pdf');
     }
 
     private function pdfManagementDecisions(Stage $stage, Result $result): Response
@@ -95,7 +96,7 @@ class ResultController extends Controller
         $user = User::query()->where('id', $result->user_id)->first();
         $pdf = PDF::loadView('admin.pdf.management_decision', ['management' => $management, 'stage' => $stage, 'user' => $user])->setPaper('a4');
 
-        return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
+        return $pdf->download($stage->name . '_' . $user->tabel_number . '.pdf');
     }
 
     private function pdfTask(Stage $stage, Result $result): Response
@@ -105,7 +106,7 @@ class ResultController extends Controller
         $user = User::query()->where('id', $result->user_id)->first();
         $pdf = PDF::loadView('admin.pdf.challenge', ['task' => $task, 'stage' => $stage, 'user' => $user, 'instrument' => $instrument])->setPaper('a4');
 
-        return $pdf->download($stage->slug . '_' . $user->tabel_number . '.pdf');
+        return $pdf->download($stage->name . '_' . $user->tabel_number . '.pdf');
     }
 
     public function accept(Result $result): RedirectResponse
@@ -147,14 +148,16 @@ class ResultController extends Controller
     {
         if (Carbon::now() > $stage->date_end) {
             $prev_stage = Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
-            $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
-            foreach ($prev_results as $prev_result) {
-                if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
-                    Result::create([
-                        'stage_id' => $stage->id,
-                        'user_id' => $prev_result->user_id,
-                        'result_status_id' => 3
-                    ]);
+            if (Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->exists()) {
+                $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
+                foreach ($prev_results as $prev_result) {
+                    if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                        Result::query()->create([
+                            'stage_id' => $stage->id,
+                            'user_id' => $prev_result->user_id,
+                            'result_status_id' => 3
+                        ]);
+                    }
                 }
             }
         }

@@ -28,15 +28,16 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    /**
+     * @throws ValidationException
+     */
     public function authenticate(): void
     {
         if (!Auth::attempt($this->only('tabel_number', 'password'), $this->boolean('remember'))) {
-            throw new HttpResponseException(
-                response([
-                    'status' => false,
-                    'message' => 'Ошибка авторизации'
-                ])->setStatusCode(401)
-            );
+            throw ValidationException::withMessages([
+                'status' => false,
+                'message' => 'Ошибка авторизации'
+            ]);
         }
     }
 }

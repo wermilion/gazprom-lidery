@@ -3,7 +3,12 @@
     <div class="flex items-center">
         <h1 class="text-2xl m-2 font-bold">{{$stage->name}}</h1>
         <div>
-            <form action="">
+            <form action="" method="get">
+                <input
+                    placeholder="Поиск по табельному номеру"
+                    class="w-60 h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500 placeholder-gray-500"
+                    type="text" name="tabel_number"
+                    value="{{ old('tabel_number', request()->get('tabel_number')) }}">
                 <select name="result_status_id" id="status"
                         class="w-max h-max ml-4 border-gray-300 focus:border-gazprom-500 focus:ring-gazprom-500">
                     <option selected value="0" class="text-gray-600">Выберите статус</option>
@@ -39,14 +44,14 @@
                             </div>
                             <div class="flex items-center mt-4">
                                 @if($result->status->status_name == 'На проверке')
-                                    <form action="{{route('cp.results.accept', $result)}}"  method="post">
+                                    <form action="{{route('cp.results.accept', $result)}}" method="post">
                                         @csrf
                                         <button
                                             class="w-max bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2">
                                             Принять
                                         </button>
                                     </form>
-                                    <form class="ml-4" action="{{route('cp.results.reject', $result)}}"  method="post">
+                                    <form class="ml-4" action="{{route('cp.results.reject', $result)}}" method="post">
                                         @csrf
                                         <button
                                             class="w-max bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2">
@@ -54,14 +59,14 @@
                                         </button>
                                     </form>
                                 @elseif($result->status->status_name == 'Отклонено')
-                                    <form action="{{route('cp.results.onCheck', $result)}}"  method="post">
+                                    <form action="{{route('cp.results.onCheck', $result)}}" method="post">
                                         @csrf
                                         <button
                                             class="w-max bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-2">
                                             Отправить на проверку
                                         </button>
                                     </form>
-                                    <form class="ml-4" action="{{route('cp.results.accept', $result)}}"  method="post">
+                                    <form class="ml-4" action="{{route('cp.results.accept', $result)}}" method="post">
                                         @csrf
                                         <button
                                             class="w-max bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2">
@@ -84,7 +89,8 @@
                                         </button>
                                     </form>
                                 @endif
-                                <a href="{{route('cp.results.printPdf', [$stage, $result])}}" class="w-max trigger hover:bg-gazprom-500 hover:text-white ml-4">
+                                <a href="{{route('cp.results.printPdf', [$stage, $result])}}"
+                                   class="w-max trigger hover:bg-gazprom-500 hover:text-white ml-4">
                                     Экспорт
                                 </a>
                             </div>

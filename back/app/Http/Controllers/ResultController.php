@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Filters\StatusFilter;
+use App\Http\Filters\ResultFilter;
 use App\Http\Requests\DistanceRequest;
+use App\Http\Requests\ResultRequest;
 use App\Models\Challenge;
 use App\Models\Instrument;
 use App\Models\ManagementDecision;
@@ -39,7 +40,7 @@ class ResultController extends Controller
         ]);
     }
 
-    public function show(Stage $stage, StatusFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
+    public function show(ResultRequest $request, Stage $stage, ResultFilter $filter): View|\Illuminate\Foundation\Application|Factory|Application
     {
         $results = Result::query()->orderBy('result_status_id', 'DESC')->where('stage_id', $stage->id)->filter($filter)->paginate(10);
         $statuses = ResultStatus::all();
@@ -147,14 +148,16 @@ class ResultController extends Controller
     {
         if (Carbon::now() > $stage->date_end) {
             $prev_stage = Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
-            $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
-            foreach ($prev_results as $prev_result) {
-                if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
-                    Result::query()->create([
-                        'stage_id' => $stage->id,
-                        'user_id' => $prev_result->user_id,
-                        'result_status_id' => 3
-                    ]);
+            if (Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->exists()) {
+                $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
+                foreach ($prev_results as $prev_result) {
+                    if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                        Result::query()->create([
+                            'stage_id' => $stage->id,
+                            'user_id' => $prev_result->user_id,
+                            'result_status_id' => 3
+                        ]);
+                    }
                 }
             }
         }

@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Лидеры Газпрома</title>
-    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('cp/images/favicon.ico')}}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

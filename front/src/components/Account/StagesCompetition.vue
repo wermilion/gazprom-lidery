@@ -35,7 +35,7 @@
 
 import GreadBlock from './items.vue';
 import { ConvertDate } from '@/java/stages_data.js'
-import {mapState, mapActions} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 
 export default{
     name:'StagesCompetitionBlock',
@@ -43,15 +43,17 @@ export default{
         GreadBlock,
     },
     computed:{
-        ...mapState(['items']),
+        ...mapGetters([
+            'Items'
+        ]),
         
         
         getListWithoutLastItem() {
-            return this.items.slice(0, this.items.length - 1);
+            return this.Items.slice(0, this.Items.length - 1);
         },
           lastItem() {
             if(!this.items.length) return null
-            return this.items[this.items.length - 1];
+            return this.Items[this.Items.length - 1];
         }
 
     },

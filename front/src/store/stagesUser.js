@@ -5,6 +5,11 @@ const Stage = {
     state: {
       items: []
     },
+    getters: {
+        Items(state) {
+            return state.items
+        }
+    },
     mutations: {
       setItems(state, items) {
         state.items = items

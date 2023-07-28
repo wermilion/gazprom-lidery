@@ -9,7 +9,7 @@
         <div class="under">
             <div class="checkbox1" >
                 <div class="checkbox2" v-on:click="$emit('chect')">
-                    <img v-show="checkbox_items" src="/image/checkbox.png" alt="">
+                    <img v-show="checkbox_items" src="/image/checkbox.svg" alt="">
                 </div>
                 <div v-for="(items, index) in questionnaire_tab" :key="index">
                     <label  v-if="$route.name == items.names">{{ items.text }}</label>

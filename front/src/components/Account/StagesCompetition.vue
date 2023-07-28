@@ -46,14 +46,13 @@ export default{
         ...mapGetters([
             'Items'
         ]),
-        
-        
         getListWithoutLastItem() {
+            if (!this.Items.length) return []
             return this.Items.slice(0, this.Items.length - 1);
         },
           lastItem() {
-            if(!this.items.length) return null
-            return this.Items[this.Items.length - 1];
+            if(!this.Items.length) return null
+            return this.Items[ this.Items.length - 1];
         }
 
     },

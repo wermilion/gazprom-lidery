@@ -40,7 +40,7 @@ export default{
             this.isPopupVisible = false;
         },
          CreateUserPasswprd() {
-            if(this.password1!=this.password2 && this.password1.length>8 && this.password2.length>8){
+            if(this.password1!=this.password2 || this.password1.length>8 || this.password2.length>8){
                 this.errorPassword=true
             }else {
                 axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {

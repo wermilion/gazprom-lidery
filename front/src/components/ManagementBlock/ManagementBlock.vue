@@ -14,7 +14,7 @@
                     <label  >Я загрузил (-а) файлы.</label>
                 </div>
                 <button @click="POST" :class="{'disabled' : !isActivBtn}">
-                    <router-link class="router"  to="/stages_competition">Завершить</router-link>
+                    <router-link class="router"  :to="{name: 'StagesCompetitionBlock'}">Завершить</router-link>
                 </button>
             </div>
     </section>

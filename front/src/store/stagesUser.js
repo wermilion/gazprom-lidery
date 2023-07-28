@@ -24,17 +24,17 @@ const Stage = {
               switch (item.id) {
                 case '2':
                   to = {
-                    router: 'QuestionnairePage'
+                    name: 'QuestionnairePage'
                   }
                   break;
                 case '3':
                   to = {
-                    router: 'ManagmentPage'
+                    name: 'ManagmentPage'
                   }
                   break;
                 case '4':
                   to = {
-                    router: 'TaskPage'
+                    name: 'TaskPage'
                   }
                   break;
               }

@@ -3,12 +3,9 @@
         <div @click="Accordion()" class="Shell">
             <button  class="head">
                 <h3 >{{ item.title }}</h3>
-                <div>
-                    <!-- <span class="one"></span>
-                    <span class="two"></span> -->
-                    
-                    <img v-bind:style="{ transform: isActive ? 'rotate(135deg)' : 'rotate(90deg)' }"  class="img1"  src="/image/Line 5.png" alt="">
-                    <img v-bind:style="{ transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)' }"  class="img2" src="/image/Line 5.png" alt="">
+                <div>     
+                    <div :class="{ 'rotete_one': isActive }" class="one"></div>
+                    <div :class="{ 'rorate': isActive }" class="two"></div>
                 </div>
             </button>
             <div v-show="isActive === true">
@@ -45,6 +42,14 @@ section{
         margin: 0 auto;
         background-color: #F5F5F5;
         margin-bottom:8px ;
+         button:hover{
+            div{
+                background-color: #0079C2;
+                .one,.two{
+                    background-color: white;
+                }
+            }
+        }
         button{
             display: flex;
             align-items: center;
@@ -67,30 +72,27 @@ section{
                 border-radius: 50%;
                 width: 62px;
                 height: 62px;
-                img{
-                    position: absolute;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                }
-                span{
+                transition: 0.5s;
+                .one,.two{
                     flex: 2;
                     background-color: #000;
+                    position: absolute;
+                    width: 37px;
+                    height: 3px;
+                    border-radius: 0;
+                    
+                }
+                .one{
+                    transform:  rotate(90deg);
+                }
+                .rotete_one{
+                    transform:  rotate(135deg);
                 }
                 .rorate{
                     transform:  rotate(45deg);
                 }
             }
         }
-        button:hover{
-           
-            
-        }
-        p{    
-            padding: 40px ;
-        }
-        
     }
 }
 

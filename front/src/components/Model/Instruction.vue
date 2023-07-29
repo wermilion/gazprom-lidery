@@ -53,7 +53,11 @@ section {
             margin-top: 32px;
             width: 1530px;
             max-width: 100%;
+            button:hover{
+                background: #064677;
+            }
         }
+
         
     }
 }

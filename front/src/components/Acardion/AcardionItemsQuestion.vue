@@ -4,11 +4,8 @@
             <button  class="head">
                 <p >{{ item.title }}</p>
                 <div>
-                    <!-- <span class="one"></span>
-                    <span class="two"></span> -->
-                    
-                    
-                    <img  v-bind:style="{ transform: isActive ? 'rotate(45deg)' : 'rotate(0deg)' }"  class="img2" src="/image/Frame 3.svg" alt="">
+                    <div :class="{ 'rotete_one':isActive }" class="one"></div>
+                    <div :class="{ 'rorate': isActive }" class="two"></div>
                 </div>
             </button>
             <div class="inside" v-show="isActive === true">
@@ -51,6 +48,14 @@ section{
         margin: 0 auto;
         background-color: #F5F5F5;
         margin-bottom:8px ;
+        button:hover{
+            div{
+                background-color: #0079C2;
+                .one,.two{
+                    background-color: white;
+                }
+            }
+        }
         button{
             display: flex;
             align-items: center;
@@ -65,6 +70,7 @@ section{
                 font-size: 32px;
                 font-weight: 400;
                 color: #000;
+                
             }
             div{
                 display: flex;
@@ -75,25 +81,41 @@ section{
                 border-radius: 50%;
                 width: 62px;
                 height: 62px;
-                
-                span{
+                transition: 0.5s;
+                .one,.two{
                     flex: 2;
                     background-color: #000;
+                    position: absolute;
+                    width: 37px;
+                    height: 3px;
+                    border-radius: 0;
+                    
+                }
+                .one{
+                    transform:  rotate(90deg);
+                }
+                .rotete_one{
+                    transform:  rotate(135deg);
                 }
                 .rorate{
                     transform:  rotate(45deg);
                 }
             }
         }
+     
         .inside{
             padding: 0  80px 40px 40px;
+            
+           
             p{
                 margin: 0;
                 padding: 0;
                 font-size: 32px;
                 font-weight: 400;
+                
             }
             li{
+           
                 margin-left:40px ;
                 font-size: 32px;
                 font-weight: 400;

@@ -8,7 +8,7 @@
         </div>
         <div class="under">
             <div class="checkbox1" >
-                <div class="checkbox2" v-on:click="$emit('chect')">
+                <div class="checkbox2" :class="{'error': !checkbox_items }" v-on:click="$emit('chect')">
                     <img v-show="checkbox_items" src="/image/checkbox.svg" alt="">
                 </div>
                 <div v-for="(items, index) in questionnaire_tab" :key="index">
@@ -30,6 +30,7 @@ export default{
     props: ['checkbox_items'],
     data(){
         return{
+            error:false,
             questionnaire_tab: [
                 {
                     title: 'Здесь будет инструкция',
@@ -59,6 +60,9 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+.error{
+     box-shadow: 10px 10px 40px 0px rgba(246, 159, 50, 0.70);
+}
 section{
     
     box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
@@ -98,8 +102,7 @@ section{
             }
         }
         .disable{
-            background-color: #E7E8E5;
-            color: white;
+            
             pointer-events: none;
         }
         button{
@@ -113,6 +116,9 @@ section{
                color: white;
                 
             }
+        }
+        button:hover{
+            background: #064677;
         }
     }
 }

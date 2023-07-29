@@ -43,6 +43,7 @@ const Stage = {
                 to,
               }
             })
+           
             context.commit('setItems', items)
           })
           .catch(error => {

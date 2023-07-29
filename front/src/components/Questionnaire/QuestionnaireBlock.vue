@@ -33,7 +33,7 @@
             </div>
             <div class="form-action">
             <button @click="POST" :class="{ 'disabled ': disableBtn }"   >
-                    <router-link class="router"  to="/stages_competition">Завершить</router-link>
+                    <router-link class="router"  :to="{name: 'StagesCompetitionBlock'}">Завершить</router-link>
             </button>
         
             </div>

@@ -10,13 +10,13 @@
     <div class="text-lg">
         <div class="flex justify-between items-start">
             <div class="flex items-start">
-                <span><b> Минимальное количество баллов:</b> {{$instrument->min_points}}</span>
+                <span><b> Минимальное количество баллов для дистанционного этапа:</b> {{$instrument->min_points}}</span>
             </div>
         </div>
 
         <div class="flex justify-between items-start">
             <div class="flex items-start">
-                <span><b>Задача для этапа Задача:</b> {{$instrument->task}}</span>
+                <span><b>Описание задачи для этапа "Задача":</b> {{$instrument->task}}</span>
             </div>
         </div>
     </div>

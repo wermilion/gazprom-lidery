@@ -3,16 +3,27 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
         </div> 
-        <div v-if="lastItem" :class="lastItem.activity_status" class="GreadBlock6">
+        <div v-if="lastItem" :class="{ 'inactive': this.blockInactiv }" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
-                    <template v-if="lastItem.button">
-                        <button>{{ lastItem.button }}</button>
+
+                    <template v-if="item.to">
+                        <router-link class="router"  :to="item.to">Приступить</router-link>
                     </template>
+                    <template v-else>
+                        <button v-on:click="OpenModel" >Инструкция</button>
+                    </template>
+
                     <div class="botton_under">
-                        <template v-if="lastItem.status">
-                            <p class="term">{{ lastItem.status }}</p> 
+                        <template v-if="item.result[0]">
+                            <p class="term">{{ item.reault[0] }}</p> 
+                        </template>
+                        <template v-else-if="item.status == true">
+                            <p class="term1"><b>Доступно</b></p>
+                        </template>
+                        <template v-else>
+                            <p class="term1"><b>Недоступно</b></p>
                         </template>
                         <template v-if="lastItem.date_end">
                             <p class="term1">{{ Convet(lastItem.date_end) }}</p>
@@ -26,7 +37,7 @@
                     <img :src="lastItem.image" alt="">
                 </div>
             </div> 
-            
+            <InstructionModal  @instruction="OpenModel" v-if="model_instruction"></InstructionModal>
         </div> 
     </section>
 </template>
@@ -36,11 +47,19 @@
 import GreadBlock from './items.vue';
 import { ConvertDate } from '@/java/stages_data.js'
 import {mapGetters, mapActions} from 'vuex';
+import InstructionModal from '@/components/Model/Instruction.vue'
 
 export default{
     name:'StagesCompetitionBlock',
+    data(){
+        return{
+            model_instruction:false,
+            blockInactiv:true
+        }
+    },
     components:{
         GreadBlock,
+        InstructionModal
     },
     computed:{
         ...mapGetters([
@@ -53,7 +72,8 @@ export default{
           lastItem() {
             if(!this.Items.length) return null
             return this.Items[ this.Items.length - 1];
-        }
+        },
+        
 
     },
     methods:{  
@@ -62,7 +82,22 @@ export default{
         ]),
         Convet(data) {
             ConvertDate(data)
+        },
+        OpenModel(){
+            if(this.madel_instruction){
+                this.madel_instruction=!this.madel_instruction
+            }else{
+                this.madel_instruction = !this.madel_instruction
+            }
+        },
+        Inactiv() {
+            if (this.Items.result == false || this.Items.status == false) {
+                this.blockInactiv = true
+            } else {
+                this.blockInactiv = false
+            }
         }
+
         
     },
     mounted() {

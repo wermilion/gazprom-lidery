@@ -21,7 +21,7 @@ const routes = [
     
   },
   {
-    path:'/questionnaire',
+    path:'/form',
     name:'QuestionnairePage',
     component:QuestionnairePage,
     meta: { 

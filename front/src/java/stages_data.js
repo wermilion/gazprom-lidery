@@ -4,40 +4,40 @@ export function ConvertDate(date) {
     let month = d.getMonth()
 
     switch(month){
-        case 1:
+        case 0:
             month = 'января'
             break;
-        case 2:
+        case 1:
             month = 'февраля'
             break;
-        case 3:
+        case 2:
             month = 'марта'
             break;
-        case 4:
+        case 3:
             month = 'апреля'
             break;
-        case 5:
+        case 4:
             month = 'мая'
             break;
-        case 6:
+        case 5:
             month = 'июня'
             break;
-        case 7:
+        case 6:
             month = 'июля'
             break;
-        case 8:
+        case 7:
             month = 'августа'
             break;
-        case 9:
+        case 8:
             month = 'сентября'
             break;
-        case 10:
+        case 9:
             month = 'октября'
             break;
-        case 11:
+        case 10:
             month = 'нояюря'
             break;
-        case 12:
+        case 11:
             month = 'декабря'
             break;
     }

@@ -14,24 +14,24 @@
             </div>
             <div class="botton">
                 <div class="botton_under">
-                    <template v-if="item.result">
-                        <p class="term">{{ item.reault}}</p> 
+                    <template v-if="item.result[0]">
+                        <p class="term">{{ item.reault[0]}}</p> 
                     </template>
-                    <template v-else-if="item.status">
-                        <p class="term1">Доступно</p>
+                    <template v-else-if="item.status==true">
+                        <p class="term1"><b>Доступно</b></p>
                     </template>
                     <template v-else>
-                        <p class="term1">Недоступно</p>
+                        <p class="term1"><b>Недоступно</b></p>
                     </template>
                     <template>
                         <p v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
-                <template v-if="item.router">
-                    <router-link class="router"  :to="{name:item.router} " >{{ item.button }}</router-link>
+                <template v-if="item.to">
+                    <router-link class="router"  :to="item.to">Приступить</router-link>
                 </template>
                 <template v-else>
-                    <button></button>
+                    <button >Инструкция</button>
                 </template>
             </div>
         </div>

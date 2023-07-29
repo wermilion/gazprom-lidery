@@ -6,11 +6,11 @@
         <div class="right">
             <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
-                <input :class="{'eror_tabel_number': !status }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
-                <input  :class="{ 'eror_password': !status }" v-model="password" type="password" placeholder="Пароль"> 
+                <input :class="{'eror_tabel_number': !userStatus }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
+                <input  :class="{ 'eror_password': !userStatus }" v-model="password" type="password" placeholder="Пароль"> 
                 <div class="shell_checkbox">
                     <div v-on:click="Remember" class="checkbox" >
-                        <img v-if="remember==1" src="/image/checkbox.png" alt="">
+                        <img v-if="remember==1" src="/image/checkbox.svg" alt="">
                     </div>
                     <b>Запомнить меня</b>
                 </div>
@@ -22,7 +22,7 @@
 
 
 <script>
-import { mapActions } from 'vuex';
+import {mapGetters, mapActions } from 'vuex';
 
 
 export  default{
@@ -32,10 +32,16 @@ export  default{
             remember: 0,
             tabel_number:'',
             password:'',
-            status:true,
             id:''
             
         }
+    },
+
+    computed: {
+        ...mapGetters([
+            'userStatus'
+        ]),
+
     },
     methods:{
         Remember(){

@@ -44,13 +44,18 @@ export default{
     name: "HeaderBlock",
     data(){
         return{
-            modalOpen:false
+            modalOpen:false,
+            user:''
         }
     },
     computed: {
         ...mapGetters([
-            'userId'
+           'userId'
         ]),
+      
+    },
+    mounted(){
+      
     },
     methods: {
         openModel(){

@@ -4,12 +4,15 @@ import router from "@/router"
 
 const Login = {
     state: {
-        id: null,
-        status: null
+        id: '',
+        status:true
     },
     getters: {
         userId(state) {
             return state.id
+        },
+        userStatus(state) {
+            return state.status
         }
     },
     mutations: {

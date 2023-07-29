@@ -28,7 +28,7 @@
                     </template>
                 </div>
                 <template v-if="item.to">
-                    <router-link class="router" to="">Приступить</router-link>
+                    <router-link class="router" :to="{name: item.to.name}">Приступить</router-link>
                 </template>
                 <template v-else>
                     <button >Инструкция</button>

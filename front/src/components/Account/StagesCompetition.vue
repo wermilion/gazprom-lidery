@@ -7,9 +7,8 @@
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
-
-                    <template v-if="item.to">
-                        <router-link class="router"  :to="item.to">Приступить</router-link>
+                    <template v-if="lastItem.to">
+                        <router-link class="router"  :to="{name:lastItem.to.name}">Приступить</router-link>
                     </template>
                     <template v-else>
                         <button v-on:click="OpenModel" >Инструкция</button>
@@ -102,7 +101,7 @@ export default{
     },
     mounted() {
         this.getStages()
-
+        console.log(this.Items)
     },
 };
 

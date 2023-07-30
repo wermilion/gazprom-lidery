@@ -1,15 +1,19 @@
 <template>
     <section class="mainContener">
         <div class="shell ">
-            <button v-on:click="Manual" class="top">
+            <button @mouseenter="handleMouseEnter"
+                    @mouseleave="handleMouseLeave" 
+                    v-on:click="Manual" class="top">
                 <p>Шаг 1 - Инструкция</p>
-                <img v-bind:class="{  'text-ratate-img1': this.manual }"  src="/image/Vector 1.png" alt="" >
+                <img v-bind:class="{  'text-ratate-img1': this.manual }"  :src="isHovered==false?'/image/arrow_to.svg': '/image/arrow_after.svg' " alt="" >
             </button>
-            <button v-on:click="Questionnair" class="under">
+            <button  @mouseenter="handleMouseEnter2"
+                    @mouseleave="handleMouseLeave2" 
+                    v-on:click="Questionnair" class="under">
                 <div v-for="(item, index) in text" :key="index" >
                     <p v-if=" $route.name == item.name" >Шаг 2 - {{ item.title }}</p>
                 </div>
-                <img v-bind:class="{ 'text-ratate': questionnair }"  src="/image/Vector 1.png" alt="">
+                <img v-bind:class="{ 'text-ratate': questionnair }"  :src="isHovered2 == false ? '/image/arrow_to.svg' : '/image/arrow_after.svg'" alt="">
             </button>
         </div>
         <div v-if="$route.name == 'QuestionnairePage'" class="Tab">
@@ -50,6 +54,8 @@ export default{
     },
     data(){
         return{
+            isHovered: false,
+            isHovered2:false,
             manual:true,
             questionnair:false,
             checkbox:false,
@@ -73,6 +79,18 @@ export default{
     }, 
   
     methods:{
+         handleMouseEnter() {
+            this.isHovered = true;
+        },
+        handleMouseLeave() {
+            this.isHovered = false;
+        },
+         handleMouseEnter2() {
+            this.isHovered2 = true;
+        },
+        handleMouseLeave2() {
+            this.isHovered2 = false;
+        },
         Manual(){
             this.manual=!this.manual
             if (this.checkbox) {
@@ -84,6 +102,7 @@ export default{
             this.rotate = !this.rotate
         },
         Questionnair(){
+           
             if(this.checkbox){
                 this.questionnair=!this.questionnair
                 this.manual = !this.manual
@@ -116,8 +135,7 @@ section{
         }   
         img{
             transform: rotate(180deg);
-            width: 40px;
-            height: 20px;
+            width: 50px;
         }
 
         .top,.under{

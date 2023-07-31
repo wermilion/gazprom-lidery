@@ -50,7 +50,7 @@ export default{
             ConvertDate(data)
         },
           Inactiv() {
-            if  (this.item.result[0] === false || this.item.status === false) {
+            if  (this.item.result === false || this.item.status === false) {
                 this.blockInactiv = true
             } else {
                 this.blockInactiv = false

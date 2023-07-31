@@ -15,10 +15,10 @@
                     </template>
 
                     <div class="botton_under">
-                        <template v-if="item.result[0]">
-                            <p class="term">{{ item.reault[0] }}</p> 
+                        <template v-if="lastItem.result">
+                            <p class="term">{{ lastItem.reault[0] }}</p> 
                         </template>
-                        <template v-else-if="item.status == true">
+                        <template v-else-if="lastItem.status == true">
                             <p class="term1"><b>Доступно</b></p>
                         </template>
                         <template v-else>
@@ -98,7 +98,7 @@ export default{
     },
     mounted() {
         this.getStages()
-        console.log(this.Items)
+        
     },
 };
 

@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from "axios";
+
 
 
 const Stage = {
@@ -22,17 +23,17 @@ const Stage = {
             const items = response.data.data.map((item) => {
               let to = null
               switch (item.id) {
-                case '2':
+                case 2:
                   to = {
                     name: 'QuestionnairePage'
                   }
                   break;
-                case '3':
+                case 4:
                   to = {
                     name: 'ManagmentPage'
                   }
                   break;
-                case '4':
+                case 5:
                   to = {
                     name: 'TaskPage'
                   }
@@ -43,6 +44,7 @@ const Stage = {
                 to,
               }
             })
+            console.log()
             context.commit('setItems', items)
           })
           .catch(error => {

@@ -1,5 +1,5 @@
-<template>
-    <section :class="item.activity_status">
+  <template>
+    <section :class="{ 'inactive': Inactiv}">
         <div class="contenerStage" >
             <div class="top " >
                 <h2>{{ item.name }}</h2>
@@ -14,25 +14,28 @@
             </div>
             <div class="botton">
                 <div class="botton_under">
-                    <template v-if="item.result[0]">
-                        <p class="term">{{ item.reault[0]}}</p> 
+                    <template v-if="item.result">
+                        <p class="term">{{ item.result[0]}}</p>
                     </template>
                     <template v-else-if="item.status==true">
-                        <p class="term1"><b>Доступно</b></p>
+                        <p class="term"><b>Доступно</b></p>
                     </template>
                     <template v-else>
-                        <p class="term1"><b>Недоступно</b></p>
+                        <p class="term"><b>Недоступно</b></p>
                     </template>
                     <template>
-                        <p v-if="item.date_end">{{  Convet(item.date_end) }}</p>
+                        <p class="term1" v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
-                <template v-if="item.to">
-                    <router-link class="router"  :to="item.to">Приступить</router-link>
+                <template v-if="Inactiv">
+                    <template v-if="item.to">
+                        <router-link class="router" :to="{name: item.to.name}">Приступить</router-link>
+                    </template>
+                    <template v-else>
+                        <button >Инструкция</button>
+                    </template>
                 </template>
-                <template v-else>
-                    <button >Инструкция</button>
-                </template>
+                
             </div>
         </div>
     </section>
@@ -40,16 +43,34 @@
 
 <script>
 import { ConvertDate } from '@/java/stages_data.js'
+
 export default{
     name:'GreadBlock',
      props: {
         item: Object
     },
+    data() {
+        return {
+            model_instruction: false,
+           
+        }
+    },
     methods:{
         Convet(data){
-            ConvertDate(data)
+           return ConvertDate(data)
+        },
+          
+    },
+    comments:{
+        Inactiv() {
+            if (!!this.item.result || !!this.item.status) {
+                return  false
+            } else {
+                return true
+            }
         }
     }
+   
     
 }
 </script>
@@ -108,17 +129,39 @@ section {
             align-items: center;
             margin-top: 7px;
             .router{
+                
+                
+                    background-color: #0079C2;
+                color: white;
+                font-weight: 700;
+                font-size: 48px;
+                line-height: 48px;
+                
+                border: none;
+                margin-top: 16px;
+                
+                height: 64px;
+                padding: 10px 25px 10px 25px;
+                
+            }
+            .router:hover{
+                background: #064677;
+            }
+            button{
                 background-color: #0079C2;
                 color: white;
                 font-weight: 700;
                 font-size: 48px;
                 line-height: 48px;
-                border-radius: 0px;
+            
                 border: none;
                 margin-top: 16px;
-                width: 50%;
+                
                 height: 64px;
                 padding: 10px 25px 10px 25px;
+            }
+            button:hover{
+                background: #064677;
             }
             .botton_under{
                 .term1{

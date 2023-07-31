@@ -1,29 +1,29 @@
 <template>
     <section>
         <div class="GreadBlock" >
-            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
+            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"   ></GreadBlock>
         </div> 
-        <div v-if="lastItem" :class="{ 'inactive': this.blockInactiv }" class="GreadBlock6">
+        <div v-if="lastItem" :class="{ 'inactive': Inactiv }" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
-
-                    <template v-if="item.to">
-                        <router-link class="router"  :to="item.to">Приступить</router-link>
-                    </template>
-                    <template v-else>
-                        <button v-on:click="OpenModel" >Инструкция</button>
-                    </template>
-
-                    <div class="botton_under">
-                        <template v-if="item.result[0]">
-                            <p class="term">{{ item.reault[0] }}</p> 
-                        </template>
-                        <template v-else-if="item.status == true">
-                            <p class="term1"><b>Доступно</b></p>
+                    <template v-if="Inactiv">
+                        <template v-if="lastItem.to">
+                            <router-link class="router"  :to="{name:lastItem.to.name}">Приступить</router-link>
                         </template>
                         <template v-else>
-                            <p class="term1"><b>Недоступно</b></p>
+                            <button v-on:click="OpenModel" >Инструкция</button>
+                        </template>
+                    </template>   
+                    <div class="botton_under">
+                        <template v-if="lastItem.result">
+                            <p class="term">{{ lastItem.result[0] }}</p> 
+                        </template>
+                        <template v-else-if="lastItem.status == true">
+                            <p class="term"><b>Доступно</b></p>
+                        </template>
+                        <template v-else>
+                            <p class="term"><b>Недоступно</b></p>
                         </template>
                         <template v-if="lastItem.date_end">
                             <p class="term1">{{ Convet(lastItem.date_end) }}</p>
@@ -37,8 +37,8 @@
                     <img :src="lastItem.image" alt="">
                 </div>
             </div> 
-            <InstructionModal  @instruction="OpenModel" v-if="model_instruction"></InstructionModal>
-        </div> 
+        </div>
+         <InstructionModal  class="InstructionModal"  @instruction="OpenModel" v-if="model_instruction"></InstructionModal>
     </section>
 </template>
 
@@ -73,7 +73,13 @@ export default{
             if(!this.Items.length) return null
             return this.Items[ this.Items.length - 1];
         },
-        
+         Inactiv() {
+            if (!!this.lastItem.result || !!this.lastItem.status) {
+                return false
+            } else {
+                return true
+            }
+        }
 
     },
     methods:{  
@@ -81,28 +87,20 @@ export default{
             'getStages'
         ]),
         Convet(data) {
-            ConvertDate(data)
+            return ConvertDate(data);
         },
         OpenModel(){
-            if(this.madel_instruction){
-                this.madel_instruction=!this.madel_instruction
-            }else{
-                this.madel_instruction = !this.madel_instruction
-            }
+            this.model_instruction =!this.model_instruction
+          
         },
-        Inactiv() {
-            if (this.Items.result == false || this.Items.status == false) {
-                this.blockInactiv = true
-            } else {
-                this.blockInactiv = false
-            }
-        }
+        
 
         
     },
     mounted() {
         this.getStages()
-
+        
+        
     },
 };
 
@@ -166,11 +164,21 @@ section{
                     } 
                 }
                 button{
-                    font-size: 42px;
-                    padding: 4px auto;
-                    width: 214px;
+                    background-color: #0079C2;
+                    color: white;
+                    font-weight: 700;
+                    font-size: 48px;
+                    line-height: 48px;
+                    border-radius: 0px;
+                    border: none;
+                    margin-top: 16px;
+                    height: 64px;
+                    padding: 10px 25px 10px 25px;
                     
                 }
+                 button:hover{
+                    background: #064677;
+                 }
             }
             .between{
                 display: flex;

@@ -1,7 +1,7 @@
 <template>
     <section>
         <h2>Личная информация</h2> 
-        <form>
+        <div class="form">
             <div class="input-wrapper">
                 <label for="">Имя</label>
                 <input required aria-required="true" type="text" v-model.lazy="name" :class="{ 'errorName': errorName }" placeholder="Ваше имя">
@@ -12,7 +12,7 @@
             </div>
             <div class="input-wrapper">
                 <label  for="">Табельный номер</label>
-                <input  type="text" autocomplete="on" v-model="service_number" placeholder="863421" value="863421">
+                <input :disabled="true" type="text" autocomplete="on"  :placeholder="this.tabel_number" >
             </div>
             <div class="input-wrapper">
                 <label for="">Должность</label>
@@ -23,7 +23,7 @@
                 <div class="selector_wraper"   >
                     <select list="selector" foe="selector"  v-model="branch" class="select">
                         <option disabled  value="">Ваш филиал</option>
-                        <option v-for="(item, index) in items" :key="index" >{{ item.name }}</option>
+                        <option v-for="(item, index) in items" :value="item.id" :key="index" >{{ item.name }}</option>
                     </select>
                 </div>
             </div>
@@ -32,12 +32,11 @@
                 <input required type="text" v-model.lazy="experience" :class="{ 'errorExperience': errorExperience }"  placeholder="Ваш стаж">
             </div>
             <div class="form-action">
-            <button @click="POST" :class="{ 'disabled ': disableBtn }"   >
-                    <router-link class="router"  :to="{name: 'StagesCompetitionBlock'}">Завершить</router-link>
-            </button>
-        
+                <button @click="POST" :class="{ 'disabled ': disableBtn }">
+                       Завершить
+                </button>
             </div>
-        </form>
+        </div>
     </section>
 </template>
 
@@ -57,10 +56,12 @@ export default{
             errorName:false,
             errorSurname: false,
             errorExperience: false,
-            error_service_number:false,
             errorbranch:false,
             errorPost:false,
-            items:[]
+            items:[],
+            tabel_number:'',
+            check_video: true
+
         }
     },
     computed: {
@@ -70,37 +71,41 @@ export default{
     },
     watch: {
         name(v) {
-            const re = /[^a-zA-Zа-яА-Я ]/ui
+            const re = /[^а-яА-Я ]/ui
             this.errorName = re.test(v)
         },
         surname(e){
-            const re = /[^a-zA-Zа-яА-Я ]/ui
+            const re = /[^а-яА-Я ]/ui
             this.errorSurname = re.test(e)
         },
         post(s){
-            const re = /[^a-zA-Zа-яА-Я ]/ui
+            const re = /[^а-яА-Я ]/ui
             this.errorPost = re.test(s)
         },
-        experience(b){
-            const re = /^[1-9]/ui
-            this.errorExperience = re.test(b)
+        experience(b) {
+            const re = /^[1-9]\d*(\d+)?$/ui;
+            this.errorExperience = !re.test(b);
         }
     },
     methods:{
         POST() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/form', {
+            if(this.errorName==false&&this.errorSurname==false&&this.errorExperience==false &&this.branch&& this.errorPost==false){
+                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/form', {
                 name:this.name,
-				surname: this.service_number,
+				surname: this.surname,
 				position: this.post,
 				work_experience: this.experience,
 				branch_id: this.branch,
+                check_video:this.check_video
 														
-            })
+                })
                 .then(response => {
                    console.log(response.data)
                     axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
                 })
                 .catch(error => { this.status = error.status })
+            }
+           
         },
         fetchData() {
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/branches')
@@ -115,6 +120,16 @@ export default{
     },
     mounted() {
         this.fetchData()
+        axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/profile')
+            .then(response => {
+                console.log(response.data.data)
+                this.tabel_number=response.data.data.tabel_number
+
+            })
+            .catch(error => {
+                console.error(error);
+                
+            });
     },
  
   
@@ -183,18 +198,17 @@ button.disableBtn {
     display: flex;
     justify-content: flex-end;
     margin-top: 172px;
-    button{
-            
-            height: 74px;
-            font-size: 36px;
-            
-           
-             .router{
-               background-color: none;
-               color: white;
-                
-            }
+    button{      
+        height: 74px;
+        font-size: 36px;
+         .router{
+           background-color: none;
+           color: white; 
         }
+    }
+    button:hover{
+        background: #064677;
+    }
 }
 section{
     width: 1210px;
@@ -208,7 +222,7 @@ section{
         font-size: 48px;
         font-weight: 700;
     }
-    form{
+    .form{
         margin: 40px 0;
         width: 1060px;
         max-width: 100%;

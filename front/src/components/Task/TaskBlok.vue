@@ -5,7 +5,7 @@
             <p>{{ data}}</p>
         </div>
         <h2>Решение</h2>
-        <textarea v-model="text"  :class="{ 'invalue ': disableButton }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
+        <textarea v-model="text"  :class="{ 'invalue ': erortext }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
         <div class="under">
             <div class="checkbox1">
                 <div class="checkbox2" v-on:click="Checbox">
@@ -13,8 +13,8 @@
                 </div>
                 <label >Я загрузил (-а) файлы.</label>
             </div>
-            <button @click="POST" :class="{ 'disabled ': disableButton }">
-                <router-link class="router"  :to="{name: 'StagesCompetitionBlock'}">Завершить</router-link>
+            <button @click="POST" >
+                Завершить
             </button>
         </div>
     </section>
@@ -23,6 +23,7 @@
 
 <script>
 import axios from "axios"
+import router from "@/router"
 export default{
     name:'TaskBlock',
     data(){
@@ -38,13 +39,20 @@ export default{
             this.chect = !this.chect
         },
          POST() {
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/challenge', {
+            if(this.text.length > 50 && this.text.length < 5000){
+                this.erortext =false
+                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/challenge', {
                 solution:this.text , check_file:this.chect
-            })
+                })
                 .then(response => {
                     console.log(response)
+                    router.push( {name:'StagesCompetitionBlock'})
                 })
                 .catch(error => { console.log(error) })
+            }else{
+                this.erortext=true
+            }
+            
         },
         fetchData() {
             axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/task')
@@ -56,22 +64,10 @@ export default{
                 });
         }
     },
-    computed:{
-        disableButton(){
-          return this.text.length<50||this.text.length>5000
-        },
-     
-    },
     mounted(){
         this.fetchData()
     },
-     watch: {
-        erortext() {
-            if(this.text.length < 50 && this.text.length > 5000){
-                return this.erortext=true
-            }
-        },
-    }
+
 }
 </script>
 
@@ -125,16 +121,15 @@ section{
                 font-size: 32px;
             }
             .checkbox2{
+                cursor: pointer;
                  width: 50px;
                 height: 50px;
                 border: 2px solid #064677;
                 margin-right: 32px;
             }
         }
-        button.disabled{
-            background-color: #E7E8E5;
-            color: white;
-            pointer-events: none;
+        button:hover{
+            background: #064677;
         }
         button{
             height: 74px;

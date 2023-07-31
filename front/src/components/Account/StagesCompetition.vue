@@ -3,11 +3,11 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"   ></GreadBlock>
         </div> 
-        <div v-if="lastItem" :class="{ 'inactive': blockInactiv }" class="GreadBlock6">
+        <div v-if="lastItem" :class="{ 'inactive': Inactiv }" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
-                    <template v-if="this.blockInactiv">
+                    <template v-if="Inactiv">
                         <template v-if="lastItem.to">
                             <router-link class="router"  :to="{name:lastItem.to.name}">Приступить</router-link>
                         </template>
@@ -37,8 +37,8 @@
                     <img :src="lastItem.image" alt="">
                 </div>
             </div> 
-            <InstructionModal  @instruction="OpenModel" v-if="model_instruction"></InstructionModal>
-        </div> 
+        </div>
+         <InstructionModal  class="InstructionModal"  @instruction="OpenModel" v-if="model_instruction"></InstructionModal>
     </section>
 </template>
 
@@ -73,7 +73,13 @@ export default{
             if(!this.Items.length) return null
             return this.Items[ this.Items.length - 1];
         },
-        
+         Inactiv() {
+            if (!!this.lastItem.result || !!this.lastItem.status) {
+                return false
+            } else {
+                return true
+            }
+        }
 
     },
     methods:{  
@@ -87,19 +93,13 @@ export default{
             this.model_instruction =!this.model_instruction
           
         },
-        Inactiv() {
-            if ((this.lastItem.result == false || this.lastItem.status == false)) {
-                this.blockInactiv = true
-            } else {
-                this.blockInactiv = false
-            }
-        }
+        
 
         
     },
     mounted() {
         this.getStages()
-        this.Inactiv()
+        
         
     },
 };

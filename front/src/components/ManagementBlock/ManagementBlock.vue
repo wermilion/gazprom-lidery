@@ -82,7 +82,7 @@ export default {
 
             if (!this.items.every(item => item.status === true)) {
                 const postData = {
-                    chectproblem: this.items[0].value,
+                    problem: this.items[0].value,
                     management_task: this.items[1].value,
                     solution: this.items[2].value,
                     result: this.items[3].value,

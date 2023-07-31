@@ -23,7 +23,7 @@
                 <div class="selector_wraper"   >
                     <select list="selector" foe="selector"  v-model="branch" class="select">
                         <option disabled  value="">Ваш филиал</option>
-                        <option v-for="(item, index) in items" :key="index" >{{ item.name }}</option>
+                        <option v-for="(item, index) in items" :value="item.id" :key="index" >{{ item.name }}</option>
                     </select>
                 </div>
             </div>

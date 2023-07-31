@@ -59,14 +59,17 @@ export default{
         Convet(data){
            return ConvertDate(data)
         },
-          Inactiv() {
-            if  (!!this.item.result  || !!this.item.status) {
-                return true
+          
+    },
+    comments:{
+        Inactiv() {
+            if (!!this.item.result || !!this.item.status) {
+                return  false
             } else {
-                return false
+                return true
             }
         }
-    },
+    }
    
     
 }

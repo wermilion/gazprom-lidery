@@ -59,7 +59,8 @@ export default{
             errorbranch:false,
             errorPost:false,
             items:[],
-            tabel_number:''
+            tabel_number:'',
+            check_video: true
 
         }
     },
@@ -89,12 +90,13 @@ export default{
     methods:{
         POST() {
             if(this.errorName==false&&this.errorSurname==false&&this.errorExperience==false &&this.branch&& this.errorPost==false){
-                 axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/form', {
+                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/form', {
                 name:this.name,
 				surname: this.surname,
 				position: this.post,
 				work_experience: this.experience,
 				branch_id: this.branch,
+                check_video:this.check_video
 														
                 })
                 .then(response => {

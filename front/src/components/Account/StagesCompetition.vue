@@ -17,13 +17,13 @@
                     </template>   
                     <div class="botton_under">
                         <template v-if="lastItem.result">
-                            <p class="term">{{ lastItem.reault[0] }}</p> 
+                            <p class="term">{{ lastItem.result[0] }}</p> 
                         </template>
                         <template v-else-if="lastItem.status == true">
-                            <p class="term1"><b>Доступно</b></p>
+                            <p class="term"><b>Доступно</b></p>
                         </template>
                         <template v-else>
-                            <p class="term1"><b>Недоступно</b></p>
+                            <p class="term"><b>Недоступно</b></p>
                         </template>
                         <template v-if="lastItem.date_end">
                             <p class="term1">{{ Convet(lastItem.date_end) }}</p>
@@ -99,6 +99,7 @@ export default{
     },
     mounted() {
         this.getStages()
+        this.Inactiv()
         
     },
 };
@@ -175,6 +176,9 @@ section{
                     padding: 10px 25px 10px 25px;
                     
                 }
+                 button:hover{
+                    background: #064677;
+                 }
             }
             .between{
                 display: flex;

@@ -1,5 +1,5 @@
   <template>
-    <section :class="item.activity_status">
+    <section :class="{'inactive': Inactiv }">
         <div class="contenerStage" >
             <div class="top " >
                 <h2>{{ item.name }}</h2>
@@ -14,7 +14,7 @@
             </div>
             <div class="botton">
                 <div class="botton_under">
-                    <template v-if="item.result[0]">
+                    <template v-if="item.result">
                         <p class="term">{{ item.reault[0]}}</p> 
                     </template>
                     <template v-else-if="item.status==true">

@@ -163,7 +163,7 @@ section{
                 }
                 button{
                     font-size: 42px;
-                    padding: 4px auto;
+                    padding: 8px 16px;
                     width: 214px;
                     
                 }

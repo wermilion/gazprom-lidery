@@ -1,5 +1,5 @@
   <template>
-    <section :class="{'inactive': Inactiv}">
+    <section :class="{ 'inactive': Inactiv }">
         <div class="contenerStage" >
             <div class="top " >
                 <h2>{{ item.name }}</h2>
@@ -18,13 +18,13 @@
                         <p class="term">{{ item.result[0]}}</p>
                     </template>
                     <template v-else-if="item.status==true">
-                        <p class="term1"><b>Доступно</b></p>
+                        <p class="term"><b>Доступно</b></p>
                     </template>
                     <template v-else>
-                        <p class="term1"><b>Недоступно</b></p>
+                        <p class="term"><b>Недоступно</b></p>
                     </template>
                     <template>
-                        <p v-if="item.date_end">{{  Convet(item.date_end) }}</p>
+                        <p class="term1" v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
                 <template v-if="Inactiv">
@@ -157,7 +157,7 @@ section {
                 height: 64px;
                 padding: 10px 25px 10px 25px;
             }
-            button{
+            button:hover{
                 background: #064677;
             }
             .botton_under{

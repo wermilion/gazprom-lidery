@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="GreadBlock" >
-            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
+            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"   ></GreadBlock>
         </div> 
         <div v-if="lastItem" :class="{ 'inactive': blockInactiv }" class="GreadBlock6">
             <div class="contenerStage1">
@@ -88,7 +88,7 @@ export default{
           
         },
         Inactiv() {
-            if ((this.lastItem.result[0] == false || this.lastItem.status == false)) {
+            if ((this.lastItem.result == false || this.lastItem.status == false)) {
                 this.blockInactiv = true
             } else {
                 this.blockInactiv = false

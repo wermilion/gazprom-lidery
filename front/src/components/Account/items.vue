@@ -1,5 +1,5 @@
   <template>
-    <section :class="{ 'inactive': Inactiv }">
+    <section :class="{ 'inactive': Inactiv}">
         <div class="contenerStage" >
             <div class="top " >
                 <h2>{{ item.name }}</h2>
@@ -60,7 +60,7 @@ export default{
            return ConvertDate(data)
         },
           Inactiv() {
-            if  (this.item.result === false || this.item.status === false) {
+            if  (!!this.item.result  || !!this.item.status) {
                 return true
             } else {
                 return false

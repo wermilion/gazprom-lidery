@@ -42,5 +42,5 @@ export function ConvertDate(date) {
             break;
     }
 
-    return 'До '+day + month
+    return 'До '+day+" "+ month
 }

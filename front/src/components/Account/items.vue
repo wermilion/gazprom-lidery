@@ -1,4 +1,4 @@
-<template>
+  <template>
     <section :class="item.activity_status">
         <div class="contenerStage" >
             <div class="top " >
@@ -48,6 +48,13 @@ export default{
     methods:{
         Convet(data){
             ConvertDate(data)
+        },
+          Inactiv() {
+            if  (this.item.result[0] === false || this.item.status === false) {
+                this.blockInactiv = true
+            } else {
+                this.blockInactiv = false
+            }
         }
     }
     

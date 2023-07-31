@@ -43,6 +43,8 @@
 
 <script>
 import axios from "axios"
+import router from "@/router"
+
 export default{
     name: "QuestionnaireBlock",
     data(){
@@ -100,7 +102,8 @@ export default{
 														
                 })
                 .then(response => {
-                   console.log(response.data)
+                   router.push({ name: 'StagesCompetitionBlock' });
+                   response
                     axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
                 })
                 .catch(error => { this.status = error.status })

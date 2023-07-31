@@ -28,12 +28,12 @@ const Stage = {
                     name: 'QuestionnairePage'
                   }
                   break;
-                case 3:
+                case 4:
                   to = {
                     name: 'ManagmentPage'
                   }
                   break;
-                case 4:
+                case 5:
                   to = {
                     name: 'TaskPage'
                   }

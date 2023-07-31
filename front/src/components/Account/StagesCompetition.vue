@@ -7,13 +7,14 @@
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
-                    <template v-if="lastItem.to">
-                        <router-link class="router"  :to="{name:lastItem.to.name}">Приступить</router-link>
-                    </template>
-                    <template v-else>
-                        <button v-on:click="OpenModel" >Инструкция</button>
-                    </template>
-
+                    <template v-if="this.blockInactiv">
+                        <template v-if="lastItem.to">
+                            <router-link class="router"  :to="{name:lastItem.to.name}">Приступить</router-link>
+                        </template>
+                        <template v-else>
+                            <button v-on:click="OpenModel" >Инструкция</button>
+                        </template>
+                    </template>   
                     <div class="botton_under">
                         <template v-if="lastItem.result">
                             <p class="term">{{ lastItem.reault[0] }}</p> 
@@ -87,7 +88,7 @@ export default{
           
         },
         Inactiv() {
-            if (this.lastItem && (this.lastItem.result[0] === false || this.lastItem.status === false)) {
+            if ((this.lastItem.result[0] == false || this.lastItem.status == false)) {
                 this.blockInactiv = true
             } else {
                 this.blockInactiv = false
@@ -162,9 +163,16 @@ section{
                     } 
                 }
                 button{
-                    font-size: 42px;
-                    padding: 8px 16px;
-                    width: 214px;
+                    background-color: #0079C2;
+                    color: white;
+                    font-weight: 700;
+                    font-size: 48px;
+                    line-height: 48px;
+                    border-radius: 0px;
+                    border: none;
+                    margin-top: 16px;
+                    height: 64px;
+                    padding: 10px 25px 10px 25px;
                     
                 }
             }

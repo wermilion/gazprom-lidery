@@ -35,7 +35,7 @@ export function ConvertDate(date) {
             month = 'октября'
             break;
         case 10:
-            month = 'нояюря'
+            month = 'ноября'
             break;
         case 11:
             month = 'декабря'

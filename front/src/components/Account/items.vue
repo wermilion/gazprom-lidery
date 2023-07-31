@@ -1,5 +1,5 @@
   <template>
-    <section :class="{'inactive': blockInactiv }">
+    <section :class="{'inactive': Inactiv}">
         <div class="contenerStage" >
             <div class="top " >
                 <h2>{{ item.name }}</h2>
@@ -15,7 +15,7 @@
             <div class="botton">
                 <div class="botton_under">
                     <template v-if="item.result">
-                        <p class="term">{{ item.reault[0]}}</p> 
+                        <p class="term">{{ item.result[0]}}</p>
                     </template>
                     <template v-else-if="item.status==true">
                         <p class="term1"><b>Доступно</b></p>
@@ -27,7 +27,7 @@
                         <p v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
-                <template v-if="blockInactiv">
+                <template v-if="Inactiv">
                     <template v-if="item.to">
                         <router-link class="router" :to="{name: item.to.name}">Приступить</router-link>
                     </template>
@@ -52,7 +52,7 @@ export default{
     data() {
         return {
             model_instruction: false,
-            blockInactiv: true
+           
         }
     },
     methods:{
@@ -61,12 +61,13 @@ export default{
         },
           Inactiv() {
             if  (this.item.result === false || this.item.status === false) {
-                this.blockInactiv = true
+                return true
             } else {
-                this.blockInactiv = false
+                return false
             }
         }
-    }
+    },
+   
     
 }
 </script>
@@ -126,19 +127,19 @@ section {
             margin-top: 7px;
             .router{
                 
-                button{
+                
                     background-color: #0079C2;
                 color: white;
                 font-weight: 700;
                 font-size: 48px;
                 line-height: 48px;
-                border-radius: 0px;
+                
                 border: none;
                 margin-top: 16px;
-                width: 50%;
+                
                 height: 64px;
                 padding: 10px 25px 10px 25px;
-                }
+                
             }
             .router:hover{
                 background: #064677;
@@ -149,10 +150,10 @@ section {
                 font-weight: 700;
                 font-size: 48px;
                 line-height: 48px;
-                border-radius: 0px;
+            
                 border: none;
                 margin-top: 16px;
-                width: 50%;
+                
                 height: 64px;
                 padding: 10px 25px 10px 25px;
             }

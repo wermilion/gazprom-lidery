@@ -80,17 +80,14 @@ export default{
             'getStages'
         ]),
         Convet(data) {
-            ConvertDate(data)
+            return ConvertDate(data);
         },
         OpenModel(){
-            if(this.madel_instruction){
-                this.madel_instruction=!this.madel_instruction
-            }else{
-                this.madel_instruction = !this.madel_instruction
-            }
+            this.model_instruction =!this.model_instruction
+          
         },
         Inactiv() {
-            if (this.Items.result == false || this.Items.status == false) {
+            if (this.lastItem && (this.lastItem.result[0] === false || this.lastItem.status === false)) {
                 this.blockInactiv = true
             } else {
                 this.blockInactiv = false

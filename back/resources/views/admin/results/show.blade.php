@@ -89,10 +89,12 @@
                                         </button>
                                     </form>
                                 @endif
-                                <a href="{{route('cp.results.printPdf', [$stage, $result])}}"
-                                   class="w-max trigger hover:bg-gazprom-500 hover:text-white ml-4">
-                                    Экспорт
-                                </a>
+                                @if($stage->name != 'Очный этап' && $stage->name != 'Финал')
+                                    <a href="{{route('cp.results.printPdf', [$stage, $result])}}"
+                                       class="w-max trigger hover:bg-gazprom-500 hover:text-white ml-4">
+                                        Экспорт
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>

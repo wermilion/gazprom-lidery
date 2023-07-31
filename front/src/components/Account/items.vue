@@ -1,5 +1,5 @@
   <template>
-    <section :class="{'inactive': this.blockInactiv }">
+    <section :class="{'inactive': blockInactiv }">
         <div class="contenerStage" >
             <div class="top " >
                 <h2>{{ item.name }}</h2>
@@ -27,7 +27,7 @@
                         <p v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
-                <template v-if="this.blockInactiv">
+                <template v-if="blockInactiv">
                     <template v-if="item.to">
                         <router-link class="router" :to="{name: item.to.name}">Приступить</router-link>
                     </template>

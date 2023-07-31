@@ -3,7 +3,7 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"  :item="item" v-bind:class="'GreadBlock'+index"  ></GreadBlock>
         </div> 
-        <div v-if="lastItem" :class="{ 'inactive': this.blockInactiv }" class="GreadBlock6">
+        <div v-if="lastItem" :class="{ 'inactive': blockInactiv }" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>

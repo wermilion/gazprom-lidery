@@ -87,6 +87,8 @@ section{
         border: 1px solid #0079C2;
     }
     textarea{
+         color: #064677;
+        
         border: none;
         outline: none;
         min-height:299px;

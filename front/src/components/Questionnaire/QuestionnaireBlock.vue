@@ -158,13 +158,14 @@ export default{
         border: none;
         font-size: 28px;
         font-weight: 400;
+        padding-bottom: 5px;
         border-bottom:5px  solid #3394CE;
     } 
     input{
         border: none;
-        height: 34px;
+        height: 38px;
         border-bottom:5px  solid #3394CE;
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 400;
         margin-bottom: 48px;
         
@@ -172,6 +173,8 @@ export default{
     input:active, :hover, :focus {
         outline: 0;
         outline-offset: 0;
+        
+
     }
     &:nth-child(2n) {
         padding-left: 65px;

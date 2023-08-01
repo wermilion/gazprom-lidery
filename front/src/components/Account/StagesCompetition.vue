@@ -77,10 +77,10 @@ export default{
             return this.Items[ this.Items.length - 1];
         },
          Inactiv() {
-            if (!!this.Items[this.Items.length - 1].result || !!this.Items[this.Items.length - 1].status) {
-                return true
+            if (this.Items[this.Items.length - 1].status==true) {
+               return false
             } else {
-               return false 
+               return true
             }
         }
 

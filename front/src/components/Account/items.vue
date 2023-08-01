@@ -63,11 +63,10 @@ export default{
     },
     computed:{
         Inactiv() {
-            if (!!this.item.result || !!this.item.status) {
+            if (this.item.status==true) {
                 return false
             } else {
                 return true
-                
             }
         }
     }

@@ -68,19 +68,26 @@ export default {
             ],
             chect:false,
             
+            
         }
     },
     methods:{
         Checbox(){
             this.chect=!this.chect
         },
-        checkTextareas() {
+       checkTextareas() {
             for (let textarea of this.items) {
                 const value = textarea.value;
-                textarea.status = value.length < 50 || value.length > 1000;
+                if (value.length < 50 || value.length > 1000) {
+                    textarea.status = true;
+                } else {
+                    textarea.status = false;
+                }
+                console.log(textarea.status)
             }
 
             if (!this.items.every(item => item.status === true)) {
+                console.log(!this.items.every(item => item.status === true));
                 const postData = {
                     problem: this.items[0].value,
                     management_task: this.items[1].value,
@@ -93,13 +100,18 @@ export default {
                 axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/management-decision', postData)
                     .then(response => {
                         console.log(response);
-                        router.push({ name: 'StagesCompetitionBlock' });
+                        if(response.data.status){
+                           router.push({ name: 'StagesCompetitionBlock' }); 
+                        }
+                        
                     })
                     .catch(error => {
                         console.log(error);
+                        
                     });
             }
         },
+        
       
     },
   

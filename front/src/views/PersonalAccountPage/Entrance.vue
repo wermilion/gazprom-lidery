@@ -6,7 +6,7 @@
         <div class="right">
             <h2><b>ВХОД В КАБИНЕТ</b></h2>
             <form>
-                <input :class="{'eror_tabel_number': !userStatus }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
+                <input  :class="{'eror_tabel_number': !userStatus }" v-model="tabel_number" type="text" class="one" placeholder="Табельный номер " >
                 <input  :class="{ 'eror_password': !userStatus }" v-model="password" type="password" placeholder="Пароль"> 
                 <div class="shell_checkbox">
                     <div v-on:click="Remember" class="checkbox" >
@@ -16,7 +16,11 @@
                 </div>
             </form>
             <button v-on:click="performPost" >Войти</button>
+             <div v-if="!userStatus" class="model">
+                <p>Введен неверный логин или пароль</p>
+            </div>
         </div>
+       
     </section>
 </template>
 
@@ -52,7 +56,8 @@ export  default{
             }
             
         },
-         ...mapActions(['POST']),
+         
+                 ...mapActions(['POST']),
         async performPost() {
             const data = {
                 tabel_number: this.tabel_number,
@@ -76,6 +81,23 @@ section{
     width: 1456px;
     max-width: 100%;
     margin: 109px auto;
+    position: relative;
+    .model{
+        top:239px;
+        right: -80px;
+        padding: 16px 24px 18px 24px;
+        z-index: 99999;
+        border: 2px solid #F69F32;
+        background: #FFF;
+        position: absolute;
+        height: 62px;
+        width: 400px;
+        p{
+            color: #064677;
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
     h2{
         margin: 40px 0 58px;
     }

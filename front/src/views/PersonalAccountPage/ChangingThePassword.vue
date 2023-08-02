@@ -6,11 +6,14 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input :class='{"erorPassword": errorPassword}' required aria-required="true" v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
+                    <input  v-on:change="MOdelClose" :class='{"erorPassword": errorPassword}' required aria-required="true" v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input  required aria-required="true"  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
+                    <input v-on:change="MOdelClose" :class='{ "erorPassword": errorPassword }' required aria-required="true"  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
             <button v-on:click="CreateUserPasswprd" >Сохранить</button>
+        </div>
+        <div v-if="errorPassword" class="model">
+            <p>Пароли не совпадают</p>
         </div>
     </section>
 </template>
@@ -39,6 +42,9 @@ export default{
         hidePopup() {
             this.isPopupVisible = false;
         },
+        MOdelClose(){
+            this.errorPassword = false
+        },
          CreateUserPasswprd() {
             if(this.password1!=this.password2 || this.password1.length<8 || this.password2.length<8){
                 this.errorPassword=true
@@ -50,6 +56,7 @@ export default{
                 .then(response => {
                     if(response.data.status){
                         router.push('/stages') 
+                        this.errorPassword=false
                     }else{
                         this.errorPassword = true
                     }
@@ -76,6 +83,23 @@ section{
     width: 1456px;
     max-width: 100%;
     margin: 109px auto;
+    position: relative;
+    .model{
+        top:239px;
+        right: -40px;
+        padding: 16px 24px 18px 24px;
+        z-index: 99999;
+        border: 2px solid #F69F32;
+        background: #FFF;
+        position: absolute;
+        height: 62px;
+        width: 259px;
+        p{
+            color: #064677;
+            font-size: 24px;
+            font-weight: 700;
+        }
+    }
      h2{
         margin: 40px 0 58px;
     }

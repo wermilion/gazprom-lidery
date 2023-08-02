@@ -23,11 +23,11 @@
                     <template v-else>
                         <p class="term"><b>Недоступно</b></p>
                     </template>
-                    <template>
+                    <template v-if="!Inactiv">
                         <p class="term1" v-if="item.date_end">{{  Convet(item.date_end) }}</p>
                     </template>
                 </div>
-                <template v-if="Inactiv">
+                <template v-if="!Inactiv">
                     <template v-if="item.to">
                         <router-link class="router" :to="{name: item.to.name}">Приступить</router-link>
                     </template>
@@ -61,10 +61,10 @@ export default{
         },
           
     },
-    comments:{
+    computed:{
         Inactiv() {
-            if (!!this.item.result || !!this.item.status) {
-                return  false
+            if (this.item.status==true) {
+                return false
             } else {
                 return true
             }

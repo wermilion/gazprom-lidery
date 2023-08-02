@@ -3,7 +3,7 @@
         <div class="GreadBlock" >
             <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"   ></GreadBlock>
         </div> 
-        <div v-if="lastItem" :class="{ 'inactive': Inactiv }" class="GreadBlock6">
+        <div v-if="lastItem" :class="{ 'inactive': !Inactiv }" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
@@ -25,7 +25,7 @@
                         <template v-else>
                             <p class="term"><b>Недоступно</b></p>
                         </template>
-                        <template v-if="lastItem.date_end">
+                        <template v-if="Inactiv">
                             <p class="term1">{{ Convet(lastItem.date_end) }}</p>
                         </template>
                     </div>
@@ -46,7 +46,7 @@
 
 import GreadBlock from './items.vue';
 import { ConvertDate } from '@/java/stages_data.js'
-import {mapGetters, mapActions} from 'vuex';
+import {mapGetters,mapActions} from 'vuex';
 import InstructionModal from '@/components/Model/Instruction.vue'
 
 export default{
@@ -54,9 +54,12 @@ export default{
     data(){
         return{
             model_instruction:false,
-            blockInactiv:true
+            blockInactiv:true,
+           
         }
+        
     },
+
     components:{
         GreadBlock,
         InstructionModal
@@ -74,10 +77,10 @@ export default{
             return this.Items[ this.Items.length - 1];
         },
          Inactiv() {
-            if (!!this.lastItem.result || !!this.lastItem.status) {
-                return false
+            if (this.Items[this.Items.length - 1].status==true) {
+               return false
             } else {
-                return true
+               return true
             }
         }
 

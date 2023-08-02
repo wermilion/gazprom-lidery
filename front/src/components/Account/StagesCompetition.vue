@@ -1,13 +1,13 @@
 <template>
     <section>
         <div class="GreadBlock" >
-            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"   ></GreadBlock>
+            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"  @instruction="OpenModel"  ></GreadBlock>
         </div> 
-        <div v-if="lastItem" :class="{ 'inactive': !Inactiv }" class="GreadBlock6">
+        <div v-if="lastItem" :class="{ 'inactive': InactivStage }" class="GreadBlock6">
             <div class="contenerStage1">
                 <div class="top ">
                     <h2>{{ lastItem.name }}</h2>
-                    <template v-if="Inactiv">
+                    <template v-if="!Inactiv && !InactivStage">
                         <template v-if="lastItem.to">
                             <router-link class="router"  :to="{name:lastItem.to.name}">Приступить</router-link>
                         </template>
@@ -17,15 +17,21 @@
                     </template>   
                     <div class="botton_under">
                         <template v-if="lastItem.result">
-                            <p class="term">{{ lastItem.result[0] }}</p> 
+                            <p class="term">{{ lastItem.result[0] }}</p>
+                            <template v-if="lastItem.date_end && !InactivStage">
+                                <p class="term1">{{ Convet(lastItem.date_end) }}</p>
+                            </template> 
                         </template>
                         <template v-else-if="lastItem.status == true">
                             <p class="term"><b>Доступно</b></p>
                         </template>
                         <template v-else>
                             <p class="term"><b>Недоступно</b></p>
+                            <template v-if="lastItem.date_start">
+                                <p class="term1">{{ Convet(lastItem.date_start) }} </p>
+                            </template>
                         </template>
-                        <template v-if="Inactiv">
+                        <template v-if="!Inactiv">
                             <p class="term1">{{ Convet(lastItem.date_end) }}</p>
                         </template>
                     </div>
@@ -38,7 +44,18 @@
                 </div>
             </div> 
         </div>
-         <InstructionModal  class="InstructionModal"  @instruction="OpenModel" v-if="model_instruction"></InstructionModal>
+
+        <section v-if="model_instruction" class="InstructionModal">
+            <section class="chell">
+                <div class="inside">
+                    <p>Здесь будет инструкция</p>
+                </div>
+                <div class="botton">
+                    <button v-on:click="OpenModel">Готово</button>
+                </div>
+            </section>
+        </section>
+
     </section>
 </template>
 
@@ -47,22 +64,17 @@
 import GreadBlock from './items.vue';
 import { ConvertDate } from '@/java/stages_data.js'
 import {mapGetters,mapActions} from 'vuex';
-import InstructionModal from '@/components/Model/Instruction.vue'
-
 export default{
     name:'StagesCompetitionBlock',
     data(){
         return{
             model_instruction:false,
             blockInactiv:true,
-           
         }
         
     },
-
     components:{
         GreadBlock,
-        InstructionModal
     },
     computed:{
         ...mapGetters([
@@ -82,7 +94,16 @@ export default{
             } else {
                return true
             }
-        }
+        },
+        InactivStage() {
+            let value = this.Items[this.Items.length - 1]
+            if (value.date_end > value.current_time && value.date_start < value.current_time) {
+                return false
+            } else {
+                return true
+            }
+        },
+
 
     },
     methods:{  
@@ -94,8 +115,8 @@ export default{
         },
         OpenModel(){
             this.model_instruction =!this.model_instruction
-          
         },
+       
         
 
         
@@ -114,7 +135,47 @@ section{
     width: 1840px;
     max-width: 100%;
     margin: 0 auto;
-    
+    .InstructionModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(244, 244, 244, 0.10);
+        backdrop-filter: blur(7.5px);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .chell {
+            width: 1840px;
+            max-width: 100%;
+            height: 903px;
+            box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
+
+            .inside {
+                border: 1px solid #000;
+                width: 1530px;
+                max-width: 100%;
+                height: 679px;
+                padding: 24px;
+            }
+            .botton{
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 32px;
+                width: 1530px;
+                max-width: 100%;
+                button:hover{
+                    background: #064677;
+                }
+            }
+
+
+        }
+    }
+
     .GreadBlock{
         display: grid;
         grid-template-columns: repeat(3, 32.60%);

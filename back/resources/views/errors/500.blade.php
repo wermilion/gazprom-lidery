@@ -17,10 +17,17 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100 text-gazprom-600 font-bold text-3xl flex flex-col items-center justify-center">
     <img src="{{asset('cp/images/404.svg')}}" alt="404" draggable="false">
-    <p class="mt-12 uppercase">
-        запрашиваемая страница не найдена. вернуться
-        <a class="text-gazprom-500" href="{{route('cp.index')}}">на главный экран</a>
-    </p>
+    @if($exception->getMessage() == 'Выставите даты для этапа')
+        <p class="mt-12 uppercase">
+            {{ $exception->getMessage() }}. перейти на страницу с
+            <a class="text-gazprom-500" href="{{route('cp.stages.index')}}">этапами</a>
+        </p>
+    @else
+        <p class="mt-12 uppercase">
+            что-то пошло не так. вернуться
+            <a class="text-gazprom-500" href="{{route('cp.index')}}">на главный экран</a>
+        </p>
+    @endif
 </div>
 </body>
 </html>

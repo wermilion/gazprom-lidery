@@ -9,8 +9,8 @@ import QuestionnairePage from "@/views/QuestionnairePage/QuestionnairePage.vue"
 
 
 Vue.use(VueRouter)
-
 const routes = [
+  
   {
     path:'/',
     name:'MainPage',
@@ -89,21 +89,25 @@ const routes = [
 
 
 
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+  if (savedPosition) {
+    return savedPosition
+  } else {
+    return { x: 0, y: 0 }
+  }
+}
+});
 
+router.beforeEach((to, from, next) => {
 
-router.beforeEach((to,from, next) => {
-  
   if (to.meta.title) {
     document.title = to.meta.title;
   }
 
   next();
 });
-
 export default router

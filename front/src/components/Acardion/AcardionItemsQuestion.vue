@@ -1,7 +1,7 @@
 <template>
     <section>
-        <div @click="Accordion()" class="Shell">
-            <button  class="head">
+        <div  class="Shell">
+            <button @click="Accordion()" class="head">
                 <p >{{ item.title }}</p>
                 <div>
                     <div :class="{ 'rotete_one':isActive }" class="one"></div>
@@ -12,7 +12,7 @@
                 <p v-if="item.p">{{ item.p }}</p>
                 <ul>
                     <li v-if="item.li1">{{ item.li1 }}</li>
-                    <li v-if="item.li2">{{ item.li2 }}<router-link class="router-link" to="" v-if="item.router">{{ item.router }}</router-link></li>
+                    <li v-if="item.li2">{{ item.li2 }}<a class="router-link" target="_blank" href="PDF/contest.pdf"  v-if="item.router">{{ item.router }}</a></li>
                     <li v-if="item.li3">{{ item.li3 }}</li>
                     <li v-if="item.li4">{{ item.li4 }}</li>
                 </ul>

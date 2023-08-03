@@ -48,14 +48,14 @@ section{
     width:100% ;
     margin: 0 auto;
     h2{
-        margin-top: 112px;
+        margin-top: 56px;
     }
     div{
         
         display: flex;
         width: 100%;
         justify-content: space-between;
-        margin-top: 56px;
+        margin-top: 32px;
          .ItemsWho{
                 width: 32.5%;
             }

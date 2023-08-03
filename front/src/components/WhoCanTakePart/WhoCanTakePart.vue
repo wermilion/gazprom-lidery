@@ -44,17 +44,17 @@ section{
     text-align: center;
     
     h2{
-        margin-top: 112px;
+        margin-top: 56px;
     }   
     .shell{
-        height: 527px;
-        margin: 112px 0 ;
+        height: 464px;
+        margin: 32px 0 56px ;
         display: flex;
         justify-content: space-around;
         position: relative;
         .line{
             position: absolute;
-            top:30%;
+            top:34%;
         }
         div{
             text-align: center;

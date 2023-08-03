@@ -17,7 +17,10 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gray-100 text-gazprom-600 font-bold text-3xl flex flex-col items-center justify-center">
     <img src="{{asset('cp/images/404.svg')}}" alt="404" draggable="false">
-    <p class="mt-12">ЗАПРАШИВАЕМАЯ СТРАНИЦА НЕ НАЙДЕНА. ВЕРНУТЬСЯ <a class="text-gazprom-500" href="{{route('cp.index')}}">НА ГЛАВНЫЙ ЭКРАН</a></p>
+    <p class="mt-12 uppercase">
+        запрашиваемая страница не найдена. вернуться
+        <a class="text-gazprom-500" href="{{route('cp.index')}}">на главный экран</a>
+    </p>
 </div>
 </body>
 </html>

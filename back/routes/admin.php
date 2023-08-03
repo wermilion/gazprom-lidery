@@ -3,10 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BranchController;
-use App\Http\Controllers\DistanceController;
-use App\Http\Controllers\FormStageController;
 use App\Http\Controllers\InstrumentController;
-use App\Http\Controllers\RegistrationStageController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\StageController;
 use App\Http\Controllers\UserController;
@@ -73,7 +70,7 @@ Route::name('cp.')->prefix('cp/')->group(function () {
 
             Route::get('', [ResultController::class, 'index'])->name('index');
 
-            Route::get('/{stage}', [ResultController::class, 'show'])->name('show');
+            Route::get('/show/{stage}', [ResultController::class, 'show'])->name('show');
 
             Route::post('accept/{result}', [ResultController::class, 'accept'])->name('accept');
 

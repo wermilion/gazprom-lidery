@@ -19,6 +19,8 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use InvalidArgumentException;
+use SebastianBergmann\Timer\Exception;
 
 class ResultController extends Controller
 {
@@ -147,18 +149,22 @@ class ResultController extends Controller
     private function createResult(Stage $stage): void
     {
         if (Carbon::now() > $stage->date_end) {
-            $prev_stage = Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
-            if (Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->exists()) {
-                $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
-                foreach ($prev_results as $prev_result) {
-                    if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
-                        Result::query()->create([
-                            'stage_id' => $stage->id,
-                            'user_id' => $prev_result->user_id,
-                            'result_status_id' => 3
-                        ]);
+            try {
+                $prev_stage = Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->first();
+                if (Stage::query()->where('date_end', '<', $stage->date_start)->orderBy('date_end', 'desc')->exists()) {
+                    $prev_results = Result::query()->where('stage_id', '=', $prev_stage->id)->where('result_status_id', '=', 1)->get();
+                    foreach ($prev_results as $prev_result) {
+                        if (!Result::query()->where('user_id', $prev_result->user_id)->where('stage_id', $stage->id)->exists()) {
+                            Result::query()->create([
+                                'stage_id' => $stage->id,
+                                'user_id' => $prev_result->user_id,
+                                'result_status_id' => 3
+                            ]);
+                        }
                     }
                 }
+            } catch (InvalidArgumentException $exception) {
+                abort(500, 'Выставите даты для этапа');
             }
         }
     }

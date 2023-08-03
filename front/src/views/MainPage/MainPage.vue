@@ -74,10 +74,10 @@ section{
 }
 
 .StagesBlock{
-    margin-bottom: 112px;
+    margin-bottom: 56px;
 }
 .NumbersBlock{
-    margin-bottom: 112px;
+    margin-bottom: 56px;
 }
 
 </style>

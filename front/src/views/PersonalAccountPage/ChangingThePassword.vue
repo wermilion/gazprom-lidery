@@ -6,14 +6,17 @@
         <div class="right">
             <h2><b>СМЕНА ПАРОЛЯ</b></h2>
                 <form>
-                    <input  v-on:change="MOdelClose" :class='{"erorPassword": errorPassword}' required aria-required="true" v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
+                    <input  v-on:change="MOdelClose" :class='{"erorPassword": errorPassword || errorLenght }' required aria-required="true" v-model="password1"   @mouseover="showPopup" @mouseout="hidePopup" type="password"  placeholder="Введите пароль ">
                     <p v-show="isPopupVisible">Используйте латинские буквы Aa - Zz, цифры и знаки: .,!#$%&"*+/-=?^_`{|}~@ от 8 символов.</p>
-                    <input v-on:change="MOdelClose" :class='{ "erorPassword": errorPassword }' required aria-required="true"  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
+                    <input v-on:change="MOdelClose" :class='{ "erorPassword": errorPassword  || errorLenght }' required aria-required="true"  v-model="password2" class="one" type="password" placeholder="Повторите новый пароль"> 
                 </form>
             <button v-on:click="CreateUserPasswprd" >Сохранить</button>
         </div>
         <div v-if="errorPassword" class="model">
-            <p>Пароли не совпадают</p>
+            <p >Пароли не совпадают</p>
+        </div>
+        <div v-if="errorLenght" class="model">
+            <p  class="lenght">Пароль меньше 8 символов</p>
         </div>
     </section>
 </template>
@@ -30,6 +33,7 @@ export default{
             isPopupVisible: false,
             SruvnPassword:false,
             errorPassword:false,
+            errorLenght:false,
             password1:'',
             password2:'',
             
@@ -44,10 +48,13 @@ export default{
         },
         MOdelClose(){
             this.errorPassword = false
+            this.errorLenght = false
         },
          CreateUserPasswprd() {
-            if(this.password1!=this.password2 || this.password1.length<8 || this.password2.length<8){
+            if(this.password1!=this.password2  ){
                 this.errorPassword=true
+            }else if(this.password1.length<8 || this.password2.length<8){
+                this.errorLenght=true
             }else {
                 axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {
                 new_password: this.password1,
@@ -93,11 +100,15 @@ section{
         background: #FFF;
         position: absolute;
         height: 62px;
-        width: 259px;
+        width: 25%;
         p{
             color: #064677;
             font-size: 24px;
             font-weight: 700;
+            width: 259px;
+        }
+        .lenght{
+            width: 300px;
         }
     }
      h2{

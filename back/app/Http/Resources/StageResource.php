@@ -25,7 +25,7 @@ class StageResource extends JsonResource
             'image' => $this->image,
             'date_start' => $this->when($this->name != 'Регистрация', $this->date_start),
             'date_end' => $this->when($this->name != 'Регистрация', $this->date_end),
-            'current_time' => Carbon::now(),
+            'current_time' => Carbon::now('+7'),
             'status' => $this->when(ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(), function () {
                 if ($this->stage_status->status_name == 'Доступно') {
                     return true;

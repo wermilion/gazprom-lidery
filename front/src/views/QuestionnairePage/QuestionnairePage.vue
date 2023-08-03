@@ -43,6 +43,7 @@ import QuestionnaireBlock from '@/components/Questionnaire/QuestionnaireBlock.vu
 import ManualBlock from '@/components/Manual/ManualBlock.vue';
 import TackBlock from '@/components/Task/TaskBlok.vue'
 import ManagementBlock from '@/components/ManagementBlock/ManagementBlock.vue';
+import { mapGetters } from 'vuex';
 
 export default{
     name: "QuestionnairePage",
@@ -77,7 +78,12 @@ export default{
            
         }
     }, 
-  
+    computed:{
+         ...mapGetters([
+            'Items'
+        ]),
+        
+    },
     methods:{
          handleMouseEnter() {
             this.isHovered = true;
@@ -106,7 +112,7 @@ export default{
             if(this.checkbox){
                 this.questionnair=!this.questionnair
                 this.manual = !this.manual
-               
+                window.scrollTo({top: 0, behavior:'smooth'});
                 
             }
         },

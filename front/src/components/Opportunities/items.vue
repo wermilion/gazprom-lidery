@@ -20,7 +20,7 @@ export default{
 section{
     
     height: 500px;
-    border:1px solid black;
+    border: 1px solid #0079C2;
     display: flex;
     img{
         margin: 32px 0 24px;

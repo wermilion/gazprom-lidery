@@ -38,14 +38,26 @@
                         <router-link class="router" :to="{name: item.to.name}">Приступить</router-link>
                     </template>
                     <template v-else>
-                        <button v-on:click="$emit('instruction')" >Инструкция</button>
+                        <button v-on:click="OpenModel" >Инструкция</button>
                     </template>
                 </template>
-                
             </div>
         </div>
         
+
+        <section v-if="model_instruction" class="InstructionModal">
+                      <section class="chell">
+                          <div class="inside" v-if="item.instruction">
+                              <p>{{ item.instruction }}</p>
+                          </div>
+                          <div class="botton">
+                              <button v-on:click="OpenModel">Готово</button>
+                          </div>
+                  </section>
+            </section>
+
     </section>
+    
 </template>
 
 <script>
@@ -67,7 +79,9 @@ export default{
         Convet(data){
            return ConvertDate(data)
         },
-        
+        OpenModel() {
+            this.model_instruction = !this.model_instruction
+        },
           
     },
     computed:{
@@ -102,7 +116,62 @@ section {
     display: flex;
     flex-direction: column;
  
-    
+    .InstructionModal {
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(244, 244, 244, 0.10);
+        backdrop-filter: blur(7.5px);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .chell {
+            border: none;
+            width: 1840px;
+            max-width: 100%;
+            height: 903px;
+            background: #FFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
+
+            .inside {
+                border: 1px solid #000;
+                width: 1530px;
+                max-width: 100%;
+                height: 679px;
+                padding: 24px;
+                p{
+                    font-size: 32px;
+                }
+            }
+            .botton{
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 32px;
+                width: 1530px;
+                max-width: 100%;
+                font-size: 32px;
+                font-weight: 700;
+                button:hover{
+                    background: #064677;
+                }
+                button{
+                    font-size: 32px;
+                }
+
+            }
+
+
+        }
+    }
     .contenerStage{
         
         .top{
@@ -110,25 +179,27 @@ section {
             display: flex;
             align-items: flex-start;
             h2{
-                border: 2px solid #064677;
+                
                 color: #064677;  
                 font-weight: bold;
-                padding: 8px 16px;
+                
             }
         
         }
         .between{
             display: flex;
             align-items: center;
+            justify-content: center;
             margin-top: 15px;
             .text{
                 width: 55%;
             }
             p{
-                font-size: 20px;
-                border: 1px solid #000;
+                font-size: 32px;
                 height: 176px;
-                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
 
@@ -151,12 +222,12 @@ section {
                 color: white;
                 font-weight: 700;
                 font-size: 48px;
-                line-height: 48px;
+                
                 
                 border: none;
                 margin-top: 16px;
                 
-                height: 64px;
+                
                 padding: 10px 25px 10px 25px;
                 
             }
@@ -169,12 +240,12 @@ section {
                 color: white;
                 font-weight: 700;
                 font-size: 48px;
-                line-height: 48px;
+                
             
                 border: none;
                 margin-top: 16px;
                 
-                height: 64px;
+                
                 padding: 10px 25px 10px 25px;
             }
             button:hover{

@@ -5,7 +5,7 @@
             <p>{{ data}}</p>
         </div>
         <h2>Решение</h2>
-        <textarea v-model="text"  :class="{ 'invalue ': erortext }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
+        <textarea v-model="text" :maxlength="5000" :class="{ 'invalue ': erortext }"  placeholder="Описание решения. Допустимое количество символов от 50 до 5000." name="" id="" cols="30" rows="10"></textarea>
         <div class="under">
             <div class="checkbox1">
                 <div class="checkbox2" v-on:click="Checbox">
@@ -13,7 +13,7 @@
                 </div>
                 <label >Я загрузил (-а) файлы.</label>
             </div>
-            <button @click="POST" >
+            <button :class="{ 'disable': Disabled }" @click="POST" >
                 Завершить
             </button>
         </div>
@@ -34,12 +34,21 @@ export default{
              data: ''
         }
     },
+    computed:{
+        Disabled(){
+            if(this.text.length >= 50 && this.text.length <= 5000){
+                return false
+            }else{
+                return true
+            }
+        }
+    },
     methods: {
         Checbox() {
             this.chect = !this.chect
         },
          POST() {
-            if(this.text.length > 50 && this.text.length < 5000){
+            if(this.text.length >= 50 && this.text.length <= 5000){
                 this.erortext =false
                 axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/challenge', {
                 solution:this.text , check_file:this.chect
@@ -88,7 +97,7 @@ section{
     }
     textarea{
          color: #064677;
-        
+        font-family: HeliosCond;
         border: none;
         outline: none;
         min-height:299px;
@@ -132,6 +141,11 @@ section{
         }
         button:hover{
             background: #064677;
+        }
+        .disable{
+            background: #E7E8E5;
+            color: white;
+            pointer-events: none;
         }
         button{
             height: 74px;

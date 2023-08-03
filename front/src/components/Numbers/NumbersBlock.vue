@@ -38,7 +38,7 @@ section{
     
     text-align: center;
     h2{
-            margin-bottom: 112px;
+            margin-bottom: 32px;
         }
     .shell{
         

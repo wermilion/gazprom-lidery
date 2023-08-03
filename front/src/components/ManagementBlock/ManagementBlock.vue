@@ -2,7 +2,7 @@
     <section >
         <div v-for="(item, index) in items" :key="index">
             <h3>{{ item.title }}</h3>
-            <textarea v-model="item.value"  :class="{ 'invalid': item.status }"  cols="30" rows="10" :placeholder="item.text"></textarea>
+            <textarea v-model="item.value" :maxlength="1000" :class="{ 'invalid': item.status }"  cols="30" rows="10" :placeholder="item.text"></textarea>
         </div>
         <div class="under">
                 <div class="checkbox1"  >
@@ -13,7 +13,7 @@
                     </div>
                     <label  >Я загрузил (-а) файлы.</label>
                 </div>
-                <button @click="checkTextareas" >
+                <button :class="{ 'disable': !buttonEnable }" @click="checkTextareas" >
                    Завершить
                 </button>
             </div>
@@ -67,8 +67,24 @@ export default {
                 },
             ],
             chect:false,
+            buttonEnable:false
             
-            
+        }
+    },
+    computed: {
+        allTextareasValid() {
+            for (let i = 0; i < this.items.length; i++) {
+                const textareaLength = this.items[i].value.length
+                if (textareaLength <= 50 || textareaLength >= 1000) {
+                    return false
+                }
+            }
+            return true
+        }
+    },
+    watch: {
+        allTextareasValid() {
+            this.buttonEnable = this.allTextareasValid
         }
     },
     methods:{
@@ -83,11 +99,9 @@ export default {
                 } else {
                     textarea.status = false;
                 }
-                console.log(textarea.status)
             }
 
             if (!this.items.every(item => item.status === true)) {
-                console.log(!this.items.every(item => item.status === true));
                 const postData = {
                     problem: this.items[0].value,
                     management_task: this.items[1].value,
@@ -133,6 +147,7 @@ section{
             font-weight: 700px;
         }
         textarea{
+            font-family: HeliosCond;
             margin-bottom: 56px;
             resize: vertical;
             width: 100%;
@@ -178,7 +193,11 @@ section{
                 margin-right: 32px;
             }
         }
-        
+        .disable{
+            background: #E7E8E5;
+            color: white;
+            pointer-events: none;
+        }
         button{
             
             height: 74px;

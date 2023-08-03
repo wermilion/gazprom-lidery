@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="GreadBlock" >
-            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index"  @instruction="OpenModel"  ></GreadBlock>
+            <GreadBlock v-for="(item, index) in getListWithoutLastItem" :key="index"   :item="item" :class="'GreadBlock'+index" ></GreadBlock>
         </div> 
         <div v-if="lastItem" :class="{ 'inactive': InactivStage }" class="GreadBlock6">
             <div class="contenerStage1">
@@ -48,7 +48,7 @@
         <section v-if="model_instruction" class="InstructionModal">
             <section class="chell">
                 <div class="inside">
-                    <p>Здесь будет инструкция</p>
+                    <p>{{ lastItem.instruction }}</p>
                 </div>
                 <div class="botton">
                     <button v-on:click="OpenModel">Готово</button>
@@ -70,6 +70,7 @@ export default{
         return{
             model_instruction:false,
             blockInactiv:true,
+        
         }
         
     },
@@ -152,6 +153,11 @@ section{
             width: 1840px;
             max-width: 100%;
             height: 903px;
+            background: #FFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             box-shadow: 10px 10px 40px 0px rgba(51, 148, 206, 0.70);
 
             .inside {
@@ -160,6 +166,9 @@ section{
                 max-width: 100%;
                 height: 679px;
                 padding: 24px;
+                p{
+                    font-size: 32px;
+                }
             }
             .botton{
                 display: flex;
@@ -167,8 +176,13 @@ section{
                 margin-top: 32px;
                 width: 1530px;
                 max-width: 100%;
+                font-size: 32px;
+                font-weight: 700;
                 button:hover{
                     background: #064677;
+                }
+                button{
+                    font-size: 32px;
                 }
             }
 
@@ -206,12 +220,12 @@ section{
                 flex-direction: column;
                 justify-content: space-between;
                 h2{
-                    border: 2px solid #064677;
+                    
                     color: #064677;  
                     
                     font-family: HeliosCondBlack;
                     font-size: 128px;
-                    padding: 0 16px;
+                    
                     font-weight: 400;
                     line-height: 128px;
                     
@@ -232,11 +246,10 @@ section{
                     color: white;
                     font-weight: 700;
                     font-size: 48px;
-                    line-height: 48px;
                     border-radius: 0px;
                     border: none;
                     margin-top: 16px;
-                    height: 64px;
+                    
                     padding: 10px 25px 10px 25px;
                     
                 }
@@ -253,8 +266,9 @@ section{
                     font-size: 32px;
                     width: 767px;
                     height: 202px;
-                    border: 1px solid #000;
-                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
             .botton{

@@ -12,7 +12,7 @@
             </div>
             <div class="input-wrapper">
                 <label  for="">Табельный номер</label>
-                <input :disabled="true" type="text" autocomplete="on"  :placeholder="this.tabel_number" >
+                <input :class="{'disable':true}" type="text" autocomplete="on"  :value="this.tabel_number" >
             </div>
             <div class="input-wrapper">
                 <label for="">Должность</label>
@@ -22,7 +22,7 @@
                 <label for="">Наименование филиала</label>
                 <div class="selector_wraper"   >
                     <select list="selector" foe="selector"  v-model="branch" class="select">
-                        <option disabled  value="">Ваш филиал</option>
+                        <option class="ferst" disabled  value="">Ваш филиал</option>
                         <option v-for="(item, index) in items" :value="item.id" :key="index" >{{ item.name }}</option>
                     </select>
                 </div>
@@ -32,7 +32,7 @@
                 <input required type="text" v-model.lazy="experience" :class="{ 'errorExperience': errorExperience }"  placeholder="Ваш стаж">
             </div>
             <div class="form-action">
-                <button @click="POST" :class="{ 'disabled ': disableBtn }">
+                <button @click="POST" :class="{ 'disable ': !disableBtn }">
                        Завершить
                 </button>
             </div>
@@ -50,7 +50,6 @@ export default{
     data(){
         return{
             name:'',
-            service_number:'',
             branch:'',
             surname:'',
             post:'',
@@ -68,17 +67,17 @@ export default{
     },
     computed: {
         disableBtn() {
-            return this.errorName || this.errorSurname || this.errorExperience || this.error_service_number || this.errorPost || this.errorbranch;
+            return this.name  && this.surname && this.branch && this.post && this.experience && this.experience<99 && this.errorName == false && this.errorSurname == false && this.errorExperience == false && this.errorPost == false;
         }
     },
     watch: {
         name(v) {
-            const re = /[^а-яА-Я ]/ui
-            this.errorName = re.test(v)
+            const re =  /^[А-Яа-яЁё\s-]+$/ui
+            this.errorName = !re.test(v)
         },
         surname(e){
-            const re = /[^а-яА-Я ]/ui
-            this.errorSurname = re.test(e)
+            const re = /^[А-Яа-яЁё\s-]+$/ui
+            this.errorSurname = !re.test(e)
         },
         post(s){
             const re = /[^а-яА-Я ]/ui
@@ -87,6 +86,9 @@ export default{
         experience(b) {
             const re = /^[1-9]\d*(\d+)?$/ui;
             this.errorExperience = !re.test(b);
+            if (this.experience>99){
+                return this.errorExperience=true
+            }
         }
     },
     methods:{
@@ -153,15 +155,32 @@ export default{
         font-weight: 700;
         font-size: 32px;
     }
+    .disable{
+        color: #064677;
+        pointer-events: none;
+    }
     .select{
+        color: #064677;
+        font-family: HeliosCond;
         width: 100%;
         border: none;
-        font-size: 28px;
+        font-size: 32px;
         font-weight: 400;
-        padding-bottom: 5px;
+        padding-bottom: -10px;
         border-bottom:5px  solid #3394CE;
+        option{
+            color: #064677;
+        }
+        .ferst{
+            color: rgba(6, 70, 119, 0.40);
+        }
     } 
+    input::placeholder {
+            color: rgba(6, 70, 119, 0.40);
+        }
     input{
+        font-family: HeliosCond;
+        color: #064677;
         border: none;
         height: 38px;
         border-bottom:5px  solid #3394CE;
@@ -196,7 +215,12 @@ export default{
     }
     
 }
-button.disableBtn {
+
+
+
+button.disable{
+    background: #E7E8E5;
+    color: white;
     pointer-events: none;
 }
 .form-action {

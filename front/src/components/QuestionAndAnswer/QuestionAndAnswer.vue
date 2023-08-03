@@ -55,12 +55,12 @@ section{
     align-items: center;
     justify-content: center;
     h2{
-        margin-bottom: 112px;
+        margin-bottom: 32px;
     }
     div{
         width: 1218px;
         max-width: 100%;
-        margin-bottom: 55px;
+        
     }
 }
 

@@ -1,15 +1,15 @@
 <template>
     <section>
-        <div @click="Accordion()" class="Shell">
-            <button  class="head">
+        <div class="Shell">
+            <button  @click="Accordion()" class="head">
                 <h3 >{{ item.title }}</h3>
                 <div>     
                     <div :class="{ 'rotete_one': isActive }" class="one"></div>
                     <div :class="{ 'rorate': isActive }" class="two"></div>
                 </div>
             </button>
-            <div v-show="isActive === true">
-             
+            <div class="under" v-show="isActive ">
+                <p>{{ item.text }}</p>
             </div>
         </div>
     </section>
@@ -42,6 +42,13 @@ section{
         margin: 0 auto;
         background-color: #F5F5F5;
         margin-bottom:8px ;
+        .under{
+            padding: 0 40px 40px 40px;
+            font-size: 32px;
+            
+            font-style: normal;
+            font-weight: 400;
+        }
          button:hover{
             div{
                 background-color: #0079C2;
@@ -55,12 +62,14 @@ section{
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            margin: 0 auto;
+            
             background-color: #F5F5F5;
             font-size: 32px;
             h3{
-                padding-left: 40px;
-                font-weight: normal;
+                padding-left: 16px;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 400;
                 color: #000;
             }
             div{

@@ -68,9 +68,8 @@ export default{
             document.body.style.overflow = "auto";
         },
         GetLogin() {
-            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/profile')
-                .then(response => {
-                    console.log(response.data.data) 
+            axios.get('/api/profile')
+                .then(() => {
                     router.push('/stages')
                     
                 })
@@ -82,16 +81,7 @@ export default{
         LogoutPost(){
             this.modalOpen = false
             document.body.style.overflow = "auto";
-            axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/logout', {
-            })
-                .then(response => {
-                    console.log(response)
-                    router.push('/')
-                })
-                .catch(error => { 
-                    console.log(error) 
-                    router.push('/')
-                })
+            this.$store.dispatch('LogoutPost')
         }
     }
 }

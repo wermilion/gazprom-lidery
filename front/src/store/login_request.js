@@ -4,7 +4,7 @@ import router from "@/router"
 
 const Login = {
     state: {
-        id: '',
+        id: null,
         status:true
     },
     getters: {
@@ -13,6 +13,9 @@ const Login = {
         },
         userStatus(state) {
             return state.status
+        },
+        isAuthenticated(state) {
+          return !!state.id
         }
     },
     mutations: {
@@ -21,20 +24,39 @@ const Login = {
       },
       setStatus(state, status) {
         state.status = status;
+      },
+      LogoutPost(state) {
+        state.id = null;
+        state.status = true;
       }
     },
     actions: {
+      LogoutPost({commit}) {
+        return new Promise((resolve, reject) => {
+          axios.post('/api/profile/logout')
+              .then(response => {
+                resolve(response)
+                commit('LogoutPost')
+                router.push('/')
+              })
+              .catch(error => { 
+                reject(error) 
+                router.push('/')
+              })
+        })
+        
+      },
       async POST({ commit }, data) {
         try {
-          const response = await axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', data);
+          const response = await axios.post('/api/profile/login', data);
+
+          commit('setId', response.data.id);
 
           if (response.data.custom_password === true) {
             router.push({ name: 'StagesCompetitionBlock' });
           } else {
             router.push({ name: 'ChangingThePassword' });
           }
-
-          commit('setId', response.data.id);
         } catch (error) {
           commit('setStatus', error.status);
         }

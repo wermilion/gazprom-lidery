@@ -79,8 +79,13 @@ export default{
         Convet(data){
            return ConvertDate(data)
         },
-        OpenModel() {
+         OpenModel() {
             this.model_instruction = !this.model_instruction
+            if (this.model_instruction) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "auto";
+            }
         },
           
     },
@@ -246,7 +251,7 @@ section {
                 margin-top: 16px;
                 
                 
-                padding: 10px 25px 10px 25px;
+                padding: 8px 16px;
             }
             button:hover{
                 background: #064677;

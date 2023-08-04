@@ -18,7 +18,7 @@ const Stage = {
     },
     actions: {
       getStages(context) {
-        axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/stages')
+        axios.get('/api/stages')
           .then(response => {
             const items = response.data.data.map((item) => {
               let to = null

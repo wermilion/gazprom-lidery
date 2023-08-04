@@ -50,7 +50,7 @@ export default{
          POST() {
             if(this.text.length >= 50 && this.text.length <= 5000){
                 this.erortext =false
-                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/challenge', {
+                axios.post('/api/stages/challenge', {
                 solution:this.text , check_file:this.chect
                 })
                 .then(response => {
@@ -64,7 +64,7 @@ export default{
             
         },
         fetchData() {
-            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/task')
+            axios.get('/api/task')
                 .then(response => {
                     this.data =response.data.data[0].task
                 })

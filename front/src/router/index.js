@@ -6,6 +6,7 @@ import Entrance from "@/views/PersonalAccountPage/Entrance.vue"
 import ChangingThePassword from '@/views/PersonalAccountPage/ChangingThePassword.vue'
 import StagesCompetition from "@/components/Account/StagesCompetition.vue"
 import QuestionnairePage from "@/views/QuestionnairePage/QuestionnairePage.vue"
+import store from '@/store'
 
 
 Vue.use(VueRouter)
@@ -26,7 +27,8 @@ const routes = [
     component:QuestionnairePage,
     meta: { 
       title:'Анкета | Лидеры Газпрома',
-      shouldRenderBlock: true 
+      shouldRenderBlock: true,
+      authRequired: true,
     }
 
   },
@@ -36,7 +38,8 @@ const routes = [
     component:QuestionnairePage,
     meta: { 
       title:'Задача | Лидеры Газпрома',
-      shouldRenderBlock: true 
+      shouldRenderBlock: true,
+      authRequired: true,
     }
   },
   {
@@ -45,7 +48,8 @@ const routes = [
     component:QuestionnairePage,
     meta: { 
       title:'Управленческие решения | Лидеры Газпрома',
-      shouldRenderBlock: true 
+      shouldRenderBlock: true,
+      authRequired: true,
     }
   },
   {
@@ -70,7 +74,8 @@ const routes = [
     component: StagesCompetition,
     meta: { 
       title: 'Этапы конкурса | Лидеры Газпрома',
-      shouldRenderBlock: true 
+      shouldRenderBlock: true,
+      authRequired: true,
     }
   },
   {
@@ -106,6 +111,15 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.title) {
     document.title = to.meta.title;
+  }
+
+  if (to.matched.some(record => record.meta.authRequired)) {
+    if (!store.getters.isAuthenticated) {
+        next({
+            name: 'EntranceBlock',
+        })
+        return
+    }
   }
 
   next();

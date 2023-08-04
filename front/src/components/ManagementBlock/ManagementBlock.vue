@@ -111,7 +111,7 @@ export default {
                     check_file: this.chect,
                 };
 
-                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/management-decision', postData)
+                axios.post('/api/stages/management-decision', postData)
                     .then(response => {
                         console.log(response);
                         if(response.data.status){

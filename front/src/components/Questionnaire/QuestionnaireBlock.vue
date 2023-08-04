@@ -10,7 +10,7 @@
                 <label for="">Фамилия</label>
                 <input required type="text" v-model.lazy="surname" :class="{ 'errorSurname': errorSurname }"  placeholder="Ваша фамилия">
             </div>
-            <div class="input-wrapper">
+            <div class="input-wrapper ">
                 <label  for="">Табельный номер</label>
                 <input :class="{'disable':true}" type="text" autocomplete="on"  :value="this.tabel_number" >
             </div>
@@ -19,10 +19,10 @@
                 <input type="text" v-model.lazy="post" :class="{ 'errorPost': errorPost }"  placeholder="Ваша должность">
             </div>
             <div class="input-wrapper">
-                <label for="">Наименование филиала</label>
+                <label for="" class='tabel_number'>Наименование филиала</label>
                 <div class="selector_wraper"   >
-                    <select list="selector" foe="selector"  v-model="branch" class="select">
-                        <option class="ferst" disabled  value="">Ваш филиал</option>
+                    <select list="selector" foe="selector"  v-model="branch" class="select" >
+                        <option class="ferst" disabled selected hidden value="" >Ваш филиал</option>
                         <option v-for="(item, index) in items" :value="item.id" :key="index" >{{ item.name }}</option>
                     </select>
                 </div>
@@ -94,7 +94,7 @@ export default{
     methods:{
         POST() {
             if(this.errorName==false&&this.errorSurname==false&&this.errorExperience==false &&this.branch&& this.errorPost==false){
-                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/stages/form', {
+                axios.post('/api/stages/form', {
                 name:this.name,
 				surname: this.surname,
 				position: this.post,
@@ -113,7 +113,7 @@ export default{
            
         },
         fetchData() {
-            axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/branches')
+            axios.get('/api/branches')
                 .then(response => {
                     this.items = response.data.data
                   
@@ -125,7 +125,7 @@ export default{
     },
     mounted() {
         this.fetchData()
-        axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/profile')
+        axios.get('/api/profile')
             .then(response => {
                 console.log(response.data.data)
                 this.tabel_number=response.data.data.tabel_number
@@ -159,6 +159,9 @@ export default{
         color: #064677;
         pointer-events: none;
     }
+    .select option:first-child{
+        color: rgba(6, 70, 119, 0.40);
+    }
     .select{
         color: #064677;
         font-family: HeliosCond;
@@ -171,10 +174,11 @@ export default{
         option{
             color: #064677;
         }
-        .ferst{
-            color: rgba(6, 70, 119, 0.40);
-        }
-    } 
+        
+    }
+    .tabel_number{
+        margin-bottom: 18px;
+    }
     input::placeholder {
             color: rgba(6, 70, 119, 0.40);
         }

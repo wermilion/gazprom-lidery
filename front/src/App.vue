@@ -27,7 +27,7 @@ export default{
     Cookeis
   },
     mounted() {
-      axios.get('https://gazprom-lidery-dev.tomsk-it.ru/api/csrf-cookie').then(response => {
+      axios.get('/api/csrf-cookie').then(response => {
       console.log(response)
       axios.defaults.headers.common['X-XSRF-TOKEN'] = document.cookie.split('=')[1];
       }).catch(error => {

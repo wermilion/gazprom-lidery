@@ -56,7 +56,7 @@ export default{
             }else if(this.password1.length<8 || this.password2.length<8){
                 this.errorLenght=true
             }else {
-                axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/change-password', {
+                axios.post('/api/profile/change-password', {
                 new_password: this.password1,
 				confirm_password:this.password2
                 })

@@ -26,12 +26,12 @@ const Login = {
     actions: {
       async POST({ commit }, data) {
         try {
-          const response = await axios.post('https://gazprom-lidery-dev.tomsk-it.ru/api/profile/login', data);
+          const response = await axios.post('/api/profile/login', data);
 
           if (response.data.custom_password === true) {
-            router.push({ name: 'StagesCompetitionBlock' });
-          } else {
             router.push({ name: 'ChangingThePassword' });
+          } else {
+              router.push({ name: 'StagesCompetitionBlock' });
           }
 
           commit('setId', response.data.id);

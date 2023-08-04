@@ -65,13 +65,4 @@ class UserController extends Controller
         ]);
         return redirect()->route('cp.users.index')->with(['success' => true, 'message' => 'Конкурсант с табельным номером ' . $user->tabel_number . ' был успешно создан']);
     }
-
-    /**
-     * Удаление пользователя в БД
-     */
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return redirect()->route('cp.users.index')->with(['success' => true, 'message' => 'Конкурсант был удалён.']);
-    }
 }

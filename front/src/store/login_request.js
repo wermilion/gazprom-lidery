@@ -53,9 +53,9 @@ const Login = {
           commit('setId', response.data.id);
 
           if (response.data.custom_password === true) {
-            router.push({ name: 'ChangingThePassword' });
-          } else {
             router.push({ name: 'StagesCompetitionBlock' });
+          } else {
+            router.push({ name: 'ChangingThePassword' });
           }
         } catch (error) {
           commit('setStatus', error.status);

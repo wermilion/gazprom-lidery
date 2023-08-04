@@ -13,7 +13,6 @@ class AdminSeeder extends Seeder
         User::query()->firstOrCreate([
             'tabel_number' => '00000',
             'password' => Hash::make('Jxv5bf9VHdcOWq4') /*$2y$10$GhQWSLcNV.ahLP8pL0R/MOZRhOwNLihKd7.BhBTxmOljfzP0T8M72*/,
-            'custom_password' => false,
             'role_id' => 2,
         ]);
     }

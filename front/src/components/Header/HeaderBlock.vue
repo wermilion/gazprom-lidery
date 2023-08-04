@@ -69,8 +69,7 @@ export default{
         },
         GetLogin() {
             axios.get('/api/profile')
-                .then(response => {
-                    console.log(response.data.data) 
+                .then(() => {
                     router.push('/stages')
                     
                 })
@@ -82,16 +81,7 @@ export default{
         LogoutPost(){
             this.modalOpen = false
             document.body.style.overflow = "auto";
-            axios.post('/api/profile/logout', {
-            })
-                .then(response => {
-                    console.log(response)
-                    router.push('/')
-                })
-                .catch(error => { 
-                    console.log(error) 
-                    router.push('/')
-                })
+            this.$store.dispatch('LogoutPost')
         }
     }
 }

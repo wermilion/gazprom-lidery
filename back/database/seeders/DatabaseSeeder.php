@@ -8,6 +8,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        \DB::table('stages')->truncate();
         $this->call([
             RoleSeeder::class,
             AdminSeeder::class,

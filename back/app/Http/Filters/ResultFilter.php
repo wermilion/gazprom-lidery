@@ -12,7 +12,7 @@ class ResultFilter extends QueryFilter
         return $this->builder->where('result_status_id', $result_status_id);
     }
 
-    public function tabel_number(int $tabel_number)
+    public function tabel_number(string $tabel_number)
     {
         $user = User::query()->where('tabel_number', $tabel_number)->first();
         if (User::query()->where('tabel_number', $tabel_number)->exists()) {

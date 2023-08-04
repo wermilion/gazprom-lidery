@@ -4,7 +4,7 @@ namespace App\Http\Filters;
 
 class UserFilter extends QueryFilter
 {
-    public function tabel_number(int $tabel_number)
+    public function tabel_number(string $tabel_number)
     {
         return $this->builder->where('tabel_number', $tabel_number);
     }

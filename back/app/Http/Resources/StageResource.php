@@ -27,13 +27,15 @@ class StageResource extends JsonResource
             'date_end' => $this->when($this->name != 'Регистрация', $this->date_end),
             'current_time' => Carbon::now(),
             'status' => $this->when(ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(), function () {
-                if ($this->stage_status->status_name == 'Доступно') {
+                if ($this->stage_status->status_name == 'Доступно' && !Auth::user()->results->contains('result_status_id', 2)) {
                     return true;
                 } else {
                     return false;
                 }
             }),
-            'result' => $this->when(!ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(), ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))),
+            'result' => $this->when(
+                !ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))->isEmpty(),
+                ResultResource::collection((Auth::user()->results->where('stage_id', $this->id)))),
         ];
     }
 }
